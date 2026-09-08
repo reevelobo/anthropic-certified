@@ -1,0 +1,597 @@
+site_name: Claude Certifications
+site_description: >-
+  Comprehensive study guide for Anthropic Claude certifications, including
+  Developer Foundations, modules, badges, prompting, agents, tools, MCP,
+  evals, security, and related learning paths.
+site_author: Reeve Lobo
+site_url: https://reevelobo.github.io/anthropic-certified/
+repo_name: reevelobo/anthropic-certified
+repo_url: https://github.com/reevelobo/anthropic-certified
+edit_uri: ""
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  custom_dir: docs/overrides
+  palette:
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  font:
+    text: IBM Plex Sans
+    code: IBM Plex Mono
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.path
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.tooltips
+    - header.autohide
+    - announce.dismiss
+
+extra_css:
+  - stylesheets/ibm-theme.css
+
+extra_javascript:
+  - javascripts/ibm-extra.js
+
+plugins:
+  - search:
+      lang: en
+  - mkdocs-jupyter:
+      include:
+        - "01.making_a_request.ipynb"
+        - "02.chat_bot_excercise.ipynb"
+        - "03.system_prompts.ipynb"
+        - "04.sys_prompt_exercise.ipynb"
+        - "05.temperature.ipynb"
+        - "06.response_streaming.ipynb"
+        - "07.structured_data.ipynb"
+        - "08.structured_data_exercise.ipynb"
+        - "09.prompt_evals.ipynb"
+        - "10.prompt_evals_exercise.ipynb"
+        - "001_prompting.ipynb"
+        - "002_prompting_completed.ipynb"
+        - "11.prompting.ipynb"
+        - "12.tools.ipynb"
+      execute: false
+  - glightbox:
+      touchNavigation: true
+      loop: false
+      effect: zoom
+      width: 100%
+      height: auto
+      zoomable: true
+      draggable: true
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - tables
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/reevelobo
+  generator: false
+
+copyright: Copyright &copy; 2025 Reeve Lobo
+
+# ─────────────────────────────────────────────────────────────
+# NAV — every path is relative to docs/
+# m* = module folder   s* = section folder   README.md = content
+# ─────────────────────────────────────────────────────────────
+nav:
+  - Home: index.md
+
+  # ── CERTIFICATION PATH ────────────────────────────────────
+  - Certification:
+    - certification/index.md
+
+    # ── CCDV-F ──────────────────────────────────────────────
+    - "CCDV-F · Claude Certified Developer – Foundations":
+      - Overview: certification/claude_certified_developer-foundation/index.md
+
+      - "M01 · MSO Foundations":
+        - Overview: certification/claude_certified_developer-foundation/modules/m01_MSO_foundation/index.md
+        - "S01 · Orientation": certification/claude_certified_developer-foundation/modules/m01_MSO_foundation/s01_orientation/README.md
+        - "S02 · How LLMs Behave": certification/claude_certified_developer-foundation/modules/m01_MSO_foundation/s02_how_LLMs_behave/README.md
+        - "S03 · Models & Reasoning": certification/claude_certified_developer-foundation/modules/m01_MSO_foundation/s03_models_reasoning/README.md
+        - "S04 · Prompting Modes": certification/claude_certified_developer-foundation/modules/m01_MSO_foundation/s04_prompting_models/README.md
+        - "S05 · Technical Substrate": certification/claude_certified_developer-foundation/modules/m01_MSO_foundation/s05_technical_substrate/README.md
+        - "S06 · Module Wrap-Up": certification/claude_certified_developer-foundation/modules/m01_MSO_foundation/s06_module_wrap-up/README.md
+
+      - "M02 · Production Prompting, Agents & Tools":
+        - Overview: certification/claude_certified_developer-foundation/modules/m02_production-grade_prompting_agents_tools/index.md
+        - "S01 · Orientation": certification/claude_certified_developer-foundation/modules/m02_production-grade_prompting_agents_tools/s01_orientation/README.md
+        - "S02 · Prompting Craft": certification/claude_certified_developer-foundation/modules/m02_production-grade_prompting_agents_tools/s02_prompting_craft/README.md
+        - "S03 · Extended Thinking": certification/claude_certified_developer-foundation/modules/m02_production-grade_prompting_agents_tools/s03_extended_thinking/README.md
+        - "S04 · Tool Use & Schema Design": certification/claude_certified_developer-foundation/modules/m02_production-grade_prompting_agents_tools/s04_tool-use_and_schema_design/README.md
+        - "S05 · Streaming Responses": certification/claude_certified_developer-foundation/modules/m02_production-grade_prompting_agents_tools/s05_streaming_responses/README.md
+        - "S06 · Context Engineering": certification/claude_certified_developer-foundation/modules/m02_production-grade_prompting_agents_tools/s06_context_engineering/README.md
+        - "S07 · Agent Construction": certification/claude_certified_developer-foundation/modules/m02_production-grade_prompting_agents_tools/s07_agent_construction/README.md
+        - "S08 · Agent Memory": certification/claude_certified_developer-foundation/modules/m02_production-grade_prompting_agents_tools/s08_agent_memory/README.md
+        - "S09 · Cumulative Debug Task": certification/claude_certified_developer-foundation/modules/m02_production-grade_prompting_agents_tools/s09_cumulative_debug_task/README.md
+        - "S10 · Multimodal & Batch": certification/claude_certified_developer-foundation/modules/m02_production-grade_prompting_agents_tools/s10_multimodal_and_batch_ingestion/README.md
+        - "S11 · Module Wrap-Up": certification/claude_certified_developer-foundation/modules/m02_production-grade_prompting_agents_tools/s11_module_wrap-up/README.md
+
+      - "M03 · Claude Code, MCP & Integration":
+        - Overview: certification/claude_certified_developer-foundation/modules/m03_claude_code_mcp_integration/index.md
+        - "S01 · Module Introduction": certification/claude_certified_developer-foundation/modules/m03_claude_code_mcp_integration/s01_module_introduction/README.md
+        - "S02 · Permission Modes and Human Gates": certification/claude_certified_developer-foundation/modules/m03_claude_code_mcp_integration/s02_permission_modes_and_human_gates/README.md
+        - "S03 · Durable Project Context": certification/claude_certified_developer-foundation/modules/m03_claude_code_mcp_integration/s03_durable_project_context/README.md
+        - "S04 · Packaging Workflows": certification/claude_certified_developer-foundation/modules/m03_claude_code_mcp_integration/s04_packaging_workflows/README.md
+        - "S05 · MCP Servers": certification/claude_certified_developer-foundation/modules/m03_claude_code_mcp_integration/s05_mcp_servers/README.md
+        - "S06 · Enterprise Integration": certification/claude_certified_developer-foundation/modules/m03_claude_code_mcp_integration/s06_enterprise_integration/README.md
+        - "S07 · Cumulative Integration Task": certification/claude_certified_developer-foundation/modules/m03_claude_code_mcp_integration/s07_cumulative_integration_task/README.md
+        - "S08 · Key Takeaways": certification/claude_certified_developer-foundation/modules/m03_claude_code_mcp_integration/s08_key_takeaways/README.md
+
+      - "M04 · Production Engineering, Evals & Security":
+        - Overview: certification/claude_certified_developer-foundation/modules/m04_production_engineering_evals_securrity/index.md
+        - "S01 · Module Introduction": certification/claude_certified_developer-foundation/modules/m04_production_engineering_evals_securrity/s01_module_introduction/README.md
+        - "S02 · Evals & Judges": certification/claude_certified_developer-foundation/modules/m04_production_engineering_evals_securrity/s02_evals_and_judges/README.md
+        - "S03 · Testing & Tracing": certification/claude_certified_developer-foundation/modules/m04_production_engineering_evals_securrity/s03_testing_and_tracing/README.md
+        - "S04 · Failure Handling & Model Selection": certification/claude_certified_developer-foundation/modules/m04_production_engineering_evals_securrity/s04_failure_handling_and_model_selection/README.md
+        - "S05 · Cost & Orchestration": certification/claude_certified_developer-foundation/modules/m04_production_engineering_evals_securrity/s05_cost_and_orchestration/README.md
+        - "S06 · Security": certification/claude_certified_developer-foundation/modules/m04_production_engineering_evals_securrity/s06_security/README.md
+        - "S07 · Cumulative Task": certification/claude_certified_developer-foundation/modules/m04_production_engineering_evals_securrity/s07_cumulative_task/README.md
+        - "S08 · Key Takeaways": certification/claude_certified_developer-foundation/modules/m04_production_engineering_evals_securrity/s08_key_takeaways/README.md
+
+      - "M05 · Accelerators & IP Contribution":
+        - Overview: certification/claude_certified_developer-foundation/modules/m05_accelerators_ip_contribution/index.md
+        - "S01 · Module Introduction": certification/claude_certified_developer-foundation/modules/m05_accelerators_ip_contribution/s01_module_introduction/README.md
+        - "S02 · Packaging for Reuse": certification/claude_certified_developer-foundation/modules/m05_accelerators_ip_contribution/s02_packaging_for_reuse/README.md
+        - "S03 · Contributing Back": certification/claude_certified_developer-foundation/modules/m05_accelerators_ip_contribution/s03_contributing_back/README.md
+        - "S04 · Requirements & Lifecycle": certification/claude_certified_developer-foundation/modules/m05_accelerators_ip_contribution/s04_requirements_and_lifecycle/README.md
+        - "S05 · Deployment & Versioning": certification/claude_certified_developer-foundation/modules/m05_accelerators_ip_contribution/s05_deployment_and_versioning/README.md
+        - "S06 · Comparing Platforms": certification/claude_certified_developer-foundation/modules/m05_accelerators_ip_contribution/s06_comparing_platforms/README.md
+        - "S07 · Trust Boundaries": certification/claude_certified_developer-foundation/modules/m05_accelerators_ip_contribution/s07_trust_boundaries/README.md
+        - "S08 · Cumulative Task": certification/claude_certified_developer-foundation/modules/m05_accelerators_ip_contribution/s08_cumulative_task/README.md
+        - "S09 · Key Takeaways": certification/claude_certified_developer-foundation/modules/m05_accelerators_ip_contribution/s09_key_takeaways/README.md
+
+    # ── CCAR-F ──────────────────────────────────────────────
+    - "CCAR-F · Claude Certified Architect – Foundations":
+      - Overview: certification/claude_certified_architect-foundation/index.md
+      - "Modules Index": certification/claude_certified_architect-foundation/modules/index.md
+
+      - "M01 · AI Fluency: Framework & Foundations":
+        - Overview: certification/claude_certified_architect-foundation/modules/m01_fluency_framework_founndations/index.md
+        - "S01 · Introduction to AI Fluency": certification/claude_certified_architect-foundation/modules/m01_fluency_framework_founndations/s01_Introduction_to_AI_Fluency/README.md
+        - "S02 · The AI Fluency Framework": certification/claude_certified_architect-foundation/modules/m01_fluency_framework_founndations/s02_the_ai_fluency_framework/README.md
+        - "S03 · What is Generative AI?": certification/claude_certified_architect-foundation/modules/m01_fluency_framework_founndations/s03_what_is_generative_ai/README.md
+        - "S04 · Delegation": certification/claude_certified_architect-foundation/modules/m01_fluency_framework_founndations/s04_Delegation/README.md
+        - "S05 · Description": certification/claude_certified_architect-foundation/modules/m01_fluency_framework_founndations/s05_description/README.md
+        - "S06 · Effective Prompting Techniques": certification/claude_certified_architect-foundation/modules/m01_fluency_framework_founndations/s06_effective_prompting_technique/README.md
+        - "S07 · Discernment": certification/claude_certified_architect-foundation/modules/m01_fluency_framework_founndations/s07_discernment/README.md
+        - "S08 · Description-Discernment Loop": certification/claude_certified_architect-foundation/modules/m01_fluency_framework_founndations/s08_the_description_discernment_loop/README.md
+        - "S09 · Diligence": certification/claude_certified_architect-foundation/modules/m01_fluency_framework_founndations/s09_diligence/README.md
+        - "S10 · Conclusion": certification/claude_certified_architect-foundation/modules/m01_fluency_framework_founndations/s10_conclusion/README.md
+      - "M02 · Building with the Claude API":
+        - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/index.md
+        - "S01 · Introduction":
+          - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s01_introduction/index.md
+          - "SS01 · Welcome to the Course": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s01_introduction/ss01_welcome_to_the_course/index.md
+        - "S02 · Anthropic Overview":
+          - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s02_anthropic_overview/index.md
+          - "SS01 · Overview of Claude Models": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s02_anthropic_overview/ss01_overview_of_claude_models/index.md
+        - "S03 · Accessing Claude with the API":
+          - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s03_accessing_claude_with_the_api/index.md
+          - "SS01 · Accessing the API": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss01_accessing_the_api/index.md
+          - "SS02 · Getting an API Key": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss02_getting_an_api_key/index.md
+          - "SS03 · Making a Request":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss03_making_a_request/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/01.making_a_request.ipynb
+          - "SS04 · Multi-Turn Conversations":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss04_multi_turn_conversations/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/01.making_a_request.ipynb
+          - "SS05 · Chat Exercise":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss05_chat_exercise/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/02.chat_bot_excercise.ipynb
+          - "SS06 · System Prompts":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss06_system_prompts/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/03.system_prompts.ipynb
+          - "SS07 · System Prompts Exercise":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss07_system_prompts_exercise/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/04.sys_prompt_exercise.ipynb
+          - "SS08 · Temperature":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss08_temperature/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/05.temperature.ipynb
+          - "SS10 · Response Streaming":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss10_response_streaming/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/06.response_streaming.ipynb
+          - "SS11 · Structured Data":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss11_structured_data/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/07.structured_data.ipynb
+          - "SS12 · Structured Data Exercise":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss12_structured_data_exercise/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/08.structured_data_exercise.ipynb
+          - "SS13 · Quiz on Accessing Claude with the API": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss13_quiz_on_accessing_claude_with_the_api/index.md
+        - "S04 · Prompt Evaluation":
+          - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s04_prompt_evaluation/index.md
+          - "SS01 · Prompt Evaluation": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s04_prompt_evaluation/ss01_prompt_evaluation/index.md
+          - "SS02 · A Typical Eval Workflow": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s04_prompt_evaluation/ss02_a_typical_eval_workflow/index.md
+          - "SS03 · Generating Test Datasets":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s04_prompt_evaluation/ss03_generating_test_datasets/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/09.prompt_evals.ipynb
+          - "SS04 · Running the Eval":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s04_prompt_evaluation/ss04_running_the_eval/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/09.prompt_evals.ipynb
+          - "SS05 · Model Based Grading":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s04_prompt_evaluation/ss05_model_based_grading/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/09.prompt_evals.ipynb
+          - "SS06 · Code Based Grading":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s04_prompt_evaluation/ss06_code_based_grading/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/09.prompt_evals.ipynb
+          - "SS07 · Exercise on Prompt Evals":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s04_prompt_evaluation/ss07_exercise_on_prompt_evals/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/10.prompt_evals_exercise.ipynb
+          - "SS08 · Quiz on Prompt Evaluation": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s04_prompt_evaluation/ss08_quiz_on_prompt_evaluation/index.md
+        - "S05 · Prompt Engineering Techniques":
+          - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s05_prompt_engineering_techniques/index.md
+          - "SS01 · Prompt Engineering":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s05_prompt_engineering_techniques/ss01_prompt_engineering/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s05_prompt_engineering_techniques/notebooks/001_prompting.ipynb
+            - Completed Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s05_prompt_engineering_techniques/notebooks/002_prompting_completed.ipynb
+            - Consolidated Eval Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/11.prompting.ipynb
+          - "SS02 · Being Clear and Direct":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s05_prompt_engineering_techniques/ss02_being_clear_and_direct/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/11.prompting.ipynb
+          - "SS03 · Being Specific":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s05_prompt_engineering_techniques/ss03_being_specific/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/11.prompting.ipynb
+          - "SS04 · Structure with XML Tags":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s05_prompt_engineering_techniques/ss04_structure_with_xml_tags/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/11.prompting.ipynb
+          - "SS05 · Providing Examples":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s05_prompt_engineering_techniques/ss05_providing_examples/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/11.prompting.ipynb
+          - "SS06 · Exercise on Prompting": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s05_prompt_engineering_techniques/ss06_exercise_on_prompting/index.md
+          - "SS07 · Quiz on Prompt Engineering Techniques": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s05_prompt_engineering_techniques/ss07_quiz_on_prompt_engineering_techniques/index.md
+        - "S06 · Tool Use with Claude":
+          - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/index.md
+          - "SS01 · Introducing Tool Use": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss01_introducing_tool_use/index.md
+          - "SS02 · Project Overview": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss02_project_overview/index.md
+          - "SS03 · Tool Functions":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss03_tool_functions/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/12.tools.ipynb
+          - "SS04 · Tool Schemas":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss04_tool_schemas/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/12.tools.ipynb
+          - "SS05 · Handling Message Blocks": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss05_handling_message_blocks/index.md
+          - "SS06 · Sending Tool Results": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss06_sending_tool_results/index.md
+          - "SS07 · Multi-Turn Conversations with Tools": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss07_multi_turn_conversations_with_tools/index.md
+          - "SS08 · Implementing Multiple Turns": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss08_implementing_multiple_turns/index.md
+          - "SS09 · Using Multiple Tools": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss09_using_multiple_tools/index.md
+          - "SS10 · Fine Grained Tool Calling": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss10_fine_grained_tool_calling/index.md
+          - "SS11 · The Text Edit Tool": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss11_the_text_edit_tool/index.md
+          - "SS12 · The Web Search Tool": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss12_the_web_search_tool/index.md
+          - "SS13 · Quiz on Tool Use with Claude": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss13_quiz_on_tool_use_with_claude/index.md
+        - "S07 · RAG and Agentic Search":
+          - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/index.md
+          - "SS01 · Introducing Retrieval Augmented Generation": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss01_introducing_retrieval_augmented_generation/index.md
+          - "SS02 · Text Chunking Strategies": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss02_text_chunking_strategies/index.md
+          - "SS03 · Text Embeddings": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss03_text_embeddings/index.md
+          - "SS04 · The Full RAG Flow": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss04_the_full_rag_flow/index.md
+          - "SS05 · Implementing the RAG Flow": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss05_implementing_the_rag_flow/index.md
+          - "SS06 · BM25 Lexical Search": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss06_bm25_lexical_search/index.md
+          - "SS07 · A Multi-Index RAG Pipeline": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss07_a_multi_index_rag_pipeline/index.md
+        - "S08 · Features of Claude":
+          - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s08_features_of_claude/index.md
+          - "SS01 · Extended Thinking": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s08_features_of_claude/ss01_extended_thinking/index.md
+          - "SS02 · Image Support": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s08_features_of_claude/ss02_image_support/index.md
+          - "SS03 · PDF Support": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s08_features_of_claude/ss03_pdf_support/index.md
+          - "SS04 · Citations": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s08_features_of_claude/ss04_citations/index.md
+          - "SS05 · Prompt Caching": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s08_features_of_claude/ss05_prompt_caching/index.md
+          - "SS06 · Rules of Prompt Caching": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s08_features_of_claude/ss06_rules_of_prompt_caching/index.md
+          - "SS07 · Prompt Caching in Action": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s08_features_of_claude/ss07_prompt_caching_in_action/index.md
+          - "SS08 · Code Execution and the Files API": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s08_features_of_claude/ss08_code_execution_and_the_files_api/index.md
+          - "SS09 · Quiz on Features of Claude": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s08_features_of_claude/ss09_quiz_on_features_of_claude/index.md
+        - "S09 · Model Context Protocol":
+          - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s09_model_context_protocol/index.md
+          - "SS01 · Introducing MCP": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s09_model_context_protocol/ss01_introducing_mcp/index.md
+          - "SS02 · MCP Clients": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s09_model_context_protocol/ss02_mcp_clients/index.md
+          - "SS03 · Project Setup": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s09_model_context_protocol/ss03_project_setup/index.md
+          - "SS04 · Defining Tools with MCP": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s09_model_context_protocol/ss04_defining_tools_with_mcp/index.md
+          - "SS05 · The Server Inspector": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s09_model_context_protocol/ss05_the_server_inspector/index.md
+          - "SS06 · Implementing a Client": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s09_model_context_protocol/ss06_implementing_a_client/index.md
+          - "SS07 · Defining Resources": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s09_model_context_protocol/ss07_defining_resources/index.md
+          - "SS08 · Accessing Resources": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s09_model_context_protocol/ss08_accessing_resources/index.md
+          - "SS09 · Defining Prompts": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s09_model_context_protocol/ss09_defining_prompts/index.md
+          - "SS10 · Prompts in the Client": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s09_model_context_protocol/ss10_prompts_in_the_client/index.md
+          - "SS11 · MCP Review": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s09_model_context_protocol/ss11_mcp_review/index.md
+          - "SS12 · Quiz on Model Context Protocol": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s09_model_context_protocol/ss12_quiz_on_model_context_protocol/index.md
+        - "S10 · Anthropic Apps - Claude Code and Computer Use":
+          - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s10_anthropic_apps_claude_code_and_computer_use/index.md
+          - "SS01 · Anthropic Apps": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s10_anthropic_apps_claude_code_and_computer_use/ss01_anthropic_apps/index.md
+          - "SS02 · Claude Code Setup": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s10_anthropic_apps_claude_code_and_computer_use/ss02_claude_code_setup/index.md
+          - "SS03 · Claude Code in Action": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s10_anthropic_apps_claude_code_and_computer_use/ss03_claude_code_in_action/index.md
+          - "SS04 · Enhancements with MCP Servers": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s10_anthropic_apps_claude_code_and_computer_use/ss04_enhancements_with_mcp_servers/index.md
+        - "S11 · Agents and Workflows":
+          - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s11_agents_and_workflows/index.md
+          - "SS01 · Agents and Workflows": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s11_agents_and_workflows/ss01_agents_and_workflows/index.md
+          - "SS02 · Parallelization Workflows": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s11_agents_and_workflows/ss02_parallelization_workflows/index.md
+          - "SS03 · Chaining Workflows": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s11_agents_and_workflows/ss03_chaining_workflows/index.md
+          - "SS04 · Routing Workflows": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s11_agents_and_workflows/ss04_routing_workflows/index.md
+          - "SS05 · Agents and Tools": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s11_agents_and_workflows/ss05_agents_and_tools/index.md
+          - "SS06 · Environment Inspection": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s11_agents_and_workflows/ss06_environment_inspection/index.md
+          - "SS07 · Workflows vs Agents": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s11_agents_and_workflows/ss07_workflows_vs_agents/index.md
+          - "SS08 · Quiz on Agents and Workflows": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s11_agents_and_workflows/ss08_quiz_on_agents_and_workflows/index.md
+        - "S12 · Final Assessment":
+          - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s12_final_assessment/index.md
+          - "SS01 · Final Assessment": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s12_final_assessment/ss01_final_assessment/index.md
+        - "S13 · Wrapping Up":
+          - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s13_wrapping_up/index.md
+          - "SS01 · Course Wrap Up": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s13_wrapping_up/ss01_course_wrap_up/index.md
+      - "M03 · Claude on Google Cloud":
+        - Overview: certification/claude_certified_architect-foundation/modules/m03_claude_on_google_cloud/index.md
+        - "S01 · Module Overview": certification/claude_certified_architect-foundation/modules/m03_claude_on_google_cloud/s01_module_overview/index.md
+      - "M04 · Claude Code in Action":
+        - Overview: certification/claude_certified_architect-foundation/modules/m04_claude_code_in_action/index.md
+        - "S01 · Module Overview": certification/claude_certified_architect-foundation/modules/m04_claude_code_in_action/s01_module_overview/index.md
+      - "M05 · Claude 101":
+        - Overview: certification/claude_certified_architect-foundation/modules/m05_claude_101/index.md
+        - "S01 · Module Overview": certification/claude_certified_architect-foundation/modules/m05_claude_101/s01_module_overview/index.md
+      - "M06 · Claude with Amazon Bedrock":
+        - Overview: certification/claude_certified_architect-foundation/modules/m06_claude_with_amazon_bedrock/index.md
+        - "S01 · Module Overview": certification/claude_certified_architect-foundation/modules/m06_claude_with_amazon_bedrock/s01_module_overview/index.md
+      - "M07 · Introduction to Model Context Protocol":
+        - Overview: certification/claude_certified_architect-foundation/modules/m07_introduction_to_model_context_protocol/index.md
+        - "S01 · Module Overview": certification/claude_certified_architect-foundation/modules/m07_introduction_to_model_context_protocol/s01_module_overview/index.md
+
+  # ── COURSES ───────────────────────────────────────────────
+  - Courses:
+    - modules/index.md
+
+    - "AI Fluency Series":
+      - Overview: modules/index.md
+      - "M01 · AI Fluency: Framework & Foundations":
+        - Overview: modules/m01_fluency_framework_founndations/index.md
+        - "S01 · Introduction to AI Fluency": modules/m01_fluency_framework_founndations/s01_Introduction_to_AI_Fluency/README.md
+        - "S02 · The AI Fluency Framework": modules/m01_fluency_framework_founndations/s02_the_ai_fluency_framework/README.md
+        - "S03 · What is Generative AI?": modules/m01_fluency_framework_founndations/s03_what_is_generative_ai/README.md
+        - "S04 · Delegation": modules/m01_fluency_framework_founndations/s04_Delegation/README.md
+        - "S05 · Description": modules/m01_fluency_framework_founndations/s05_description/README.md
+        - "S06 · Effective Prompting Techniques": modules/m01_fluency_framework_founndations/s06_effective_prompting_technique/README.md
+        - "S07 · Discernment": modules/m01_fluency_framework_founndations/s07_discernment/README.md
+        - "S08 · Description–Discernment Loop": modules/m01_fluency_framework_founndations/s08_the_description_discernment_loop/README.md
+        - "S09 · Diligence": modules/m01_fluency_framework_founndations/s09_diligence/README.md
+        - "S10 · Conclusion": modules/m01_fluency_framework_founndations/s10_conclusion/README.md
+        - "S10 · Additional Activities": modules/m01_fluency_framework_founndations/s10_conclusion/additional_activities.md
+      - "M02 · AI Fluency for Educators":
+        - Overview: modules/m02_fluency_for_educators/index.md
+      - "M03 · AI Fluency for Students":
+        - Overview: modules/m03_fluency_for_students/index.md
+      - "M04 · AI Fluency for Builders":
+        - Overview: modules/m04_fluency_for_builders/index.md
+      - "M14 · Teaching AI Fluency":
+        - Overview: modules/m14_teacing_ai_fluency/index.md
+      - "M15 · AI Fluency for Nonprofits":
+        - Overview: modules/m15_fluency_for_nonprofits/index.md
+
+    - "Agent & Agentic Skills":
+      - Overview: modules/index.md
+      - "M05 · Introduction to Agent Skills":
+        - Overview: modules/m05_introduction_to_agent_skills/index.md
+      - "M06 · Introduction to Subagents":
+        - Overview: modules/m06_introduction_to_subagents/index.md
+      - "M07 · Introduction to Claude Cowork":
+        - Overview: modules/m07_introduction_to_claude_cowork/index.md
+
+    - "Building with Claude":
+      - Overview: modules/index.md
+      - "M08 · Building with the Claude API":
+        - Overview: modules/m08_building_with_the_claude_api/index.md
+        - "S01 · Introduction":
+          - Overview: modules/m08_building_with_the_claude_api/s01_introduction/index.md
+          - "SS01 · Welcome to the Course": modules/m08_building_with_the_claude_api/s01_introduction/ss01_welcome_to_the_course/index.md
+        - "S02 · Anthropic Overview":
+          - Overview: modules/m08_building_with_the_claude_api/s02_anthropic_overview/index.md
+          - "SS01 · Overview of Claude Models": modules/m08_building_with_the_claude_api/s02_anthropic_overview/ss01_overview_of_claude_models/index.md
+        - "S03 · Accessing Claude with the API":
+          - Overview: modules/m08_building_with_the_claude_api/s03_accessing_claude_with_the_api/index.md
+          - "SS01 · Accessing the API": modules/m08_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss01_accessing_the_api/index.md
+          - "SS02 · Getting an API Key": modules/m08_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss02_getting_an_api_key/index.md
+          - "SS03 · Making a Request":
+            - Notes: modules/m08_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss03_making_a_request/index.md
+            - Notebook: modules/m08_building_with_the_claude_api/notebooks/01.making_a_request.ipynb
+          - "SS04 · Multi-Turn Conversations":
+            - Notes: modules/m08_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss04_multi_turn_conversations/index.md
+            - Notebook: modules/m08_building_with_the_claude_api/notebooks/01.making_a_request.ipynb
+          - "SS05 · Chat Exercise":
+            - Notes: modules/m08_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss05_chat_exercise/index.md
+            - Notebook: modules/m08_building_with_the_claude_api/notebooks/02.chat_bot_excercise.ipynb
+          - "SS06 · System Prompts": modules/m08_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss06_system_prompts/index.md
+          - "SS07 · System Prompts Exercise": modules/m08_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss07_system_prompts_exercise/index.md
+          - "SS08 · Temperature": modules/m08_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss08_temperature/index.md
+          - "SS10 · Response Streaming": modules/m08_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss10_response_streaming/index.md
+          - "SS11 · Structured Data": modules/m08_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss11_structured_data/index.md
+          - "SS12 · Structured Data Exercise": modules/m08_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss12_structured_data_exercise/index.md
+          - "SS13 · Quiz on Accessing Claude with the API": modules/m08_building_with_the_claude_api/s03_accessing_claude_with_the_api/ss13_quiz_on_accessing_claude_with_the_api/index.md
+        - "S04 · Prompt Evaluation":
+          - Overview: modules/m08_building_with_the_claude_api/s04_prompt_evaluation/index.md
+          - "SS01 · Prompt Evaluation": modules/m08_building_with_the_claude_api/s04_prompt_evaluation/ss01_prompt_evaluation/index.md
+          - "SS02 · A Typical Eval Workflow": modules/m08_building_with_the_claude_api/s04_prompt_evaluation/ss02_a_typical_eval_workflow/index.md
+          - "SS03 · Generating Test Datasets": modules/m08_building_with_the_claude_api/s04_prompt_evaluation/ss03_generating_test_datasets/index.md
+          - "SS04 · Running the Eval": modules/m08_building_with_the_claude_api/s04_prompt_evaluation/ss04_running_the_eval/index.md
+          - "SS05 · Model Based Grading": modules/m08_building_with_the_claude_api/s04_prompt_evaluation/ss05_model_based_grading/index.md
+          - "SS06 · Code Based Grading": modules/m08_building_with_the_claude_api/s04_prompt_evaluation/ss06_code_based_grading/index.md
+          - "SS07 · Exercise on Prompt Evals": modules/m08_building_with_the_claude_api/s04_prompt_evaluation/ss07_exercise_on_prompt_evals/index.md
+          - "SS08 · Quiz on Prompt Evaluation": modules/m08_building_with_the_claude_api/s04_prompt_evaluation/ss08_quiz_on_prompt_evaluation/index.md
+        - "S05 · Prompt Engineering Techniques":
+          - Overview: modules/m08_building_with_the_claude_api/s05_prompt_engineering_techniques/index.md
+          - "SS01 · Prompt Engineering": modules/m08_building_with_the_claude_api/s05_prompt_engineering_techniques/ss01_prompt_engineering/index.md
+          - "SS02 · Being Clear and Direct": modules/m08_building_with_the_claude_api/s05_prompt_engineering_techniques/ss02_being_clear_and_direct/index.md
+          - "SS03 · Being Specific": modules/m08_building_with_the_claude_api/s05_prompt_engineering_techniques/ss03_being_specific/index.md
+          - "SS04 · Structure with XML Tags": modules/m08_building_with_the_claude_api/s05_prompt_engineering_techniques/ss04_structure_with_xml_tags/index.md
+          - "SS05 · Providing Examples": modules/m08_building_with_the_claude_api/s05_prompt_engineering_techniques/ss05_providing_examples/index.md
+          - "SS06 · Exercise on Prompting": modules/m08_building_with_the_claude_api/s05_prompt_engineering_techniques/ss06_exercise_on_prompting/index.md
+          - "SS07 · Quiz on Prompt Engineering Techniques": modules/m08_building_with_the_claude_api/s05_prompt_engineering_techniques/ss07_quiz_on_prompt_engineering_techniques/index.md
+        - "S06 · Tool Use with Claude":
+          - Overview: modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/index.md
+          - "SS01 · Introducing Tool Use": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss01_introducing_tool_use/index.md
+          - "SS02 · Project Overview": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss02_project_overview/index.md
+          - "SS03 · Tool Functions": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss03_tool_functions/index.md
+          - "SS04 · Tool Schemas": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss04_tool_schemas/index.md
+          - "SS05 · Handling Message Blocks": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss05_handling_message_blocks/index.md
+          - "SS06 · Sending Tool Results": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss06_sending_tool_results/index.md
+          - "SS07 · Multi-Turn Conversations with Tools": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss07_multi_turn_conversations_with_tools/index.md
+          - "SS08 · Implementing Multiple Turns": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss08_implementing_multiple_turns/index.md
+          - "SS09 · Using Multiple Tools": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss09_using_multiple_tools/index.md
+          - "SS10 · Fine Grained Tool Calling": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss10_fine_grained_tool_calling/index.md
+          - "SS11 · The Text Edit Tool": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss11_the_text_edit_tool/index.md
+          - "SS12 · The Web Search Tool": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss12_the_web_search_tool/index.md
+          - "SS13 · Quiz on Tool Use with Claude": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss13_quiz_on_tool_use_with_claude/index.md
+        - "S07 · RAG and Agentic Search":
+          - Overview: modules/m08_building_with_the_claude_api/s07_rag_and_agentic_search/index.md
+          - "SS01 · Introducing Retrieval Augmented Generation": modules/m08_building_with_the_claude_api/s07_rag_and_agentic_search/ss01_introducing_retrieval_augmented_generation/index.md
+          - "SS02 · Text Chunking Strategies": modules/m08_building_with_the_claude_api/s07_rag_and_agentic_search/ss02_text_chunking_strategies/index.md
+          - "SS03 · Text Embeddings": modules/m08_building_with_the_claude_api/s07_rag_and_agentic_search/ss03_text_embeddings/index.md
+          - "SS04 · The Full RAG Flow": modules/m08_building_with_the_claude_api/s07_rag_and_agentic_search/ss04_the_full_rag_flow/index.md
+          - "SS05 · Implementing the RAG Flow": modules/m08_building_with_the_claude_api/s07_rag_and_agentic_search/ss05_implementing_the_rag_flow/index.md
+          - "SS06 · BM25 Lexical Search": modules/m08_building_with_the_claude_api/s07_rag_and_agentic_search/ss06_bm25_lexical_search/index.md
+          - "SS07 · A Multi-Index RAG Pipeline": modules/m08_building_with_the_claude_api/s07_rag_and_agentic_search/ss07_a_multi_index_rag_pipeline/index.md
+        - "S08 · Features of Claude":
+          - Overview: modules/m08_building_with_the_claude_api/s08_features_of_claude/index.md
+          - "SS01 · Extended Thinking": modules/m08_building_with_the_claude_api/s08_features_of_claude/ss01_extended_thinking/index.md
+          - "SS02 · Image Support": modules/m08_building_with_the_claude_api/s08_features_of_claude/ss02_image_support/index.md
+          - "SS03 · PDF Support": modules/m08_building_with_the_claude_api/s08_features_of_claude/ss03_pdf_support/index.md
+          - "SS04 · Citations": modules/m08_building_with_the_claude_api/s08_features_of_claude/ss04_citations/index.md
+          - "SS05 · Prompt Caching": modules/m08_building_with_the_claude_api/s08_features_of_claude/ss05_prompt_caching/index.md
+          - "SS06 · Rules of Prompt Caching": modules/m08_building_with_the_claude_api/s08_features_of_claude/ss06_rules_of_prompt_caching/index.md
+          - "SS07 · Prompt Caching in Action": modules/m08_building_with_the_claude_api/s08_features_of_claude/ss07_prompt_caching_in_action/index.md
+          - "SS08 · Code Execution and the Files API": modules/m08_building_with_the_claude_api/s08_features_of_claude/ss08_code_execution_and_the_files_api/index.md
+          - "SS09 · Quiz on Features of Claude": modules/m08_building_with_the_claude_api/s08_features_of_claude/ss09_quiz_on_features_of_claude/index.md
+        - "S09 · Model Context Protocol":
+          - Overview: modules/m08_building_with_the_claude_api/s09_model_context_protocol/index.md
+          - "SS01 · Introducing MCP": modules/m08_building_with_the_claude_api/s09_model_context_protocol/ss01_introducing_mcp/index.md
+          - "SS02 · MCP Clients": modules/m08_building_with_the_claude_api/s09_model_context_protocol/ss02_mcp_clients/index.md
+          - "SS03 · Project Setup": modules/m08_building_with_the_claude_api/s09_model_context_protocol/ss03_project_setup/index.md
+          - "SS04 · Defining Tools with MCP": modules/m08_building_with_the_claude_api/s09_model_context_protocol/ss04_defining_tools_with_mcp/index.md
+          - "SS05 · The Server Inspector": modules/m08_building_with_the_claude_api/s09_model_context_protocol/ss05_the_server_inspector/index.md
+          - "SS06 · Implementing a Client": modules/m08_building_with_the_claude_api/s09_model_context_protocol/ss06_implementing_a_client/index.md
+          - "SS07 · Defining Resources": modules/m08_building_with_the_claude_api/s09_model_context_protocol/ss07_defining_resources/index.md
+          - "SS08 · Accessing Resources": modules/m08_building_with_the_claude_api/s09_model_context_protocol/ss08_accessing_resources/index.md
+          - "SS09 · Defining Prompts": modules/m08_building_with_the_claude_api/s09_model_context_protocol/ss09_defining_prompts/index.md
+          - "SS10 · Prompts in the Client": modules/m08_building_with_the_claude_api/s09_model_context_protocol/ss10_prompts_in_the_client/index.md
+          - "SS11 · MCP Review": modules/m08_building_with_the_claude_api/s09_model_context_protocol/ss11_mcp_review/index.md
+          - "SS12 · Quiz on Model Context Protocol": modules/m08_building_with_the_claude_api/s09_model_context_protocol/ss12_quiz_on_model_context_protocol/index.md
+        - "S10 · Anthropic Apps - Claude Code and Computer Use":
+          - Overview: modules/m08_building_with_the_claude_api/s10_anthropic_apps_claude_code_and_computer_use/index.md
+          - "SS01 · Anthropic Apps": modules/m08_building_with_the_claude_api/s10_anthropic_apps_claude_code_and_computer_use/ss01_anthropic_apps/index.md
+          - "SS02 · Claude Code Setup": modules/m08_building_with_the_claude_api/s10_anthropic_apps_claude_code_and_computer_use/ss02_claude_code_setup/index.md
+          - "SS03 · Claude Code in Action": modules/m08_building_with_the_claude_api/s10_anthropic_apps_claude_code_and_computer_use/ss03_claude_code_in_action/index.md
+          - "SS04 · Enhancements with MCP Servers": modules/m08_building_with_the_claude_api/s10_anthropic_apps_claude_code_and_computer_use/ss04_enhancements_with_mcp_servers/index.md
+        - "S11 · Agents and Workflows":
+          - Overview: modules/m08_building_with_the_claude_api/s11_agents_and_workflows/index.md
+          - "SS01 · Agents and Workflows": modules/m08_building_with_the_claude_api/s11_agents_and_workflows/ss01_agents_and_workflows/index.md
+          - "SS02 · Parallelization Workflows": modules/m08_building_with_the_claude_api/s11_agents_and_workflows/ss02_parallelization_workflows/index.md
+          - "SS03 · Chaining Workflows": modules/m08_building_with_the_claude_api/s11_agents_and_workflows/ss03_chaining_workflows/index.md
+          - "SS04 · Routing Workflows": modules/m08_building_with_the_claude_api/s11_agents_and_workflows/ss04_routing_workflows/index.md
+          - "SS05 · Agents and Tools": modules/m08_building_with_the_claude_api/s11_agents_and_workflows/ss05_agents_and_tools/index.md
+          - "SS06 · Environment Inspection": modules/m08_building_with_the_claude_api/s11_agents_and_workflows/ss06_environment_inspection/index.md
+          - "SS07 · Workflows vs Agents": modules/m08_building_with_the_claude_api/s11_agents_and_workflows/ss07_workflows_vs_agents/index.md
+          - "SS08 · Quiz on Agents and Workflows": modules/m08_building_with_the_claude_api/s11_agents_and_workflows/ss08_quiz_on_agents_and_workflows/index.md
+        - "S12 · Final Assessment":
+          - Overview: modules/m08_building_with_the_claude_api/s12_final_assessment/index.md
+          - "SS01 · Final Assessment": modules/m08_building_with_the_claude_api/s12_final_assessment/ss01_final_assessment/index.md
+        - "S13 · Wrapping Up":
+          - Overview: modules/m08_building_with_the_claude_api/s13_wrapping_up/index.md
+          - "SS01 · Course Wrap Up": modules/m08_building_with_the_claude_api/s13_wrapping_up/ss01_course_wrap_up/index.md
+      - "M09 · Claude Code in Action":
+        - Overview: modules/m09_claude_code_in_action/index.md
+      - "M16 · Claude 101":
+        - Overview: modules/m16_claude_101/index.md
+      - "M18 · Claude Code 101":
+        - Overview: modules/m18_claude_code_101/index.md
+
+    - "MCP & Integrations":
+      - Overview: modules/index.md
+      - "M10 · Introduction to MCP":
+        - Overview: modules/m10_introduction_to_model_context_protocol/index.md
+      - "M11 · MCP Advanced Topics":
+        - Overview: modules/m11_model_context_protocol_advance_topics/index.md
+      - "M12 · Claude in Amazon Bedrock":
+        - Overview: modules/m12_claude_in_amazon_bedrock/index.md
+      - "M13 · Claude with Google Vertex":
+        - Overview: modules/m13_claude_with_google_vertex/index.md
+
+    - "Partner & Educator":
+      - Overview: modules/index.md
+      - "M17 · Partner Basecamp":
+        - Overview: modules/m17_partner_basecamp/index.md
+
+  # ── BADGES ────────────────────────────────────────────────
+  - Badges:
+    - badges/index.md
+    - "Claude Badges":
+      - Overview: badges/index.md
+      - "Claude Partner Badge · Claude Code":
+        - Overview: badges/Claud.Patner.Badge_Claude_code/index.md
+
+  # ── EXAM PLANNING ─────────────────────────────────────────
+  - "Exam Planning":
+    - "Claude Certifications":
+      - "Claude Certified Developer – Foundations":
+        - "Study Runway": ccdvf/study-runway.md
+        - "Mind Map": ccdvf/mindmap.md
+      - "Claude Certified Architect – Foundations":
+        - "Study Runway": ccarf/study-runway.md
+        - "Mind Map": ccarf/mindmap.md

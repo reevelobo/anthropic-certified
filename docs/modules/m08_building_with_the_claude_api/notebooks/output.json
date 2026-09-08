@@ -1,0 +1,23 @@
+[
+  {
+    "output": "# One-Day Meal Plan for Marathon Training Peak Week\n\nHere is a one-day meal plan for an athlete aiming to maximize carbohydrate intake and hydration during marathon training peak week:\n\n* **Calorie Target:** Approximately 3,200 calories\n* **Macronutrient Breakdown:** Protein (120g), Fat (80g), Carbs (480g)\n\n**Meal Plan:**\n\n* **Breakfast (6:30 AM):** Oatmeal (100g dry weight) with banana (150g), honey (30g), and whole milk (240g). Side of whole wheat toast (50g) with jam (20g).\n  * Protein: 18g, Fat: 8g, Carbs: 110g\n\n* **Pre-Workout Snack (8:00 AM):** Energy bar (65g) and sports drink (500ml).\n  * Protein: 10g, Fat: 5g, Carbs: 70g\n\n* **Lunch (12:30 PM):** Pasta (100g dry weight) with lean ground turkey (120g) and marinara sauce (150g). Side salad with olive oil dressing (15g oil). Orange juice (250ml).\n  * Protein: 35g, Fat: 15g, Carbs: 95g\n\n* **Post-Workout Snack (3:30 PM):** Rice cakes (60g) with almond butter (25g) and apple (120g). Sports drink (500ml).\n  * Protein: 12g, Fat: 12g, Carbs: 95g\n\n* **Dinner (6:30 PM):** Grilled chicken breast (150g), white rice (120g dry weight), steamed carrots (150g), and olive oil (10g). Whole wheat roll (40g).\n  * Protein: 35g, Fat: 15g, Carbs: 105g\n\n* **Evening Snack (8:30 PM):** Greek yogurt (200g), granola (40g), and berries (80g). Coconut water (200ml).\n  * Protein: 18g, Fat: 8g, Carbs: 65g\n\n* **Hydration:** Water throughout the day (minimum 3-4 liters) + electrolyte drinks during/after training sessions.\n\nThis meal plan prioritizes easily digestible carbohydrates, moderate protein for muscle recovery, and consistent hydration to support endurance performance and glycogen replenishment during peak marathon training.",
+    "test_case": {
+      "prompt_inputs": {
+        "height": "180",
+        "weight": "68",
+        "goal": "Marathon training peak week - maximize carbohydrate intake and hydration for endurance performance",
+        "restrictions": "None"
+      },
+      "solution_criteria": [
+        "Meal plan covers all meals for one full day (breakfast, lunch, dinner, and snacks)",
+        "Emphasizes high carbohydrate intake appropriate for peak marathon training week",
+        "Includes hydration strategy with specific fluid recommendations throughout the day",
+        "Provides realistic, practical meal options that can be consumed by a single athlete"
+      ],
+      "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+      "scenario": "Testing with a professional marathon runner requiring high carbohydrate intake and hydration strategy during peak training week"
+    },
+    "score": 9,
+    "reasoning": "The solution comprehensively meets all three mandatory requirements with precise daily totals, complete macronutrient breakdowns, and detailed meals with portions and timings. It successfully addresses the secondary criteria by emphasizing carbohydrate loading appropriate for marathon training and including a hydration strategy. The meal plan is compact, concise, and practical for a single athlete. Minor weaknesses exist in hydration specificity and lack of personalized caloric calculation based on the provided athlete measurements, but these do not constitute violations of the stated criteria. The solution directly fulfills all listed requirements without significant deficiencies."
+  }
+]

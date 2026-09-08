@@ -1,0 +1,697 @@
+<title>CCDV-F Study Runway</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    color-scheme: light;
+    --page-bg:      #f7f7f5;
+    --surface:      #ffffff;
+    --surface-2:    #fbfbfa;
+    --ink-1:        #14161a;
+    --ink-2:        #565b63;
+    --ink-3:        #8b8f96;
+    --border:       rgba(20,22,26,0.11);
+    --border-strong:rgba(20,22,26,0.20);
+    --accent:       #8a5a1c;
+    --accent-soft:  #f2e6d3;
+    --track-bg:     #eeede9;
+
+    --d1:#2a78d6; --d2:#eb6834; --d3:#1baf7a; --d4:#eda100;
+    --d5:#e87ba4; --d6:#008300; --d7:#4a3aa7; --d8:#e34948;
+    --d0:#9a9d9f;
+
+    --d1-t:rgba(42,120,214,0.09); --d2-t:rgba(235,104,52,0.09); --d3-t:rgba(27,175,122,0.09); --d4-t:rgba(237,161,0,0.10);
+    --d5-t:rgba(232,123,164,0.10); --d6-t:rgba(0,131,0,0.08); --d7-t:rgba(74,58,167,0.09); --d8-t:rgba(227,73,72,0.09);
+    --d0-t:rgba(154,157,159,0.12);
+
+    --shadow: 0 1px 2px rgba(20,22,26,0.06), 0 8px 24px -12px rgba(20,22,26,0.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --page-bg:      #100f0d;
+      --surface:      #191815;
+      --surface-2:    #1f1e1a;
+      --ink-1:        #f3f1ec;
+      --ink-2:        #c2bfb6;
+      --ink-3:        #86837b;
+      --border:       rgba(255,255,255,0.10);
+      --border-strong:rgba(255,255,255,0.18);
+      --accent:       #dba85a;
+      --accent-soft:  #3a2c14;
+      --track-bg:     #26241f;
+
+      --d1:#3987e5; --d2:#d95926; --d3:#199e70; --d4:#c98500;
+      --d5:#d55181; --d6:#3fbf3f; --d7:#9085e9; --d8:#e66767;
+      --d0:#7d7f81;
+
+      --d1-t:rgba(57,135,229,0.16); --d2-t:rgba(217,89,38,0.16); --d3-t:rgba(25,158,112,0.16); --d4-t:rgba(201,133,0,0.16);
+      --d5-t:rgba(213,81,129,0.16); --d6-t:rgba(63,191,63,0.14); --d7-t:rgba(144,133,233,0.16); --d8-t:rgba(230,103,103,0.16);
+      --d0-t:rgba(125,127,129,0.18);
+
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --page-bg:      #100f0d;
+    --surface:      #191815;
+    --surface-2:    #1f1e1a;
+    --ink-1:        #f3f1ec;
+    --ink-2:        #c2bfb6;
+    --ink-3:        #86837b;
+    --border:       rgba(255,255,255,0.10);
+    --border-strong:rgba(255,255,255,0.18);
+    --accent:       #dba85a;
+    --accent-soft:  #3a2c14;
+    --track-bg:     #26241f;
+
+    --d1:#3987e5; --d2:#d95926; --d3:#199e70; --d4:#c98500;
+    --d5:#d55181; --d6:#3fbf3f; --d7:#9085e9; --d8:#e66767;
+    --d0:#7d7f81;
+
+    --d1-t:rgba(57,135,229,0.16); --d2-t:rgba(217,89,38,0.16); --d3-t:rgba(25,158,112,0.16); --d4-t:rgba(201,133,0,0.16);
+    --d5-t:rgba(213,81,129,0.16); --d6-t:rgba(63,191,63,0.14); --d7-t:rgba(144,133,233,0.16); --d8-t:rgba(230,103,103,0.16);
+    --d0-t:rgba(125,127,129,0.18);
+
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+
+  *{ box-sizing: border-box; }
+  body{
+    background: var(--page-bg);
+    color: var(--ink-1);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .wrap{ max-width: 1180px; margin: 0 auto; padding: 40px 24px 96px; }
+
+  h1,h2,h3{ font-family: "Fraunces", Georgia, serif; text-wrap: balance; margin: 0; }
+  .eyebrow{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600;
+  }
+
+  header{ padding-bottom: 28px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+  header h1{ font-size: clamp(28px, 4vw, 40px); font-weight: 600; margin-top: 8px; }
+  header p.sub{ color: var(--ink-2); max-width: 66ch; margin-top: 10px; font-size: 15px; }
+
+  .stats{ display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border);
+          border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 24px; }
+  .stat{ background: var(--surface); padding: 16px 18px; }
+  .stat .k{ font-family:"IBM Plex Mono",monospace; font-size: 26px; font-weight: 600; font-variant-numeric: proportional-nums; }
+  .stat .l{ font-size: 12px; color: var(--ink-2); margin-top: 4px; }
+  @media (max-width: 720px){ .stats{ grid-template-columns: repeat(2,1fr); } }
+
+  section{ margin-top: 48px; }
+  section > h2{ font-size: 21px; font-weight: 600; }
+  section > .lede{ color: var(--ink-2); font-size: 14px; max-width: 70ch; margin-top: 6px; }
+
+  /* legend */
+  .legend{ display:flex; flex-wrap:wrap; gap: 8px 18px; margin-top: 18px; }
+  .legend .item{ display:flex; align-items:center; gap:8px; font-size: 13px; color: var(--ink-2); }
+  .legend .sw{ width: 11px; height: 11px; border-radius: 3px; flex: none; }
+  .legend b{ color: var(--ink-1); font-weight: 600; }
+  .legend .pct{ font-family:"IBM Plex Mono",monospace; color: var(--ink-3); }
+
+  .tooltip{
+    position: fixed; pointer-events: none; z-index: 50;
+    background: var(--ink-1); color: var(--page-bg);
+    font-size: 12.5px; line-height: 1.45; padding: 9px 12px; border-radius: 8px;
+    max-width: 320px; box-shadow: var(--shadow); opacity: 0; transition: opacity 0.08s ease;
+  }
+  .tooltip .tt-domain{ font-family:"IBM Plex Mono",monospace; font-size: 10.5px; text-transform: uppercase;
+                        letter-spacing: 0.06em; opacity: 0.72; margin-bottom: 4px; display:block; }
+  .tooltip ul{ margin: 5px 0 0; padding-left: 15px; }
+  .tooltip li{ margin: 1px 0; }
+
+  /* ============ GANTT ============ */
+  .gantt-scroll{ overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; margin-top: 18px; background: var(--surface); padding: 6px 0; }
+  .gantt{ min-width: 1240px; }
+  .grow{ display:grid; grid-template-columns: 236px repeat(22, minmax(40px, 1fr)); align-items: center; }
+  .grow.head{ position: sticky; top: 0; background: var(--surface); z-index: 2; border-bottom: 1px solid var(--border-strong); padding-bottom: 6px; }
+  .grow.head .gcell{ font-family:"IBM Plex Mono",monospace; font-size: 10.5px; color: var(--ink-3); text-align:center; line-height:1.3; padding: 4px 2px; }
+  .grow.head .gcell b{ display:block; color: var(--ink-2); font-size: 11.5px; }
+  .grow.head .gcell.weekend{ background: var(--track-bg); border-radius: 6px 6px 0 0; }
+  .grow.head .gcell.exam-col{ background: var(--accent-soft); border-radius: 6px 6px 0 0; }
+  .grow.lane{ padding: 9px 10px; margin-top: 10px; border-radius: 6px; font-size: 12px; font-weight: 600; color: var(--ink-1); }
+  .grow.lane .lane-name{ grid-column: 1 / -1; display:flex; align-items:center; gap:8px; }
+  .grow.lane .sw{ width:10px; height:10px; border-radius: 3px; flex:none; }
+  .grow.lane .pct{ font-family:"IBM Plex Mono",monospace; font-weight: 500; color: var(--ink-3); font-size: 11px; }
+  .grow.session{ min-height: 30px; padding: 2px 0; }
+  .glabel{ font-size: 12.5px; padding-right: 10px; color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .gbar-wrap{ display:flex; align-items:center; height: 100%; min-width:0; }
+  .gbar{ width: 26px; height: 18px; border-radius: 4px; flex: none; }
+  .gbar-label{ margin-left: 8px; font-size: 12px; color: var(--ink-2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor: default; }
+  .gbar-label b{ color: var(--ink-1); font-weight: 600; }
+  .gbar-label .ghrs{ font-family:"IBM Plex Mono",monospace; color: var(--ink-3); margin-left: 5px; }
+
+  /* ============ ACCORDION TIMETABLE ============ */
+  .daycards{ margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+  details.daycard{ border: 1px solid var(--border); border-radius: 12px; background: var(--surface); overflow: hidden; }
+  details.daycard[open]{ box-shadow: var(--shadow); }
+  details.daycard.exam{ border-color: var(--accent); }
+  summary.day-summary{
+    list-style: none; cursor: pointer; padding: 14px 16px; display:flex; align-items:center; gap: 14px; flex-wrap: wrap;
+  }
+  summary.day-summary::-webkit-details-marker{ display:none; }
+  summary.day-summary .chev{ font-family:"IBM Plex Mono",monospace; color: var(--ink-3); transition: transform 0.15s ease; flex:none; }
+  details[open] summary.day-summary .chev{ transform: rotate(90deg); }
+  summary.day-summary .sdate{ min-width: 108px; flex: none; }
+  summary.day-summary .sdate .dow{ display:block; font-family:"IBM Plex Mono",monospace; font-size: 11px; color: var(--ink-3); }
+  summary.day-summary .sdate .date{ font-weight: 600; font-size: 14.5px; }
+  summary.day-summary .schips{ display:flex; flex-wrap:wrap; gap: 6px; flex: 1; min-width: 200px; }
+  .chip{ display:inline-flex; align-items:center; gap:5px; font-size: 11.5px; padding: 3px 9px 3px 7px; border-radius: 999px; color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--border); }
+  .chip .sw{ width:7px; height:7px; border-radius:50%; flex:none; }
+  summary.day-summary .smeta{ display:flex; gap: 14px; flex: none; font-family:"IBM Plex Mono",monospace; font-size: 12px; color: var(--ink-3); }
+  summary.day-summary .smeta b{ color: var(--ink-1); font-weight: 600; }
+
+  .day-body{ padding: 4px 16px 18px; border-top: 1px solid var(--border); }
+  .topic-block{ margin-top: 16px; border-radius: 10px; padding: 14px 14px 6px; }
+  .topic-head{ display:flex; align-items:baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+  .topic-head .sw{ width:10px; height:10px; border-radius:3px; flex:none; position:relative; top:1px; }
+  .topic-head h4{ font-family: "IBM Plex Sans", sans-serif; font-size: 14.5px; font-weight: 600; margin:0; }
+  .topic-head .tmeta{ font-family:"IBM Plex Mono",monospace; font-size: 11.5px; color: var(--ink-3); }
+
+  .subs{ display:flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: 8px; overflow:hidden; border: 1px solid var(--border); }
+  .sub-row{ display:grid; grid-template-columns: 1fr 128px 64px; gap: 10px; background: var(--surface); padding: 9px 12px; align-items:center; }
+  .sub-row .sn{ font-size: 13px; color: var(--ink-1); }
+  .sub-row .sn a{ color: var(--accent); text-decoration: none; font-size: 11.5px; margin-left: 7px; white-space: nowrap; }
+  .sub-row .sn a:hover{ text-decoration: underline; }
+  .dots{ font-size: 12px; letter-spacing: 1px; color: var(--ink-3); white-space:nowrap; }
+  .dots .on{ color: var(--ink-1); }
+  .sub-row .smin{ font-family:"IBM Plex Mono",monospace; font-size: 12px; color: var(--ink-2); text-align:right; white-space:nowrap; }
+  @media (max-width: 640px){
+    .sub-row{ grid-template-columns: 1fr; gap: 4px; }
+    .sub-row .smin::before{ content:"Time: "; color:var(--ink-3); }
+    .dots::before{ content:"Complexity: "; color:var(--ink-3); }
+  }
+
+  .scale-note{ margin-top: 14px; font-size: 12px; color: var(--ink-3); }
+
+  footer{ margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--ink-3); font-size: 12.5px; }
+  footer a{ color: var(--accent); }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Claude Certified Developer &mdash; Foundations (CCDV-F)</span>
+    <h1>Study Runway: Aug&nbsp;29 &rarr; Sep&nbsp;19</h1>
+    <p class="sub">Every skill in the exam blueprint, scheduled by domain weight across 2&nbsp;hours on weekdays and 6&nbsp;hours on weekends &mdash; broken down to the sub-concept, each with a complexity score and a time budget, ending in practice tests and a full review pass before test day.</p>
+    <div class="stats">
+      <div class="stat"><div class="k" id="stat-days">&mdash;</div><div class="l">days until exam</div></div>
+      <div class="stat"><div class="k">66</div><div class="l">total study hours</div></div>
+      <div class="stat"><div class="k">8</div><div class="l">domains · 24 skills</div></div>
+      <div class="stat"><div class="k">720<span style="font-size:14px;color:var(--ink-3)">/1000</span></div><div class="l">passing scaled score</div></div>
+    </div>
+  </header>
+
+  <section id="legend-section">
+    <h2>Domains, by exam weight</h2>
+    <p class="lede">Hours lean deeper than raw exam weight for the two smallest domains, Claude Code (3.1%) and Eval/Testing/Debugging (2.6%) &mdash; thin content on the blueprint still needs full retention, not a proportionally thin slice of study time.</p>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section id="gantt-section">
+    <h2>Gantt chart</h2>
+    <p class="lede">Every session, laid out on the calendar. Rows are grouped into a swimlane per domain; a bar marks the date a skill is studied, sized to fit its column, with the session's length and average complexity in the label. Scroll sideways on a small screen. Hover a bar for its sub-topics.</p>
+    <div class="gantt-scroll"><div class="gantt" id="gantt"></div></div>
+  </section>
+
+  <section id="table-section">
+    <h2>Full timetable</h2>
+    <p class="lede">Click any day to open it &mdash; every topic that day breaks down into its sub-concepts, each with a complexity score, a time budget in minutes, and a link to primary material where a strong one exists.</p>
+    <div class="daycards" id="daycards"></div>
+    <p class="scale-note">Complexity scale: <span class="dots"><span class="on">&#9679;</span>&#9675;&#9675;&#9675;&#9675;</span> 1&nbsp;&mdash; foundational recall &nbsp;&middot;&nbsp; <span class="dots"><span class="on">&#9679;&#9679;&#9679;&#9679;&#9679;</span></span> 5&nbsp;&mdash; advanced, multi-part synthesis. Minutes per day always sum to that day's hours.</p>
+  </section>
+
+  <footer>
+    Built strictly from the CCDV-F Exam Guide v1.0 (July 2026) blueprint &mdash; 8 domains, 24 skills, no outside topics added.
+    Pair this with the companion mindmap (<code>CCDV-F_Syllabus_Mindmap.opml</code>) in MindNode for the concept tree behind every session below.
+    Reference links point to Anthropic's own documentation, verified live at the time this page was built &mdash; docs move, so if one 404s, search the term on <a href="https://platform.claude.com/docs" target="_blank" rel="noopener">platform.claude.com/docs</a> or <a href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>.
+  </footer>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const DOMAINS = {
+  1: { name: "Agents & Workflows",             weight: "14.7%", color: "var(--d1)", tint: "var(--d1-t)" },
+  2: { name: "Applications & Integration",     weight: "33.1%", color: "var(--d2)", tint: "var(--d2-t)" },
+  3: { name: "Claude Code",                    weight: "3.1%",  color: "var(--d3)", tint: "var(--d3-t)" },
+  4: { name: "Eval, Testing & Debugging",      weight: "2.6%",  color: "var(--d4)", tint: "var(--d4-t)" },
+  5: { name: "Model Selection & Optimization", weight: "16.8%", color: "var(--d5)", tint: "var(--d5-t)" },
+  6: { name: "Prompt & Context Engineering",   weight: "11.0%", color: "var(--d6)", tint: "var(--d6-t)" },
+  7: { name: "Security & Safety",              weight: "8.1%",  color: "var(--d7)", tint: "var(--d7-t)" },
+  8: { name: "Tools & MCPs",                   weight: "10.6%", color: "var(--d8)", tint: "var(--d8-t)" },
+  0: { name: "Mixed review / practice",        weight: null,    color: "var(--d0)", tint: "var(--d0-t)" },
+};
+
+const LINKS = {
+  messages:  ["Messages API reference", "https://platform.claude.com/docs/en/api/messages/create"],
+  streaming: ["Streaming responses (SSE)", "https://docs.anthropic.com/en/api/messages-streaming"],
+  vision:    ["Vision / image input", "https://platform.claude.com/docs/en/build-with-claude/vision"],
+  thinking:  ["Extended & adaptive thinking", "https://platform.claude.com/docs/en/build-with-claude/thinking"],
+  caching:   ["Prompt caching", "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"],
+  batch:     ["Message Batches API", "https://platform.claude.com/docs/en/build-with-claude/batch-processing"],
+  tooluse:   ["Tool use / function calling", "https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview"],
+  agentsdk:  ["Claude Agent SDK", "https://code.claude.com/docs/en/agent-sdk/overview"],
+  agentpat:  ["Building Effective Agents", "https://www.anthropic.com/engineering/building-effective-agents"],
+  mcp:       ["Model Context Protocol", "https://modelcontextprotocol.io/specification/2025-11-25"],
+  mcpserver: ["Building an MCP server", "https://modelcontextprotocol.io/docs/develop/build-server"],
+  claudecode:["Claude Code overview", "https://code.claude.com/docs/en/overview"],
+  claudemd:  ["Claude Code memory/config", "https://code.claude.com/docs/en/memory"],
+  hooks:     ["Claude Code hooks", "https://code.claude.com/docs/en/hooks-guide"],
+  headless:  ["Claude Code headless mode", "https://code.claude.com/docs/en/headless"],
+  pe:        ["Prompt engineering guide", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview"],
+  longctx:   ["Long-context prompting", "https://www.anthropic.com/news/prompting-long-context"],
+  jailbreak: ["Mitigating jailbreaks", "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/mitigate-jailbreaks"],
+  security:  ["Claude Code security", "https://code.claude.com/docs/en/security"],
+  modelsel:  ["Choosing a model", "https://platform.claude.com/docs/en/about-claude/models/choosing-a-model"],
+  pricing:   ["Pricing & token costs", "https://platform.claude.com/docs/en/about-claude/pricing"],
+  auth:      ["API authentication & keys", "https://platform.claude.com/docs/en/manage-claude/authentication"],
+};
+
+// Each day: { date, dow, hours, exam?, segs:[ { d:domainId, h:hours, t:title, subs:[ [name, complexity 1-5, minutes, linkKey?] ] } ] }
+const WEEKS = [
+  { label: "Week 1 · Foundations — API, engineering basics, LLM fundamentals", days: [
+    { date: "Aug 29", dow: "Sat", hours: 6, segs: [
+      { d:5, h:3, t:"LLM Fundamentals", subs: [
+        ["Tokens & context windows — how text becomes tokens, window limits, truncation", 2, 25, "longctx"],
+        ["Sampling & non-determinism — temperature, top-p/top-k, why output varies", 3, 30, null],
+        ["Next-token generation — autoregressive prediction and why it shapes prompting", 3, 20, null],
+        ["Model options: fast mode vs. extended thinking vs. adaptive thinking vs. effort levels", 4, 45, "thinking"],
+        ["Zero-shot vs. single-shot vs. multi-shot prompting", 2, 40, "pe"],
+        ["Self-check: 10-question flashcard pass", 2, 20, null],
+      ]},
+      { d:2, h:3, t:"Software Engineering Foundations I", subs: [
+        ["REST API principles — verbs, status codes, statelessness, resource design", 2, 50, null],
+        ["JSON structure & schema — nesting, types, validation basics", 1, 30, null],
+        ["Asynchronous programming — async/await, promises/futures, event loops", 3, 60, null],
+        ["Hands-on: call a JSON REST API asynchronously end to end", 3, 40, null],
+      ]},
+    ]},
+    { date: "Aug 30", dow: "Sun", hours: 6, segs: [
+      { d:2, h:2, t:"Software Engineering Foundations II", subs: [
+        ["Version control workflows — branching, pull requests, commit hygiene", 2, 25, null],
+        ["SDLC integration points — where AI-assisted dev fits plan/build/test/deploy", 2, 20, null],
+        ["Code review practices — what reviewers check, review etiquette", 2, 25, null],
+        ["Small-scale refactoring — function-level cleanup, extraction, naming", 2, 25, null],
+        ["Large-scale refactoring — module/service migration strategy and risk", 4, 25, null],
+      ]},
+      { d:2, h:4, t:"Claude API Mechanics I", subs: [
+        ["Messages API basics — roles, message structure, the system prompt parameter", 2, 50, "messages"],
+        ["Multi-turn conversations — message history management", 2, 30, "messages"],
+        ["Tool use / function calling mechanics — tool schema, tool_choice, tool_result blocks", 4, 60, "tooluse"],
+        ["Streaming responses — SSE event types, partial JSON, handling a stream in code", 4, 50, "streaming"],
+        ["Vision input — image formats, base64 vs. URL, multi-image requests, image token cost", 3, 50, "vision"],
+      ]},
+    ]},
+    { date: "Aug 31", dow: "Mon", hours: 2, segs: [
+      { d:2, h:2, t:"Claude API Mechanics II", subs: [
+        ["Extended/adaptive thinking via the API — thinking budget, output format", 4, 35, "thinking"],
+        ["Prompt caching mechanics — cache_control breakpoints, TTL, cost impact", 4, 30, "caching"],
+        ["Invoking Claude via third-party vendors — Bedrock and Vertex AI differences", 3, 30, null],
+        ["Messages API data access patterns — pagination, retrieving history, citations", 3, 25, "messages"],
+      ]},
+    ]},
+    { date: "Sep 1", dow: "Tue", hours: 2, segs: [
+      { d:2, h:1, t:"Claude API Mechanics III", subs: [
+        ["Message Batches API mechanics — submission, 24-hour window, retrieval", 3, 30, "batch"],
+        ["Realtime vs. batch — choosing by cost, latency, and use-case fit", 2, 30, "batch"],
+      ]},
+      { d:5, h:1, t:"Technical Fundamentals", subs: [
+        ["How Claude SDKs wrap the REST API — client libraries, request/response mapping", 2, 30, null],
+        ["Websockets vs. REST for real-time apps — when Claude integrations use each", 3, 30, null],
+      ]},
+    ]},
+    { date: "Sep 2", dow: "Wed", hours: 2, segs: [
+      { d:5, h:2, t:"Model Selection & Tradeoffs", subs: [
+        ["Opus vs. Sonnet vs. Haiku — capability and use-case mapping", 3, 35, "modelsel"],
+        ["Which models support adaptive thinking and effort levels", 2, 20, "thinking"],
+        ["Quality / latency / cost tradeoff framework for picking a model", 4, 35, "modelsel"],
+        ["Handling breaking behavior changes across model version releases", 3, 30, null],
+      ]},
+    ]},
+    { date: "Sep 3", dow: "Thu", hours: 2, segs: [
+      { d:5, h:2, t:"Cost & Token Management", subs: [
+        ["Token usage tracking — usage fields in API responses, logging", 2, 25, "pricing"],
+        ["Cost modeling a Claude application — input/output pricing, estimating spend", 3, 35, "pricing"],
+        ["Prompt caching for cost reduction — what to cache, cache-hit economics", 4, 35, "caching"],
+        ["Cache check-pointing strategy — multiple breakpoints, invalidation", 4, 25, "caching"],
+      ]},
+    ]},
+    { date: "Sep 4", dow: "Fri", hours: 2, segs: [
+      { d:5, h:1, t:"Review — Model Selection & Optimization", subs: [
+        ["Timed self-quiz: LLM Fundamentals, Model Selection, Cost & Token Management", 3, 60, null],
+      ]},
+      { d:2, h:1, t:"Understanding Requirements", subs: [
+        ["Deriving functional requirements from business requirements", 3, 30, null],
+        ["Deriving infrastructure requirements from solution architecture", 3, 30, null],
+      ]},
+    ]},
+  ]},
+  { label: "Week 2 · Design, prompting, and agents", days: [
+    { date: "Sep 5", dow: "Sat", hours: 6, segs: [
+      { d:2, h:1, t:"Systems Life Cycle", subs: [
+        ["SDLC management concepts — plan, design, build, test, deploy, maintain", 2, 30, null],
+        ["SDLC frameworks in practice — mapping Claude app dev onto a framework", 2, 30, null],
+      ]},
+      { d:2, h:3, t:"Claude Application Design", subs: [
+        ["Instruction interpretation across interfaces — Claude Code vs. Desktop vs. claude.ai vs. API vs. SDKs", 4, 45, "claudecode"],
+        ["Content boundaries — what Claude will and won't do across contexts", 3, 25, null],
+        ["Schema design for structured Claude outputs", 4, 40, "tooluse"],
+        ["Session hygiene — conversation length, resets, state management", 3, 35, null],
+        ["Plugin management basics", 2, 35, null],
+      ]},
+      { d:2, h:2, t:"Configuration Management", subs: [
+        ["CLAUDE.md files — purpose and structure", 2, 25, "claudemd"],
+        ["settings.json configuration options", 3, 30, "claudemd"],
+        ["Model version pinning strategy", 2, 20, null],
+        ["Prompt versioning practices", 2, 20, null],
+        ["Plugin dependency management", 2, 25, null],
+      ]},
+    ]},
+    { date: "Sep 6", dow: "Sun", hours: 6, segs: [
+      { d:6, h:3, t:"Prompt Engineering", subs: [
+        ["Instruction clarity — specificity and unambiguous phrasing", 2, 25, "pe"],
+        ["Few-shot examples — selecting and formatting them", 3, 30, "pe"],
+        ["System vs. user message placement — what goes where", 3, 25, "pe"],
+        ["Output constraints — format, length, and style enforcement", 2, 20, "pe"],
+        ["Prompt/instruction placement across components — system, tools, user turns", 4, 30, "pe"],
+        ["Iterative refinement & prompt adjustment workflow", 3, 25, "pe"],
+        ["Input sanitization before it reaches the prompt", 3, 25, "jailbreak"],
+      ]},
+      { d:6, h:3, t:"Context Engineering", subs: [
+        ["Context window management fundamentals — what fills it, budget planning", 3, 35, "longctx"],
+        ["Preventing context drift over long sessions", 4, 30, "longctx"],
+        ["Tool output pruning to reduce context bloat", 3, 30, null],
+        ["Compaction techniques — summarizing history to save tokens", 4, 35, null],
+        ["Context isolation via subagents", 4, 25, "agentpat"],
+        ["Context isolation via multi-step agentic workflows", 3, 25, "agentpat"],
+      ]},
+    ]},
+    { date: "Sep 7", dow: "Mon", hours: 2, segs: [
+      { d:6, h:2, t:"Output Handling", subs: [
+        ["Structured output patterns — JSON mode and tool-based structured output", 3, 35, "tooluse"],
+        ["Response validation techniques", 3, 30, null],
+        ["Defensive parsing — handling malformed or unexpected output", 3, 30, null],
+        ["Skepticism toward confident output — verification habits", 3, 25, null],
+      ]},
+    ]},
+    { date: "Sep 8", dow: "Tue", hours: 2, segs: [
+      { d:2, h:1, t:"Review — Applications & Integration", subs: [
+        ["Domain quiz + weak-spot triage", 3, 60, null],
+      ]},
+      { d:6, h:1, t:"Review — Prompt & Context Engineering", subs: [
+        ["Domain quiz + weak-spot triage", 3, 60, null],
+      ]},
+    ]},
+    { date: "Sep 9", dow: "Wed", hours: 2, segs: [
+      { d:1, h:2, t:"Agent Architecture", subs: [
+        ["Workflow vs. agent — decision criteria for when each fits", 4, 45, "agentpat"],
+        ["Manager/supervisor hierarchy structures", 4, 40, "agentpat"],
+        ["Role of subagents in improving task execution", 3, 35, "agentpat"],
+      ]},
+    ]},
+    { date: "Sep 10", dow: "Thu", hours: 2, segs: [
+      { d:1, h:2, t:"Agent Construction with Claude", subs: [
+        ["Claude Agent SDK basics — structure and core APIs", 4, 40, "agentsdk"],
+        ["Building custom agent loops and harnesses", 5, 35, "agentpat"],
+        ["Managed deployment models — self-hosted vs. Anthropic-hosted", 3, 25, "agentsdk"],
+        ["Hooks for deterministic actions in agents", 3, 20, "hooks"],
+      ]},
+    ]},
+    { date: "Sep 11", dow: "Fri", hours: 2, segs: [
+      { d:1, h:2, t:"Agent Patterns & Frameworks", subs: [
+        ["Tool-use loop pattern — the core agent cycle", 3, 25, "agentpat"],
+        ["Sub-agents as a design pattern", 3, 20, "agentpat"],
+        ["Memory patterns in agents — short-term vs. persistent", 4, 25, "agentpat"],
+        ["Context-window management as an agent pattern", 3, 20, "longctx"],
+        ["Framework landscape: Strands, LangGraph, PydanticAI — when to reach for each", 3, 30, null],
+      ]},
+    ]},
+  ]},
+  { label: "Week 3 · Tools, security, Claude Code — then consolidate", days: [
+    { date: "Sep 12", dow: "Sat", hours: 6, segs: [
+      { d:8, h:3, t:"Tool Implementation", subs: [
+        ["Tool use & function calling fundamentals", 3, 30, "tooluse"],
+        ["Configuring tools for external system interaction", 3, 25, "tooluse"],
+        ["Writing effective tool descriptions", 3, 25, "tooluse"],
+        ["Error handling in tool calls", 3, 25, "tooluse"],
+        ["Tool usage pattern: agentic harness dispatch", 4, 25, "agentpat"],
+        ["Client-side vs. server-side tools", 3, 20, "tooluse"],
+        ["Approval patterns for sensitive tool calls", 3, 20, "hooks"],
+        ["Tool set construction best practices", 3, 10, "tooluse"],
+      ]},
+      { d:8, h:3, t:"MCP Server Development", subs: [
+        ["MCP server authoring basics", 4, 35, "mcpserver"],
+        ["Deploying an MCP server", 3, 25, "mcpserver"],
+        ["Integrating an MCP server with Claude applications", 3, 25, "mcp"],
+        ["MCP resources — exposing data", 3, 25, "mcp"],
+        ["MCP tools — exposing actions", 3, 25, "mcp"],
+        ["MCP prompts — exposing templates", 2, 20, "mcp"],
+        ["Communication patterns — stdio vs. sockets, client vs. server roles", 4, 25, "mcp"],
+      ]},
+    ]},
+    { date: "Sep 13", dow: "Sun", hours: 6, segs: [
+      { d:8, h:1.5, t:"Agentic Customization", subs: [
+        ["Built-in Tools vs. custom Tools — tradeoffs", 3, 25, "tooluse"],
+        ["Tools vs. Skills — when each fits", 3, 20, "claudecode"],
+        ["Tools/Skills vs. MCPs — when each fits", 3, 25, "mcp"],
+        ["Selecting the right approach for a given use case (decision framework)", 4, 20, null],
+      ]},
+      { d:7, h:2.5, t:"AI Application Security", subs: [
+        ["Data privacy & security best practices overview", 2, 15, "security"],
+        ["Prompt injection — awareness and mitigation techniques", 5, 35, "jailbreak"],
+        ["Jailbreak defense strategies", 4, 25, "jailbreak"],
+        ["Untrusted input handling patterns", 4, 20, "jailbreak"],
+        ["Data leakage prevention", 3, 15, "security"],
+        ["PII handling in Claude applications", 3, 15, "security"],
+        ["Authentication, authorization, confidentiality, privacy & integrity checklist", 3, 25, "auth"],
+      ]},
+      { d:7, h:2, t:"Guardrails & Safe Deployment", subs: [
+        ["Content policy design", 3, 25, "security"],
+        ["Guardrail layering — defense in depth", 4, 35, "security"],
+        ["Secure-by-design: privacy principles", 3, 20, "security"],
+        ["Secure-by-design: identity & access management", 3, 20, "auth"],
+        ["Secure-by-design: least privilege", 3, 20, "security"],
+      ]},
+    ]},
+    { date: "Sep 14", dow: "Mon", hours: 2, segs: [
+      { d:7, h:1, t:"Claude Hooks", subs: [
+        ["Hooks for guardrails — mechanics", 3, 20, "hooks"],
+        ["Hooks for safety controls", 3, 20, "hooks"],
+        ["Using hooks to prevent destructive actions", 4, 20, "hooks"],
+      ]},
+      { d:7, h:1, t:"Identity, Secrets & Key Management", subs: [
+        ["Managing secrets & credentials", 3, 15, "auth"],
+        ["API key management across dev and production environments", 3, 15, "auth"],
+        ["Identity validation, authentication & access approval", 3, 15, "auth"],
+        ["Authorized access monitoring", 2, 15, "security"],
+      ]},
+    ]},
+    { date: "Sep 15", dow: "Tue", hours: 2, segs: [
+      { d:3, h:2, t:"Claude Code Operation", subs: [
+        ["Core components — Rules, Skills, Commands, Agents, Agent Memory", 3, 30, "claudecode"],
+        ["Session management & slash commands (built-in and custom)", 2, 25, "claudecode"],
+        ["Headless mode, streaming mode & auto-mode", 4, 30, "headless"],
+        ["CLAUDE.md hierarchy — project vs. user vs. nested", 3, 20, "claudemd"],
+        ["Repository initialization & settings.json configuration", 2, 15, "claudemd"],
+      ]},
+    ]},
+    { date: "Sep 16", dow: "Wed", hours: 2, segs: [
+      { d:4, h:1, t:"Debugging & Error Handling", subs: [
+        ["Error type identification", 3, 15, null],
+        ["Recovery strategy selection", 3, 15, null],
+        ["Trace analysis to identify failure modes", 4, 15, null],
+        ["Problem origin isolation — integration layer vs. model output", 4, 15, null],
+      ]},
+      { d:0, h:1, t:"Cross-domain review", subs: [
+        ["Recap: Agents & Workflows, Claude Code, Debugging, Model Selection", 3, 60, null],
+      ]},
+    ]},
+    { date: "Sep 17", dow: "Thu", hours: 2, segs: [
+      { d:0, h:2, t:"Practice Test 1", subs: [
+        ["25 mixed questions spanning all 8 domains, timed", 4, 60, null],
+        ["Review every wrong answer against the blueprint", 3, 60, null],
+      ]},
+    ]},
+    { date: "Sep 18", dow: "Fri", hours: 2, segs: [
+      { d:0, h:2, t:"Weak-area drilling", subs: [
+        ["Targeted drilling on Practice Test 1 misses", 3, 70, null],
+        ["Full 8-domain blueprint checklist skim", 2, 50, null],
+      ]},
+    ]},
+  ]},
+  { label: "Exam day", days: [
+    { date: "Sep 19", dow: "Sat", hours: 0.5, exam: true, segs: [
+      { d:0, h:0.5, t:"Light review only", subs: [
+        ["Skim the mindmap and this timetable — 30–45 minutes, then stop. No new material.", 1, 30, null],
+      ]},
+    ]},
+  ]},
+];
+
+// ---------- helpers ----------
+function fmtH(h){ return (h % 1 === 0 ? h : h.toFixed(1)) + "h"; }
+function dots(c){
+  let s = "";
+  for (let i=1;i<=5;i++) s += `<span class="${i<=c?'on':''}">${i<=c?'&#9679;':'&#9675;'}</span>`;
+  return `<span class="dots">${s}</span>`;
+}
+function avgComplexity(subs){
+  const sum = subs.reduce((a,s)=>a+s[1],0);
+  return Math.round((sum/subs.length)*10)/10;
+}
+function segMinutes(seg){ return seg.subs.reduce((a,s)=>a+s[2],0); }
+
+// flatten for the gantt: ordered list of dates, and sessions grouped by domain
+const DATES = [];
+WEEKS.forEach(w => w.days.forEach(d => DATES.push(d)));
+
+const LANES = [1,2,3,4,5,6,7,8,0];
+const sessionsByLane = {};
+LANES.forEach(l => sessionsByLane[l] = []);
+WEEKS.forEach(w => w.days.forEach(day => {
+  const dateIdx = DATES.indexOf(day);
+  day.segs.forEach(seg => sessionsByLane[seg.d].push({ ...seg, date: day.date, dow: day.dow, dateIdx, exam: !!day.exam }));
+}));
+
+// ---------- legend ----------
+const legend = document.getElementById("legend");
+LANES.forEach(id => {
+  const dm = DOMAINS[id];
+  const el = document.createElement("div");
+  el.className = "item";
+  el.innerHTML = `<span class="sw" style="background:${dm.color}"></span><b>${dm.name}</b>${dm.weight ? `<span class="pct">${dm.weight}</span>` : ""}`;
+  legend.appendChild(el);
+});
+
+// ---------- tooltip ----------
+const tooltip = document.getElementById("tooltip");
+function showTip(e, html){ tooltip.innerHTML = html; tooltip.style.opacity = "1"; positionTip(e); }
+function positionTip(e){
+  const pad = 14;
+  let x = e.clientX + pad, y = e.clientY + pad;
+  const rect = tooltip.getBoundingClientRect();
+  if (x + rect.width > window.innerWidth - 10) x = e.clientX - rect.width - pad;
+  if (y + rect.height > window.innerHeight - 10) y = e.clientY - rect.height - pad;
+  tooltip.style.left = x + "px"; tooltip.style.top = y + "px";
+}
+function hideTip(){ tooltip.style.opacity = "0"; }
+
+// ---------- gantt ----------
+const gantt = document.getElementById("gantt");
+
+// header row
+const head = document.createElement("div");
+head.className = "grow head";
+let headHtml = `<div class="gcell"></div>`;
+DATES.forEach(d => {
+  const isWeekend = d.hours >= 6 || d.exam;
+  headHtml += `<div class="gcell ${d.exam ? 'exam-col' : (d.hours>=6?'weekend':'')}">${d.dow}<b>${d.date.split(" ")[1]}</b></div>`;
+});
+head.innerHTML = headHtml;
+gantt.appendChild(head);
+
+LANES.forEach(laneId => {
+  const dm = DOMAINS[laneId];
+  const sessions = sessionsByLane[laneId];
+  if (!sessions.length) return;
+
+  const laneRow = document.createElement("div");
+  laneRow.className = "grow lane";
+  laneRow.style.background = dm.tint;
+  laneRow.innerHTML = `<div class="lane-name"><span class="sw" style="background:${dm.color}"></span>${dm.name}${dm.weight ? `<span class="pct">${dm.weight} of exam</span>` : ""}</div>`;
+  gantt.appendChild(laneRow);
+
+  sessions.forEach(sess => {
+    const row = document.createElement("div");
+    row.className = "grow session";
+    const startCol = sess.dateIdx + 2; // +1 for 1-index, +1 for label column
+    const avg = avgComplexity(sess.subs);
+    row.innerHTML = `
+      <div class="glabel">${sess.date}</div>
+      <div class="gbar-wrap" style="grid-column: ${startCol} / -1;">
+        <div class="gbar" style="background:${dm.color}" data-lane="${laneId}" data-idx="${DATES.indexOf(DATES.find(x=>x.date===sess.date))}"></div>
+        <div class="gbar-label"><b>${sess.t}</b><span class="ghrs">${fmtH(sess.h)} · avg complexity ${avg}/5</span></div>
+      </div>`;
+    const bar = row.querySelector(".gbar");
+    bar.addEventListener("mouseover", (e) => {
+      const list = sess.subs.map(s => `<li>${s[0].split(" — ")[0]} <span style="opacity:.7">(${s[2]}m, C${s[1]})</span></li>`).join("");
+      showTip(e, `<span class="tt-domain">${dm.name} · ${sess.date} · ${fmtH(sess.h)}</span><b>${sess.t}</b><ul>${list}</ul>`);
+    });
+    bar.addEventListener("mousemove", positionTip);
+    bar.addEventListener("mouseout", hideTip);
+    gantt.appendChild(row);
+  });
+});
+
+// ---------- accordion day cards ----------
+const daycards = document.getElementById("daycards");
+WEEKS.forEach(week => {
+  const wh = document.createElement("div");
+  wh.style.cssText = "font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3);font-weight:600;margin:22px 0 4px;";
+  wh.textContent = week.label;
+  daycards.appendChild(wh);
+
+  week.days.forEach(day => {
+    const det = document.createElement("details");
+    det.className = "daycard" + (day.exam ? " exam" : "");
+    const allSubs = day.segs.flatMap(s => s.subs);
+    const dayAvg = avgComplexity(allSubs);
+    const totalMin = day.segs.reduce((a,s)=>a+segMinutes(s),0);
+
+    const chips = day.segs.map(s => {
+      const dm = DOMAINS[s.d];
+      return `<span class="chip"><span class="sw" style="background:${dm.color}"></span>${s.t}</span>`;
+    }).join("");
+
+    const summary = document.createElement("summary");
+    summary.className = "day-summary";
+    summary.innerHTML = `
+      <span class="chev">&#9656;</span>
+      <span class="sdate"><span class="dow">${day.dow}</span><span class="date">${day.date}</span></span>
+      <span class="schips">${chips}</span>
+      <span class="smeta"><span><b>${fmtH(day.hours)}</b></span><span>avg C&nbsp;<b>${dayAvg}</b>/5</span></span>`;
+    det.appendChild(summary);
+
+    const body = document.createElement("div");
+    body.className = "day-body";
+    day.segs.forEach(seg => {
+      const dm = DOMAINS[seg.d];
+      const segAvg = avgComplexity(seg.subs);
+      const block = document.createElement("div");
+      block.className = "topic-block";
+      block.style.background = dm.tint;
+      const subRows = seg.subs.map(s => {
+        const [name, c, min, linkKey] = s;
+        const link = linkKey && LINKS[linkKey] ? `<a href="${LINKS[linkKey][1]}" target="_blank" rel="noopener">${LINKS[linkKey][0]} ↗</a>` : "";
+        return `<div class="sub-row"><div class="sn">${name}${link}</div>${dots(c)}<div class="smin">${min} min</div></div>`;
+      }).join("");
+      block.innerHTML = `
+        <div class="topic-head">
+          <span class="sw" style="background:${dm.color}"></span>
+          <h4>${seg.t}</h4>
+          <span class="tmeta">${dm.name} &middot; ${fmtH(seg.h)} &middot; avg complexity ${segAvg}/5</span>
+        </div>
+        <div class="subs">${subRows}</div>`;
+      body.appendChild(block);
+    });
+    det.appendChild(body);
+    daycards.appendChild(det);
+  });
+});
+
+// Live countdown to exam day (Sep 19, 2026), computed in the viewer's local time.
+try {
+  const exam = new Date("2026-09-19T00:00:00");
+  const now = new Date();
+  const diff = Math.ceil((exam.setHours(0,0,0,0) - now.setHours(0,0,0,0)) / 86400000);
+  document.getElementById("stat-days").textContent = diff > 0 ? diff : (diff === 0 ? "Today" : "—");
+} catch(e) {
+  document.getElementById("stat-days").textContent = "21";
+}
+</script>

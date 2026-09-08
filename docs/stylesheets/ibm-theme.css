@@ -1,0 +1,690 @@
+/* ============================================================
+   IBM-flavored dark/light theme for MkDocs Material
+   Colors align with IBM Carbon Design System
+   ============================================================ */
+
+/* ── Google Fonts: IBM Plex ──────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap');
+
+/* ── IBM Carbon colour tokens ────────────────────────────── */
+:root {
+  --ibm-blue-10:  #edf5ff;
+  --ibm-blue-20:  #d0e2ff;
+  --ibm-blue-30:  #a6c8ff;
+  --ibm-blue-40:  #78a9ff;
+  --ibm-blue-50:  #4589ff;
+  --ibm-blue-60:  #0f62fe;  /* IBM Blue – primary action */
+  --ibm-blue-70:  #0043ce;
+  --ibm-blue-80:  #002d9c;
+  --ibm-blue-90:  #001d6c;
+  --ibm-blue-100: #001141;
+
+  --ibm-gray-10:  #f4f4f4;
+  --ibm-gray-20:  #e0e0e0;
+  --ibm-gray-30:  #c6c6c6;
+  --ibm-gray-40:  #a8a8a8;
+  --ibm-gray-50:  #8d8d8d;
+  --ibm-gray-60:  #6f6f6f;
+  --ibm-gray-70:  #525252;
+  --ibm-gray-80:  #393939;
+  --ibm-gray-90:  #262626;
+  --ibm-gray-100: #161616;
+
+  --ibm-teal-40:  #08bdba;
+  --ibm-teal-50:  #009d9a;
+  --ibm-teal-60:  #007d79;
+  --ibm-purple-50: #a56eff;
+  --ibm-purple-60: #8a3ffc;
+  --ibm-red-50:    #fa4d56;
+  --ibm-red-60:    #da1e28;
+  --ibm-yellow-20: #f1c21b;
+  --ibm-green-40:  #42be65;
+  --ibm-green-50:  #24a148;
+
+  --claude-orange: #d97706;
+  --claude-amber:  #f59e0b;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK SCHEME  (scheme: ibm-dark)
+   ═══════════════════════════════════════════════════════════ */
+[data-md-color-scheme="ibm-dark"] {
+  /* ── Backgrounds ── */
+  --md-default-bg-color:       var(--ibm-gray-100);
+  --md-default-fg-color:       #f4f4f4;
+  --md-default-fg-color--light:#c6c6c6;
+  --md-default-fg-color--lighter: #8d8d8d;
+  --md-default-fg-color--lightest: #6f6f6f;
+
+  /* ── Primary / Accent ── */
+  --md-primary-fg-color:       var(--ibm-blue-60);
+  --md-primary-fg-color--light:var(--ibm-blue-50);
+  --md-primary-fg-color--dark: var(--ibm-blue-70);
+  --md-primary-bg-color:       #ffffff;
+  --md-accent-fg-color:        var(--ibm-teal-40);
+  --md-accent-fg-color--transparent: rgba(8, 189, 186, 0.12);
+  --md-accent-bg-color:        var(--ibm-gray-100);
+
+  /* ── Typeset ── */
+  --md-typeset-color:          #f4f4f4;
+  --md-typeset-a-color:        var(--ibm-blue-40);
+  --md-typeset-mark-color:     rgba(69, 137, 255, 0.25);
+  --md-typeset-del-color:      rgba(250, 77, 86, 0.20);
+  --md-typeset-ins-color:      rgba(66, 190, 101, 0.20);
+  --md-typeset-kbd-color:      var(--ibm-gray-90);
+  --md-typeset-kbd-accent-color: var(--ibm-gray-80);
+  --md-typeset-kbd-border-color: var(--ibm-gray-60);
+
+  /* ── Code blocks ── */
+  --md-code-fg-color:          #dde1e7;
+  --md-code-bg-color:          #1e1e2e;
+  --md-code-hl-color:          rgba(69, 137, 255, 0.18);
+  --md-code-hl-number-color:   var(--ibm-teal-40);
+  --md-code-hl-special-color:  var(--ibm-purple-50);
+  --md-code-hl-function-color: var(--ibm-blue-40);
+  --md-code-hl-constant-color: var(--ibm-yellow-20);
+  --md-code-hl-keyword-color:  var(--ibm-purple-50);
+  --md-code-hl-string-color:   var(--ibm-green-40);
+  --md-code-hl-name-color:     var(--ibm-blue-30);
+  --md-code-hl-operator-color: var(--ibm-teal-40);
+  --md-code-hl-punctuation-color: #c6c6c6;
+  --md-code-hl-comment-color:  #6f6f6f;
+  --md-code-hl-generic-color:  #c6c6c6;
+  --md-code-hl-variable-color: var(--ibm-blue-30);
+
+  /* ── Header ── */
+  --md-header-bg-color:        #0f1523;
+  --md-header-fg-color:        #f4f4f4;
+
+  /* ── Footer ── */
+  --md-footer-bg-color:        #0a0f1a;
+  --md-footer-fg-color:        #a8a8a8;
+  --md-footer-bg-color--dark:  #06090f;
+
+  /* ── Shadows / Surfaces ── */
+  --md-shadow-z1:  0 2px 8px rgba(0,0,0,.60), 0 1px 2px rgba(0,0,0,.40);
+  --md-shadow-z2:  0 4px 16px rgba(0,0,0,.70);
+  --md-shadow-z3:  0 8px 32px rgba(0,0,0,.80);
+
+  /* ── Admonitions ── */
+  --md-admonition-fg-color:    var(--md-typeset-color);
+  --md-admonition-bg-color:    #1e2232;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LIGHT SCHEME  (scheme: ibm-light)
+   ═══════════════════════════════════════════════════════════ */
+[data-md-color-scheme="ibm-light"] {
+  --md-default-bg-color:       #ffffff;
+  --md-default-fg-color:       var(--ibm-gray-100);
+  --md-default-fg-color--light:var(--ibm-gray-70);
+  --md-default-fg-color--lighter: var(--ibm-gray-50);
+  --md-default-fg-color--lightest: var(--ibm-gray-40);
+
+  --md-primary-fg-color:       var(--ibm-blue-60);
+  --md-primary-fg-color--light:var(--ibm-blue-50);
+  --md-primary-fg-color--dark: var(--ibm-blue-70);
+  --md-primary-bg-color:       #ffffff;
+  --md-accent-fg-color:        var(--ibm-teal-50);
+  --md-accent-bg-color:        var(--ibm-blue-10);
+
+  --md-typeset-color:          var(--ibm-gray-100);
+  --md-typeset-a-color:        var(--ibm-blue-60);
+
+  --md-code-bg-color:          #f4f4f4;
+  --md-code-fg-color:          var(--ibm-gray-100);
+
+  --md-header-bg-color:        var(--ibm-blue-60);
+  --md-header-fg-color:        #ffffff;
+  --md-footer-bg-color:        var(--ibm-gray-90);
+  --md-footer-fg-color:        var(--ibm-gray-30);
+  --md-footer-bg-color--dark:  var(--ibm-gray-100);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   GLOBAL TYPOGRAPHY & LAYOUT
+   ═══════════════════════════════════════════════════════════ */
+body {
+  font-family: 'IBM Plex Sans', system-ui, sans-serif !important;
+}
+
+/* ── Widen the content column ─────────────────────────────────
+   Material default max-width is ~61rem (≈976px).
+   Pushing to 80rem gives tables, code, and prose room to breathe
+   without becoming an eye-tracking marathon on wide monitors.   */
+.md-grid {
+  max-width: 80rem;
+}
+
+.md-content {
+  max-width: none;
+}
+
+/* More generous padding around the article text */
+.md-content__inner {
+  padding: 2.5rem 2.5rem 4rem;
+  margin: 0;
+}
+
+/* ── Base typeset ─────────────────────────────────────────── */
+.md-typeset {
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-size: .9375rem;     /* 15px — up from default 14px */
+  line-height: 1.85;       /* open leading, easier to scan */
+}
+
+.md-typeset code,
+.md-typeset pre {
+  font-family: 'IBM Plex Mono', 'Menlo', monospace !important;
+  font-size: .84em;
+}
+
+/* ── Paragraph spacing ──────────────────────────────────── */
+.md-typeset p {
+  margin-top: 0;
+  margin-bottom: 1.1rem;
+}
+
+/* ── Heading scale & spacing ────────────────────────────── */
+.md-typeset h1 {
+  font-size: 2.1rem;
+  letter-spacing: -.01em;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+.md-typeset h2 {
+  font-size: 1.5rem;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.md-typeset h3 {
+  font-size: 1.2rem;
+  margin-top: 2.2rem;
+  margin-bottom: .75rem;
+}
+
+.md-typeset h4 {
+  font-size: 1rem;
+  margin-top: 1.75rem;
+  margin-bottom: .5rem;
+}
+
+/* ── List breathing room ────────────────────────────────── */
+.md-typeset ul,
+.md-typeset ol {
+  padding-left: 1.6rem;
+  margin-bottom: 1.1rem;
+}
+
+.md-typeset li {
+  margin-bottom: .4rem;
+  line-height: 1.75;
+}
+
+/* ── Horizontal rules ───────────────────────────────────── */
+.md-typeset hr {
+  margin: 2.5rem 0;
+  border-color: rgba(69, 137, 255, 0.12);
+}
+
+/* ── Header bar ─────────────────────────────────────────── */
+.md-header {
+  background: var(--md-header-bg-color, #0f1523) !important;
+  border-bottom: 1px solid rgba(69, 137, 255, 0.15);
+  box-shadow: 0 1px 0 rgba(69, 137, 255, 0.1);
+}
+
+.md-header__title {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* IBM blue accent on nav tabs */
+.md-tabs {
+  background: #0a0f1a !important;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.md-tabs__item--active .md-tabs__link {
+  color: var(--ibm-blue-40) !important;
+}
+
+.md-tabs__link:hover {
+  color: var(--ibm-blue-30) !important;
+}
+
+/* ── Claude symbol in the tab bar ───────────────────────────
+   Injects the Claude mark as a 20px icon before the first
+   tab item, keeping it visually anchored left of the tab row
+   without requiring a template override.                     */
+.md-tabs__list {
+  display: flex;
+  align-items: center;
+}
+
+.md-tabs__list::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 0 .75rem 0 1rem;
+  flex-shrink: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='hsl(14.8%2C63.1%25%2C59.6%25)'%3E%3Cpath d='m19.6 66.5 19.7-11 .3-1-.3-.5h-1l-3.3-.2-11.2-.3L14 53l-9.5-.5-2.4-.5L0 49l.2-1.5 2-1.3 2.9.2 6.3.5 9.5.6 6.9.4L38 49.1h1.6l.2-.7-.5-.4-.4-.4L29 41l-10.6-7-5.6-4.1-3-2-1.5-2-.6-4.2 2.7-3 3.7.3.9.2 3.7 2.9 8 6.1L37 36l1.5 1.2.6-.4.1-.3-.7-1.1L33 25l-6-10.4-2.7-4.3-.7-2.6c-.3-1-.4-2-.4-3l3-4.2L28 0l4.2.6L33.8 2l2.6 6 4.1 9.3L47 29.9l2 3.8 1 3.4.3 1h.7v-.5l.5-7.2 1-8.7 1-11.2.3-3.2 1.6-3.8 3-2L61 2.6l2 2.9-.3 1.8-1.1 7.7L59 27.1l-1.5 8.2h.9l1-1.1 4.1-5.4 6.9-8.6 3-3.5L77 13l2.3-1.8h4.3l3.1 4.7-1.4 4.9-4.4 5.6-3.7 4.7-5.3 7.1-3.2 5.7.3.4h.7l12-2.6 6.4-1.1 7.6-1.3 3.5 1.6.4 1.6-1.4 3.4-8.2 2-9.6 2-14.3 3.3-.2.1.2.3 6.4.6 2.8.2h6.8l12.6 1 3.3 2 1.9 2.7-.3 2-5.1 2.6-6.8-1.6-16-3.8-5.4-1.3h-.8v.4l4.6 4.5 8.3 7.5L89 80.1l.5 2.4-1.3 2-1.4-.2-9.2-7-3.6-3-8-6.8h-.5v.7l1.8 2.7 9.8 14.7.5 4.5-.7 1.4-2.6 1-2.7-.6-5.8-8-6-9-4.7-8.2-.5.4-2.9 30.2-1.3 1.5-3 1.2-2.5-2-1.4-3 1.4-6.2 1.6-8 1.3-6.4 1.2-7.9.7-2.6v-.2H49L43 72l-9 12.3-7.2 7.6-1.7.7-3-1.5.3-2.8L24 86l10-12.8 6-7.9 4-4.6-.1-.5h-.3L17.2 77.4l-4.7.6-2-2 .2-3 1-1 8-5.5Z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.85;
+}
+
+/* ── Navigation ─────────────────────────────────────────── */
+[data-md-color-scheme="ibm-dark"] .md-nav {
+  --md-nav-item--active-color: var(--ibm-blue-40);
+}
+
+[data-md-color-scheme="ibm-dark"] .md-sidebar {
+  background: #0d1220;
+}
+
+[data-md-color-scheme="ibm-dark"] .md-nav__link--active,
+[data-md-color-scheme="ibm-dark"] .md-nav__link:is(:focus, :hover) {
+  color: var(--ibm-blue-40) !important;
+}
+
+.md-nav__item--active > .md-nav__link {
+  font-weight: 600;
+  border-left: 2px solid var(--ibm-blue-60);
+  padding-left: calc(var(--md-nav-item-spacing-x) - 2px);
+}
+
+/* ── Content area ───────────────────────────────────────── */
+[data-md-color-scheme="ibm-dark"] .md-content {
+  background: var(--ibm-gray-100);
+}
+
+[data-md-color-scheme="ibm-dark"] .md-content__inner {
+  padding-bottom: 4rem;
+}
+
+/* ── Headings ───────────────────────────────────────────── */
+[data-md-color-scheme="ibm-dark"] .md-typeset h1 {
+  color: #f4f4f4;
+  font-weight: 700;
+  border-bottom: 2px solid var(--ibm-blue-60);
+  padding-bottom: .5rem;
+  margin-bottom: 1.5rem;
+}
+
+[data-md-color-scheme="ibm-dark"] .md-typeset h2 {
+  color: var(--ibm-blue-30);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(69, 137, 255, 0.2);
+  padding-bottom: .3rem;
+}
+
+[data-md-color-scheme="ibm-dark"] .md-typeset h3 {
+  color: var(--ibm-teal-40);
+  font-weight: 600;
+}
+
+[data-md-color-scheme="ibm-dark"] .md-typeset h4 {
+  color: var(--ibm-blue-40);
+  font-weight: 600;
+}
+
+/* ── Links ──────────────────────────────────────────────── */
+[data-md-color-scheme="ibm-dark"] .md-typeset a {
+  color: var(--ibm-blue-40);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(120, 169, 255, 0.3);
+  transition: border-color .15s ease, color .15s ease;
+}
+
+[data-md-color-scheme="ibm-dark"] .md-typeset a:hover {
+  color: var(--ibm-blue-30);
+  border-bottom-color: var(--ibm-blue-40);
+}
+
+/* ── Tables ─────────────────────────────────────────────── */
+[data-md-color-scheme="ibm-dark"] .md-typeset table:not([class]) {
+  background: #1a1f2e;
+  border: 1px solid #2a3150;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 1.5rem 0;            /* space above and below every table */
+  width: 100%;
+}
+
+[data-md-color-scheme="ibm-dark"] .md-typeset table:not([class]) th {
+  background: #0f62fe22;
+  color: var(--ibm-blue-30);
+  border-bottom: 2px solid var(--ibm-blue-60);
+  font-weight: 600;
+  letter-spacing: .04em;
+  padding: .85rem 1.1rem;      /* roomier header cells */
+}
+
+[data-md-color-scheme="ibm-dark"] .md-typeset table:not([class]) td {
+  padding: .75rem 1.1rem;      /* roomier data cells */
+  line-height: 1.6;
+}
+
+[data-md-color-scheme="ibm-dark"] .md-typeset table:not([class]) tr:nth-child(even) {
+  background: rgba(255,255,255,.03);
+}
+
+[data-md-color-scheme="ibm-dark"] .md-typeset table:not([class]) tr:hover {
+  background: rgba(69, 137, 255, 0.07);
+}
+
+[data-md-color-scheme="ibm-dark"] .md-typeset table:not([class]) td,
+[data-md-color-scheme="ibm-dark"] .md-typeset table:not([class]) th {
+  border-color: #2a3150;
+}
+
+/* ── Code blocks ────────────────────────────────────────── */
+[data-md-color-scheme="ibm-dark"] .md-typeset pre {
+  background: #1e1e2e !important;
+  border: 1px solid #2a3150;
+  border-radius: 6px;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,.3);
+  padding: 1.25rem 1.5rem;     /* more internal breathing room */
+  margin: 1.25rem 0;
+}
+
+[data-md-color-scheme="ibm-dark"] .md-typeset code {
+  background: rgba(30,30,46,.7);
+  border: 1px solid #2a3150;
+  border-radius: 3px;
+  color: var(--ibm-teal-40);
+  padding: .1em .4em;
+}
+
+[data-md-color-scheme="ibm-dark"] .md-typeset pre code {
+  border: none;
+  background: transparent;
+  color: #dde1e7;
+  padding: 0;
+}
+
+/* Copy button */
+.md-clipboard {
+  color: var(--ibm-gray-50) !important;
+}
+.md-clipboard:hover {
+  color: var(--ibm-blue-40) !important;
+}
+
+/* ── Admonitions ────────────────────────────────────────── */
+[data-md-color-scheme="ibm-dark"] .md-typeset .admonition {
+  background: #1a1f2e;
+  border-color: var(--ibm-blue-60);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+  margin: 1.5rem 0;            /* space above and below admonitions */
+}
+
+[data-md-color-scheme="ibm-dark"] .md-typeset .admonition-title {
+  background: rgba(15, 98, 254, 0.15) !important;
+  font-weight: 600;
+  padding: .7rem 1rem;
+}
+
+/* Body text inside admonitions */
+[data-md-color-scheme="ibm-dark"] .md-typeset .admonition > :not(.admonition-title) {
+  padding: 0 1rem .75rem;
+}
+
+[data-md-color-scheme="ibm-dark"] .md-typeset .admonition.note { border-left-color: var(--ibm-blue-40); }
+[data-md-color-scheme="ibm-dark"] .md-typeset .admonition.tip { border-left-color: var(--ibm-teal-40); }
+[data-md-color-scheme="ibm-dark"] .md-typeset .admonition.warning { border-left-color: var(--ibm-yellow-20); }
+[data-md-color-scheme="ibm-dark"] .md-typeset .admonition.danger { border-left-color: var(--ibm-red-50); }
+[data-md-color-scheme="ibm-dark"] .md-typeset .admonition.success { border-left-color: var(--ibm-green-40); }
+[data-md-color-scheme="ibm-dark"] .md-typeset .admonition.info { border-left-color: var(--ibm-blue-30); }
+[data-md-color-scheme="ibm-dark"] .md-typeset .admonition.example { border-left-color: var(--ibm-purple-50); }
+
+/* ── Cards / hero elements ──────────────────────────────── */
+.ibm-card {
+  background: #1a1f2e;
+  border: 1px solid #2a3150;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.ibm-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15, 98, 254, 0.15);
+  border-color: var(--ibm-blue-60);
+}
+
+.ibm-card h3 {
+  color: var(--ibm-blue-40) !important;
+  margin-top: 0 !important;
+}
+
+/* ── Hero section ───────────────────────────────────────── */
+.hero-section {
+  background: linear-gradient(135deg, #0a0f1a 0%, #0f1e3d 50%, #0a1a2e 100%);
+  border: 1px solid rgba(69, 137, 255, 0.2);
+  border-radius: 12px;
+  padding: 3rem 2.5rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ibm-blue-60), var(--ibm-teal-40), var(--ibm-purple-50));
+}
+
+.hero-section h1 {
+  color: #f4f4f4 !important;
+  border: none !important;
+  margin-bottom: .75rem !important;
+  font-size: 2.2rem !important;
+}
+
+.hero-section .subtitle {
+  color: var(--ibm-blue-30);
+  font-size: 1.05rem;
+  margin-bottom: 0;
+}
+
+/* ── Stat grid ──────────────────────────────────────────── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.stat-card {
+  background: rgba(15, 98, 254, 0.08);
+  border: 1px solid rgba(69, 137, 255, 0.2);
+  border-radius: 8px;
+  padding: 1.25rem;
+  text-align: center;
+}
+
+.stat-card .number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ibm-blue-40);
+  line-height: 1;
+  margin-bottom: .25rem;
+}
+
+.stat-card .label {
+  font-size: .8rem;
+  color: var(--ibm-gray-40);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* ── Module header badge ────────────────────────────────── */
+.module-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: var(--ibm-blue-60);
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .25rem .75rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+/* ── Section TOC sidebar ────────────────────────────────── */
+[data-md-color-scheme="ibm-dark"] .md-sidebar--secondary {
+  background: #0d1220;
+}
+
+[data-md-color-scheme="ibm-dark"] .md-nav--secondary .md-nav__link--active {
+  color: var(--ibm-teal-40) !important;
+}
+
+/* ── Search results ─────────────────────────────────────── */
+[data-md-color-scheme="ibm-dark"] .md-search__form {
+  background: #1a1f2e;
+  border: 1px solid #2a3150;
+}
+
+[data-md-color-scheme="ibm-dark"] .md-search-result__article {
+  background: #1a1f2e;
+}
+
+[data-md-color-scheme="ibm-dark"] .md-search-result__article:hover {
+  background: rgba(15, 98, 254, 0.1);
+}
+
+/* ── Footer ─────────────────────────────────────────────── */
+[data-md-color-scheme="ibm-dark"] .md-footer {
+  background: var(--md-footer-bg-color, #0a0f1a);
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+/* ── Mermaid diagrams ───────────────────────────────────── */
+[data-md-color-scheme="ibm-dark"] .mermaid {
+  filter: hue-rotate(0deg) saturate(1.1);
+}
+
+/* ── Tag chips ──────────────────────────────────────────── */
+.md-tag {
+  background: rgba(15, 98, 254, 0.15) !important;
+  color: var(--ibm-blue-30) !important;
+  border: 1px solid rgba(15, 98, 254, 0.3) !important;
+}
+
+/* ── Progress indicator ─────────────────────────────────── */
+.section-progress {
+  display: flex;
+  gap: .4rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.section-progress .pip {
+  width: 28px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,.15);
+}
+
+.section-progress .pip.done {
+  background: var(--ibm-blue-60);
+}
+
+.section-progress .pip.current {
+  background: var(--ibm-teal-40);
+}
+
+/* ── Scrollbar ──────────────────────────────────────────── */
+[data-md-color-scheme="ibm-dark"] ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+[data-md-color-scheme="ibm-dark"] ::-webkit-scrollbar-track {
+  background: #0d1220;
+}
+[data-md-color-scheme="ibm-dark"] ::-webkit-scrollbar-thumb {
+  background: #2a3150;
+  border-radius: 3px;
+}
+[data-md-color-scheme="ibm-dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--ibm-blue-60);
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media screen and (max-width: 76.1875em) {
+  .hero-section {
+    padding: 2rem 1.5rem;
+  }
+  .hero-section h1 {
+    font-size: 1.7rem !important;
+  }
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── Notebook readability (mkdocs-jupyter) ─────────────── */
+[data-md-color-scheme="slate"] .jupyter-wrapper,
+[data-md-color-scheme="ibm-dark"] .jupyter-wrapper {
+  --jp-content-font-color1: #e6edf3;
+  --jp-content-font-color0: #f5f7fa;
+  --jp-ui-font-color1: #d7deea;
+  --jp-cell-editor-background: #171d2b;
+  --jp-cell-editor-active-background: #1e2638;
+  --jp-cell-editor-border-color: #33415f;
+}
+
+[data-md-color-scheme="slate"] .jupyter-wrapper .jp-Cell-inputWrapper,
+[data-md-color-scheme="slate"] .jupyter-wrapper .jp-Cell-outputWrapper,
+[data-md-color-scheme="ibm-dark"] .jupyter-wrapper .jp-Cell-inputWrapper,
+[data-md-color-scheme="ibm-dark"] .jupyter-wrapper .jp-Cell-outputWrapper {
+  border-color: #33415f;
+}
+
+[data-md-color-scheme="slate"] .jupyter-wrapper .jp-Cell-inputArea pre,
+[data-md-color-scheme="slate"] .jupyter-wrapper .jp-Cell-outputArea pre,
+[data-md-color-scheme="slate"] .jupyter-wrapper .jp-RenderedText pre,
+[data-md-color-scheme="ibm-dark"] .jupyter-wrapper .jp-Cell-inputArea pre,
+[data-md-color-scheme="ibm-dark"] .jupyter-wrapper .jp-Cell-outputArea pre,
+[data-md-color-scheme="ibm-dark"] .jupyter-wrapper .jp-RenderedText pre {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: #e6edf3 !important;
+}
+
+[data-md-color-scheme="slate"] .jupyter-wrapper .jp-InputPrompt,
+[data-md-color-scheme="slate"] .jupyter-wrapper .jp-OutputPrompt,
+[data-md-color-scheme="ibm-dark"] .jupyter-wrapper .jp-InputPrompt,
+[data-md-color-scheme="ibm-dark"] .jupyter-wrapper .jp-OutputPrompt {
+  color: #8fb8ff !important;
+  opacity: 1;
+}
+
+[data-md-color-scheme="slate"] .jupyter-wrapper .ansi-black-fg,
+[data-md-color-scheme="slate"] .jupyter-wrapper .ansi-black-intense-fg,
+[data-md-color-scheme="ibm-dark"] .jupyter-wrapper .ansi-black-fg,
+[data-md-color-scheme="ibm-dark"] .jupyter-wrapper .ansi-black-intense-fg {
+  color: #e6edf3 !important;
+}
+
+[data-md-color-scheme="slate"] .jupyter-wrapper .ansi-black-bg,
+[data-md-color-scheme="slate"] .jupyter-wrapper .ansi-black-intense-bg,
+[data-md-color-scheme="ibm-dark"] .jupyter-wrapper .ansi-black-bg,
+[data-md-color-scheme="ibm-dark"] .jupyter-wrapper .ansi-black-intense-bg {
+  background-color: #111827 !important;
+}

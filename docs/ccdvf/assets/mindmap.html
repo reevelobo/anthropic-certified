@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCDV-F Syllabus Mind Map</title>
+<link rel="stylesheet" href="vendor/markmap-toolbar.css">
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body { background: #fcfcfb; }
+  @media (prefers-color-scheme: dark) { body { background: #141414; } }
+
+  svg#mindmap { width: 100vw; height: 100vh; display: block; }
+
+  .mm-toolbar-wrap { position: fixed; bottom: 14px; right: 14px; z-index: 10; }
+  .mm-hint {
+    position: fixed; bottom: 16px; left: 14px; z-index: 5;
+    font: 11px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; color: #8b8f96;
+    background: rgba(255,255,255,0.85); padding: 4px 9px; border-radius: 6px; pointer-events: none;
+  }
+  @media (prefers-color-scheme: dark) {
+    .mm-hint { background: rgba(20,20,20,0.85); color: #9a9d9f; }
+  }
+</style>
+</head>
+<body>
+
+<svg id="mindmap"></svg>
+<div class="mm-hint">Scroll to zoom &middot; drag to pan &middot; click a node to expand or collapse it</div>
+<div class="mm-toolbar-wrap" id="toolbar-wrap"></div>
+
+<!-- Fully local vendor bundle — no CDN, works offline once your docs site is built. -->
+<script src="vendor/d3.min.js"></script>
+<script src="vendor/markmap-view.js"></script>
+<script src="vendor/markmap-toolbar.js"></script>
+<!-- Generated from outline.md by rebuild-mindmap.js — see that file to edit content. -->
+<script src="mindmap-data.js"></script>
+
+<script>
+(function () {
+  var isDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  if (isDark) document.documentElement.classList.add("markmap-dark");
+
+  // Same 8 hues as the Study Runway's domain legend and Gantt chart (light / dark variants),
+  // in exam-domain order 1→8, so a branch reads as the same domain across both pages.
+  var COLORS_LIGHT = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300", "#4a3aa7", "#e34948"];
+  var COLORS_DARK  = ["#3987e5", "#d95926", "#199e70", "#c98500", "#d55181", "#3fbf3f", "#9085e9", "#e66767"];
+
+  var mm = window.markmap;
+  var meta = window.__markmapMeta || { initialExpandLevel: 2 };
+  var palette = isDark ? COLORS_DARK : COLORS_LIGHT;
+  var fallback = isDark ? "#7d7f81" : "#9a9d9f";
+
+  var options = mm.deriveOptions({ initialExpandLevel: meta.initialExpandLevel });
+  // Color every node by the domainIndex rebuild-mindmap.js stamped onto its
+  // whole branch — exact and stable, unlike coloring by traversal order.
+  options.color = function (node) {
+    var idx = node && node.payload && typeof node.payload.domainIndex === "number"
+      ? node.payload.domainIndex
+      : null;
+    return idx === null ? fallback : palette[idx % palette.length];
+  };
+
+  var svg = document.getElementById("mindmap");
+  var markmapInstance = mm.Markmap.create(svg, options, window.__markmapData);
+
+  var toolbar = mm.Toolbar.create(markmapInstance);
+  document.getElementById("toolbar-wrap").appendChild(toolbar.el);
+})();
+</script>
+</body>
+</html>

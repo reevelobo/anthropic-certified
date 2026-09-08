@@ -1,0 +1,3944 @@
+<title>CCAR-F Study Runway</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    color-scheme: light;
+    --page-bg:      #f7f7f5;
+    --surface:      #ffffff;
+    --surface-2:    #fbfbfa;
+    --ink-1:        #14161a;
+    --ink-2:        #565b63;
+    --ink-3:        #8b8f96;
+    --border:       rgba(20,22,26,0.11);
+    --border-strong:rgba(20,22,26,0.20);
+    --accent:       #8a5a1c;
+    --accent-soft:  #f2e6d3;
+    --track-bg:     #eeede9;
+
+    --d1:#2a78d6; --d2:#eb6834; --d3:#1baf7a; --d4:#eda100;
+    --d5:#e87ba4; --d0:#4a3aa7;
+
+    --d1-t:rgba(42,120,214,0.09); --d2-t:rgba(235,104,52,0.09); --d3-t:rgba(27,175,122,0.09); --d4-t:rgba(237,161,0,0.10);
+    --d5-t:rgba(232,123,164,0.10); --d0-t:rgba(74,58,167,0.09);
+
+    --shadow: 0 1px 2px rgba(20,22,26,0.06), 0 8px 24px -12px rgba(20,22,26,0.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      color-scheme: dark;
+      --page-bg:      #100f0d;
+      --surface:      #191815;
+      --surface-2:    #1f1e1a;
+      --ink-1:        #f3f1ec;
+      --ink-2:        #c2bfb6;
+      --ink-3:        #86837b;
+      --border:       rgba(255,255,255,0.10);
+      --border-strong:rgba(255,255,255,0.18);
+      --accent:       #dba85a;
+      --accent-soft:  #3a2c14;
+      --track-bg:     #26241f;
+
+      --d1:#3987e5; --d2:#d95926; --d3:#199e70; --d4:#c98500;
+      --d5:#d55181; --d0:#9085e9;
+
+      --d1-t:rgba(57,135,229,0.16); --d2-t:rgba(217,89,38,0.16); --d3-t:rgba(25,158,112,0.16); --d4-t:rgba(201,133,0,0.16);
+      --d5-t:rgba(213,81,129,0.16); --d0-t:rgba(144,133,233,0.16);
+
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --page-bg:      #100f0d;
+    --surface:      #191815;
+    --surface-2:    #1f1e1a;
+    --ink-1:        #f3f1ec;
+    --ink-2:        #c2bfb6;
+    --ink-3:        #86837b;
+    --border:       rgba(255,255,255,0.10);
+    --border-strong:rgba(255,255,255,0.18);
+    --accent:       #dba85a;
+    --accent-soft:  #3a2c14;
+    --track-bg:     #26241f;
+
+    --d1:#3987e5; --d2:#d95926; --d3:#199e70; --d4:#c98500;
+    --d5:#d55181; --d0:#9085e9;
+
+    --d1-t:rgba(57,135,229,0.16); --d2-t:rgba(217,89,38,0.16); --d3-t:rgba(25,158,112,0.16); --d4-t:rgba(201,133,0,0.16);
+    --d5-t:rgba(213,81,129,0.16); --d0-t:rgba(144,133,233,0.16);
+
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+
+  *{ box-sizing: border-box; }
+  body{
+    background: var(--page-bg);
+    color: var(--ink-1);
+    font-family: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .wrap{ max-width: 1180px; margin: 0 auto; padding: 40px 24px 96px; }
+
+  h1,h2,h3{ font-family: "Fraunces", Georgia, serif; text-wrap: balance; margin: 0; }
+  .eyebrow{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px; letter-spacing: 0.11em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600;
+  }
+
+  header{ padding-bottom: 28px; border-bottom: 1px solid var(--border); margin-bottom: 28px; }
+  header h1{ font-size: clamp(26px, 4vw, 38px); font-weight: 600; margin-top: 8px; }
+  header p.sub{ color: var(--ink-2); max-width: 68ch; margin-top: 10px; font-size: 15px; }
+
+  .stats{ display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border);
+          border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 24px; }
+  .stat{ background: var(--surface); padding: 16px 18px; }
+  .stat .k{ font-family:"IBM Plex Mono",monospace; font-size: 24px; font-weight: 600; font-variant-numeric: proportional-nums; }
+  .stat .l{ font-size: 12px; color: var(--ink-2); margin-top: 4px; }
+  @media (max-width: 720px){ .stats{ grid-template-columns: repeat(2,1fr); } }
+
+  .phase-banner{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  .phase-pill{ font-size: 12.5px; padding: 7px 13px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); color: var(--ink-2); }
+  .phase-pill b{ color: var(--ink-1); }
+
+  section{ margin-top: 48px; }
+  section > h2{ font-size: 21px; font-weight: 600; }
+  section > .lede{ color: var(--ink-2); font-size: 14px; max-width: 72ch; margin-top: 6px; }
+
+  /* legend */
+  .legend{ display:flex; flex-wrap:wrap; gap: 8px 18px; margin-top: 18px; }
+  .legend .item{ display:flex; align-items:center; gap:8px; font-size: 13px; color: var(--ink-2); }
+  .legend .sw{ width: 11px; height: 11px; border-radius: 3px; flex: none; }
+  .legend b{ color: var(--ink-1); font-weight: 600; }
+  .legend .pct{ font-family:"IBM Plex Mono",monospace; color: var(--ink-3); }
+
+  .tooltip{
+    position: fixed; pointer-events: none; z-index: 50;
+    background: var(--ink-1); color: var(--page-bg);
+    font-size: 12.5px; line-height: 1.45; padding: 9px 12px; border-radius: 8px;
+    max-width: 320px; box-shadow: var(--shadow); opacity: 0; transition: opacity 0.08s ease;
+  }
+  .tooltip .tt-domain{ font-family:"IBM Plex Mono",monospace; font-size: 10.5px; text-transform: uppercase;
+                        letter-spacing: 0.06em; opacity: 0.72; margin-bottom: 4px; display:block; }
+  .tooltip ul{ margin: 5px 0 0; padding-left: 15px; }
+  .tooltip li{ margin: 1px 0; }
+
+  /* ============ GANTT ============ */
+  .gantt-scroll{ overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; margin-top: 18px; background: var(--surface); padding: 6px 0; }
+  .gantt{ min-width: 2760px; position: relative; }
+  .gantt-guides{ position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  .gantt-guides .guide{ position: absolute; top: 0; bottom: 0; }
+  .gantt-guides .guide.weekend{ background: var(--track-bg); }
+  .gantt-guides .guide.exam-col{ background: var(--accent-soft); }
+  .gantt-guides .guide.rest-col{ background: var(--track-bg); opacity: 0.55; }
+  .gantt-guides .guide.phase-line{ width: 2px !important; background: var(--border-strong); }
+  .grow{ display:grid; grid-template-columns: 236px repeat(64, minmax(38px, 1fr)); align-items: center; position: relative; z-index: 1; }
+  .grow.months{ padding-top: 4px; }
+  .grow.months .mcell{ font-family:"IBM Plex Mono",monospace; font-size: 10.5px; font-weight: 600; letter-spacing: 0.05em; color: var(--ink-2); text-align: left; padding-left: 4px; border-bottom: 1px solid var(--border); padding-bottom: 3px; }
+  .grow.head{ position: sticky; top: 0; background: var(--surface); z-index: 2; border-bottom: 1px solid var(--border-strong); padding-bottom: 6px; }
+  .grow.head .gcell{ font-family:"IBM Plex Mono",monospace; font-size: 10px; color: var(--ink-3); text-align:center; line-height:1.3; padding: 4px 1px; }
+  .grow.head .gcell b{ display:block; color: var(--ink-2); font-size: 11px; }
+  .grow.lane{ padding: 9px 10px; margin-top: 10px; border-radius: 6px; font-size: 12px; font-weight: 600; color: var(--ink-1); }
+  .grow.lane .lane-name{ grid-column: 1 / -1; display:flex; align-items:center; gap:8px; }
+  .grow.lane .sw{ width:10px; height:10px; border-radius: 3px; flex:none; }
+  .grow.lane .pct{ font-family:"IBM Plex Mono",monospace; font-weight: 500; color: var(--ink-3); font-size: 11px; }
+  .grow.session{ min-height: 26px; padding: 2px 0; }
+  .glabel{ font-size: 11.5px; padding-right: 10px; color: var(--ink-3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-family:"IBM Plex Mono",monospace; }
+  .gbar{ height: 19px; border-radius: 5px; box-shadow: 0 0 0 1px rgba(0,0,0,0.06); cursor: default; min-width: 6px; top: 50%; transform: translateY(-50%); }
+  .gbar-label{ font-size: 12px; color: var(--ink-2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; cursor: default; padding: 0 8px; top: 50%; transform: translateY(-50%); line-height: 19px; }
+  .gbar-label.before{ text-align: right; }
+  .gbar-label b{ color: var(--ink-1); font-weight: 600; }
+  .gbar-label .ghrs{ font-family:"IBM Plex Mono",monospace; color: var(--ink-3); margin-left: 5px; }
+
+  /* ============ ACCORDION TIMETABLE ============ */
+  .daycards{ margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+  details.daycard{ border: 1px solid var(--border); border-radius: 12px; background: var(--surface); overflow: hidden; }
+  details.daycard[open]{ box-shadow: var(--shadow); }
+  details.daycard.exam{ border-color: var(--accent); }
+  details.daycard.restday{ opacity: 0.72; }
+  summary.day-summary{
+    list-style: none; cursor: pointer; padding: 14px 16px; display:flex; align-items:center; gap: 14px; flex-wrap: wrap;
+  }
+  summary.day-summary::-webkit-details-marker{ display:none; }
+  summary.day-summary .chev{ font-family:"IBM Plex Mono",monospace; color: var(--ink-3); transition: transform 0.15s ease; flex:none; }
+  details[open] summary.day-summary .chev{ transform: rotate(90deg); }
+  summary.day-summary .sdate{ min-width: 108px; flex: none; }
+  summary.day-summary .sdate .dow{ display:block; font-family:"IBM Plex Mono",monospace; font-size: 11px; color: var(--ink-3); }
+  summary.day-summary .sdate .date{ font-weight: 600; font-size: 14.5px; }
+  summary.day-summary .schips{ display:flex; flex-wrap:wrap; gap: 6px; flex: 1; min-width: 200px; }
+  .chip{ display:inline-flex; align-items:center; gap:5px; font-size: 11.5px; padding: 3px 9px 3px 7px; border-radius: 999px; color: var(--ink-2); background: var(--surface-2); border: 1px solid var(--border); }
+  .chip .sw{ width:7px; height:7px; border-radius:50%; flex:none; }
+  summary.day-summary .smeta{ display:flex; gap: 14px; flex: none; font-family:"IBM Plex Mono",monospace; font-size: 12px; color: var(--ink-3); }
+  summary.day-summary .smeta b{ color: var(--ink-1); font-weight: 600; }
+
+  .day-body{ padding: 4px 16px 18px; border-top: 1px solid var(--border); }
+  .day-body p.note{ margin: 14px 0 0; color: var(--ink-2); font-size: 13.5px; }
+  .topic-block{ margin-top: 16px; border-radius: 10px; padding: 14px 14px 6px; }
+  .topic-head{ display:flex; align-items:baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+  .topic-head .sw{ width:10px; height:10px; border-radius:3px; flex:none; position:relative; top:1px; }
+  .topic-head h4{ font-family: "IBM Plex Sans", sans-serif; font-size: 14.5px; font-weight: 600; margin:0; }
+  .topic-head .tmeta{ font-family:"IBM Plex Mono",monospace; font-size: 11.5px; color: var(--ink-3); }
+
+  .subs{ display:flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: 8px; overflow:hidden; border: 1px solid var(--border); }
+  .sub-row{ display:grid; grid-template-columns: 1fr 128px 64px; gap: 10px; background: var(--surface); padding: 9px 12px; align-items:center; }
+  .sub-row .sn{ font-size: 13px; color: var(--ink-1); }
+  .sub-row .sn a{ color: var(--accent); text-decoration: none; font-size: 11.5px; margin-left: 7px; white-space: nowrap; }
+  .sub-row .sn a:hover{ text-decoration: underline; }
+  .dots{ font-size: 12px; letter-spacing: 1px; color: var(--ink-3); white-space:nowrap; }
+  .dots .on{ color: var(--ink-1); }
+  .sub-row .smin{ font-family:"IBM Plex Mono",monospace; font-size: 12px; color: var(--ink-2); text-align:right; white-space:nowrap; }
+  @media (max-width: 640px){
+    .sub-row{ grid-template-columns: 1fr; gap: 4px; }
+    .sub-row .smin::before{ content:"Time: "; color:var(--ink-3); }
+    .dots::before{ content:"Complexity: "; color:var(--ink-3); }
+  }
+
+  .scale-note{ margin-top: 14px; font-size: 12px; color: var(--ink-3); }
+
+  footer{ margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--ink-3); font-size: 12.5px; }
+  footer a{ color: var(--accent); }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Claude Certified Architect &mdash; Foundations (CCAR-F)</span>
+    <h1>Study Runway: Aug&nbsp;29 &rarr; Oct&nbsp;31</h1>
+    <p class="sub">Every task statement in the exam blueprint, scheduled around your CCDV-F exam on Sep&nbsp;19 &mdash; a light 1&nbsp;hour/day architecture-lens preview until then, full pace (2h weekdays / 6h weekends) afterward, broken down to the sub-concept with a complexity score and a time budget, ending in hands-on exercises, scenario practice, two timed mocks, and a full review pass.</p>
+    <div class="stats">
+      <div class="stat"><div class="k" id="stat-days">&mdash;</div><div class="l">days until exam</div></div>
+      <div class="stat"><div class="k">147.5</div><div class="l">total study hours</div></div>
+      <div class="stat"><div class="k">5</div><div class="l">domains &middot; 30 task statements</div></div>
+      <div class="stat"><div class="k">720<span style="font-size:14px;color:var(--ink-3)">/1000</span></div><div class="l">passing scaled score</div></div>
+    </div>
+    <div class="phase-banner">
+      <span class="phase-pill"><b>Aug 29 &ndash; Sep 18</b> &middot; Phase 1 &middot; 1h/day preview, alongside CCDV-F</span>
+      <span class="phase-pill"><b>Sep 19</b> &middot; CCDV-F exam day &middot; no Architect study</span>
+      <span class="phase-pill"><b>Sep 20 &ndash; Oct 30</b> &middot; Phase 2 &middot; full pace (2h/6h), deep dive + review</span>
+      <span class="phase-pill"><b>Oct 31</b> &middot; CCAR-F exam day</span>
+    </div>
+  </header>
+
+  <section id="legend-section">
+    <h2>Domains, by exam weight</h2>
+    <p class="lede">Domain 1 carries the most weight (27%) but not a proportional 27% of the hours below &mdash; Domain 2 (18%) and Domain 5 (15%) get more depth than raw weight alone would give them, the same "thin content still needs full retention" principle used for the Developer plan. "Mixed review / practice" carries the hands-on exercises, scenario drills, two timed mocks, and the Developer-exam bridge-review sessions.</p>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section id="gantt-section">
+    <h2>Gantt chart</h2>
+    <p class="lede">Every session, laid out on the full Aug&nbsp;29&ndash;Oct&nbsp;31 calendar. Rows are grouped into a swimlane per domain; a bar marks the date a topic is studied, sized to fit its column, with the session's length and average complexity in the label. The greyed column is the CCDV-F exam day; the highlighted column is the CCAR-F exam day. Scroll sideways on a small screen. Hover a bar for its sub-topics.</p>
+    <div class="gantt-scroll"><div class="gantt" id="gantt"></div></div>
+  </section>
+
+  <section id="table-section">
+    <h2>Full timetable</h2>
+    <p class="lede">Click any day to open it &mdash; every topic that day breaks down into its sub-concepts, each with a complexity score, a time budget in minutes, and a link to primary material where a strong one exists.</p>
+    <div class="daycards" id="daycards"></div>
+    <p class="scale-note">Complexity scale: <span class="dots"><span class="on">&#9679;</span>&#9675;&#9675;&#9675;&#9675;</span> 1&nbsp;&mdash; foundational recall &nbsp;&middot;&nbsp; <span class="dots"><span class="on">&#9679;&#9679;&#9679;&#9679;&#9679;</span></span> 5&nbsp;&mdash; advanced, multi-part synthesis. Minutes per day always sum to that day's hours.</p>
+  </section>
+
+  <footer>
+    Built strictly from the CCAR-F Exam Guide v1.0 (July 2026) blueprint &mdash; 5 domains, 30 task statements, no outside topics added.
+    Phase&nbsp;1 previews and Phase&nbsp;2's "Bridge review" sessions are the deliberate revision pass over material shared with the CCDV-F blueprint; Phase&nbsp;2's deep-dive sessions cover every task statement in full, followed by the guide's own Section&nbsp;8 exercises and Section&nbsp;9 sample-question scenarios.
+    Pair this with the companion mindmap (<code>CCAR-F_Syllabus_Mindmap.opml</code>) in MindNode for the concept tree behind every session below.
+    Reference links point to Anthropic's own documentation, verified live at the time this page was built &mdash; docs move, so if one 404s, search the term on <a href="https://platform.claude.com/docs" target="_blank" rel="noopener">platform.claude.com/docs</a> or <a href="https://code.claude.com/docs" target="_blank" rel="noopener">code.claude.com/docs</a>.
+  </footer>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const DOMAINS = {
+  1: { name: "Agentic Architecture & Orchestration", weight: "27%", color: "var(--d1)", tint: "var(--d1-t)" },
+  2: { name: "Tool Design & MCP Integration", weight: "18%", color: "var(--d2)", tint: "var(--d2-t)" },
+  3: { name: "Claude Code Configuration & Workflows", weight: "20%", color: "var(--d3)", tint: "var(--d3-t)" },
+  4: { name: "Prompt Engineering & Structured Output", weight: "20%", color: "var(--d4)", tint: "var(--d4-t)" },
+  5: { name: "Context Management & Reliability", weight: "15%", color: "var(--d5)", tint: "var(--d5-t)" },
+  0: { name: "Mixed review / practice", weight: null, color: "var(--d0)", tint: "var(--d0-t)" }
+};
+
+const LINKS = {
+  "agentic-loop": ["Agent Loop Lifecycle (Agent SDK)", "https://code.claude.com/docs/en/agent-sdk/agent-loop"],
+  "stop-reason": ["Messages API stop_reason Field", "https://platform.claude.com/docs/en/api/messages"],
+  "hub-and-spoke": ["Orchestrator-Worker / Hub-and-Spoke Pattern", "https://www.anthropic.com/engineering/multi-agent-research-system"],
+  "subagent-isolation": ["Subagent Isolated Context", "https://code.claude.com/docs/en/sub-agents"],
+  "task-tool": ["Task/Agent Tool for Spawning Subagents", "https://code.claude.com/docs/en/sub-agents"],
+  "agent-definition": ["AgentDefinition Configuration", "https://code.claude.com/docs/en/agent-sdk/subagents"],
+  "fork-session": ["fork_session / Session Forking", "https://code.claude.com/docs/en/agent-sdk/sessions"],
+  "workflow-enforcement": ["Multi-Step Workflow Enforcement", "https://code.claude.com/docs/en/workflows"],
+  "sdk-hooks": ["Agent SDK Hooks (PostToolUse)", "https://code.claude.com/docs/en/agent-sdk/hooks"],
+  "task-decomposition": ["Prompt Chaining vs Orchestrator-Workers", "https://www.anthropic.com/engineering/building-effective-agents"],
+  "session-management": ["Session Management (--resume, naming)", "https://code.claude.com/docs/en/sessions"],
+  "tool-descriptions": ["Writing Effective Tool Descriptions", "https://platform.claude.com/docs/en/agents-and-tools/tool-use/implement-tool-use"],
+  "tool-choice": ["tool_choice Parameter (auto/any/tool/none)", "https://platform.claude.com/docs/en/agents-and-tools/tool-use/implement-tool-use#forcing-tool-use"],
+  "mcp-overview": ["Model Context Protocol Overview", "https://modelcontextprotocol.io/introduction"],
+  "mcp-tools": ["MCP Tools Spec", "https://modelcontextprotocol.io/specification/2026-07-28/server/tools"],
+  "mcp-resources": ["MCP Resources Spec", "https://modelcontextprotocol.io/specification/2026-07-28/server/resources"],
+  "mcp-iserror": ["MCP isError Flag / Structured Tool Errors", "https://modelcontextprotocol.io/specification/2026-07-28/server/tools#error-handling"],
+  "mcp-config-scope": ["MCP Server Config: Project vs User Scope", "https://code.claude.com/docs/en/mcp"],
+  "mcp-env-vars": ["Env Var Expansion in MCP Config", "https://code.claude.com/docs/en/mcp"],
+  "builtin-tools": ["Built-in Claude Code Tools Reference", "https://code.claude.com/docs/en/tools-reference"],
+  "mcp-servers-directory": ["Community/Reference MCP Servers", "https://github.com/modelcontextprotocol/servers"],
+  "claude-md-hierarchy": ["CLAUDE.md Configuration Hierarchy", "https://code.claude.com/docs/en/memory#choose-where-to-put-claude-md-files"],
+  "claude-md-import": ["CLAUDE.md @import Syntax", "https://code.claude.com/docs/en/memory#import-additional-files"],
+  "rules-directory": [".claude/rules/ Path-Scoped Rules", "https://code.claude.com/docs/en/memory#path-specific-rules"],
+  "slash-commands": ["Custom Slash Commands / Skills", "https://code.claude.com/docs/en/skills"],
+  "skills-scoping": ["Skill Scoping — Personal vs Project", "https://code.claude.com/docs/en/skills#where-skills-live"],
+  "skill-frontmatter": ["SKILL.md Frontmatter Reference", "https://code.claude.com/docs/en/skills#frontmatter-reference"],
+  "skill-context-fork": ["Running Skills in a Subagent (context: fork)", "https://code.claude.com/docs/en/skills#run-skills-in-a-subagent"],
+  "plan-mode": ["Plan Mode vs Direct Execution", "https://code.claude.com/docs/en/permission-modes#analyze-before-you-edit-with-plan-mode"],
+  "explore-subagent": ["Built-in Explore Subagent", "https://code.claude.com/docs/en/sub-agents"],
+  "tdd-iterative-workflow": ["Verification-Driven Iterative Workflow", "https://code.claude.com/docs/en/best-practices#give-claude-a-way-to-verify-its-work"],
+  "common-workflows-tests": ["Common Workflow Recipes (incl. Tests)", "https://code.claude.com/docs/en/common-workflows"],
+  "memory-command": ["/memory Command", "https://code.claude.com/docs/en/memory#view-and-edit-with-%2Fmemory"],
+  "headless-mode": ["Non-Interactive Mode (-p / --print)", "https://code.claude.com/docs/en/headless"],
+  "structured-output-json": ["--output-format json & --json-schema", "https://code.claude.com/docs/en/headless#get-structured-output"],
+  "cli-reference": ["Claude Code CLI Reference", "https://code.claude.com/docs/en/cli-reference"],
+  "github-actions-cicd": ["Claude Code GitHub Actions (CI/CD)", "https://code.claude.com/docs/en/github-actions"],
+  "session-continue": ["Continuing Conversations Non-Interactively", "https://code.claude.com/docs/en/headless#continue-conversations"],
+  "prompt-eng-overview": ["Prompt Engineering Overview", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview"],
+  "clear-and-direct": ["Be Clear and Direct", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#be-clear-and-direct"],
+  "few-shot-multishot": ["Multishot / Few-Shot Examples", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#use-examples-effectively"],
+  "reduce-hallucinations": ["Reducing Hallucinations", "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/reduce-hallucinations"],
+  "output-consistency": ["Increasing Output Consistency", "https://platform.claude.com/docs/en/test-and-evaluate/strengthen-guardrails/increase-consistency"],
+  "force-tool-use": ["Forcing Tool Use (tool_choice)", "https://platform.claude.com/docs/en/agents-and-tools/tool-use/implement-tool-use#forcing-tool-use"],
+  "json-schema-tools": ["JSON Schema Design for Tools", "https://platform.claude.com/docs/en/agents-and-tools/tool-use/define-tools"],
+  "message-batches-api": ["Message Batches API", "https://platform.claude.com/docs/en/build-with-claude/batch-processing"],
+  "prompt-chaining": ["Prompt Chaining", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#chain-complex-prompts"],
+  "chain-of-thought": ["Chain of Thought Prompting", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#thinking-and-reasoning"],
+  "long-context-tips": ["Long Context Prompting Tips", "https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#long-context-prompting"],
+  "context-window-mgmt": ["Context Windows", "https://platform.claude.com/docs/en/build-with-claude/context-windows"],
+  "lost-in-middle-niah": ["Long Context Recall (Needle-in-Haystack)", "https://claude.com/blog/claude-2-1-prompting"],
+  "prompt-caching": ["Prompt Caching", "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"],
+  "extended-thinking": ["Extended Thinking / Adaptive Reasoning", "https://platform.claude.com/docs/en/build-with-claude/extended-thinking"],
+  "rag-citations": ["Citations API (RAG Provenance)", "https://platform.claude.com/docs/en/build-with-claude/citations"],
+  "api-error-handling": ["API Errors & Retries", "https://platform.claude.com/docs/en/api/errors"],
+  "agent-sdk-compaction": ["Context Compaction (/compact)", "https://platform.claude.com/docs/en/build-with-claude/compaction"],
+  "building-effective-agents": ["Building Effective Agents", "https://www.anthropic.com/engineering/building-effective-agents"],
+  "human-in-the-loop": ["Human-in-the-Loop Approval (Agent SDK)", "https://code.claude.com/docs/en/agent-sdk/permissions"]
+};
+
+// Each day: { date, dow, hours, exam?, restday?, segs:[ { d:domainId, h:hours, t:title, subs:[ [name, complexity 1-5, minutes, linkKey?] ] } ] }
+const WEEKS = [
+  {
+    "label": "Week 1 · Architecture-lens preview — Domain 1, run alongside CCDV-F study",
+    "days": [
+      {
+        "date": "Aug 29",
+        "dow": "Sat",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 0,
+            "h": 1.0,
+            "t": "Orientation: how the Architect exam builds on the Developer exam",
+            "subs": [
+              [
+                "CCAR-F at a glance: 60 items, 4 of 6 scenarios, 120 min, cut score 720/1000",
+                1,
+                15,
+                null
+              ],
+              [
+                "The 5 architect domains vs the 8 developer domains — where the overlap is",
+                2,
+                20,
+                null
+              ],
+              [
+                "Why architect questions test tradeoffs/judgment, not just feature recall",
+                2,
+                15,
+                null
+              ],
+              [
+                "Set up a standing 'architecture notes' doc to log Developer-exam material worth revisiting here",
+                1,
+                10,
+                null
+              ]
+            ],
+            "tid": "PV0"
+          }
+        ]
+      },
+      {
+        "date": "Aug 30",
+        "dow": "Sun",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 1,
+            "h": 1.0,
+            "t": "Preview 1.1 — Agentic loops (rides on today's Developer agentic-loop study)",
+            "subs": [
+              [
+                "Loop lifecycle at a glance: request -> stop_reason -> tools -> repeat",
+                2,
+                30,
+                "agentic-loop"
+              ],
+              [
+                "The two stop_reason values that matter most: tool_use vs end_turn",
+                2,
+                30,
+                "stop-reason"
+              ]
+            ],
+            "tid": "PV1"
+          }
+        ]
+      },
+      {
+        "date": "Aug 31",
+        "dow": "Mon",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 1,
+            "h": 1.0,
+            "t": "Preview 1.2 — Coordinator-subagent patterns",
+            "subs": [
+              [
+                "Hub-and-spoke in one picture: coordinator owns every subagent conversation",
+                2,
+                30,
+                "hub-and-spoke"
+              ],
+              [
+                "Why subagents don't automatically inherit the coordinator's context",
+                3,
+                30,
+                "subagent-isolation"
+              ]
+            ],
+            "tid": "PV2"
+          }
+        ]
+      },
+      {
+        "date": "Sep 1",
+        "dow": "Tue",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 1,
+            "h": 1.0,
+            "t": "Preview 1.3 — Subagent invocation & context passing",
+            "subs": [
+              [
+                "The Task/Agent tool and allowedTools — the spawn mechanism in outline",
+                2,
+                30,
+                "task-tool"
+              ],
+              [
+                "Rule of thumb: if a subagent needs it, it must be IN the prompt",
+                2,
+                30,
+                null
+              ]
+            ],
+            "tid": "PV3"
+          }
+        ]
+      },
+      {
+        "date": "Sep 2",
+        "dow": "Wed",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 1,
+            "h": 1.0,
+            "t": "Preview 1.4 — Workflow enforcement & handoff",
+            "subs": [
+              [
+                "Prompts guide; hooks and gates guarantee — the enforcement spectrum",
+                3,
+                30,
+                "workflow-enforcement"
+              ],
+              [
+                "What a good human handoff summary contains (ID, root cause, action)",
+                2,
+                30,
+                null
+              ]
+            ],
+            "tid": "PV4"
+          }
+        ]
+      },
+      {
+        "date": "Sep 3",
+        "dow": "Thu",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 1,
+            "h": 1.0,
+            "t": "Preview 1.5 — Agent SDK hooks",
+            "subs": [
+              [
+                "PostToolUse in one line: reshape tool output before Claude reasons over it",
+                2,
+                30,
+                "sdk-hooks"
+              ],
+              [
+                "Interception hooks as a deterministic gate on outgoing tool calls",
+                3,
+                30,
+                "sdk-hooks"
+              ]
+            ],
+            "tid": "PV5"
+          }
+        ]
+      },
+      {
+        "date": "Sep 4",
+        "dow": "Fri",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 1,
+            "h": 1.0,
+            "t": "Preview 1.6 — Task decomposition strategies",
+            "subs": [
+              [
+                "Prompt chaining (predictable) vs dynamic decomposition (open-ended)",
+                2,
+                30,
+                "task-decomposition"
+              ],
+              [
+                "Per-file pass + cross-file pass — the pattern behind good multi-file reviews",
+                2,
+                30,
+                "prompt-chaining"
+              ]
+            ],
+            "tid": "PV6"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Week 2 · Architecture-lens preview — Domain 2, run alongside CCDV-F study",
+    "days": [
+      {
+        "date": "Sep 5",
+        "dow": "Sat",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 1,
+            "h": 1.0,
+            "t": "Preview 1.7 — Session state, resumption, forking",
+            "subs": [
+              [
+                "--resume <name> vs fork_session — continuing vs branching",
+                2,
+                30,
+                "session-management"
+              ],
+              [
+                "When a fresh session beats resuming a stale one",
+                2,
+                30,
+                "fork-session"
+              ]
+            ],
+            "tid": "PV7"
+          }
+        ]
+      },
+      {
+        "date": "Sep 6",
+        "dow": "Sun",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 2,
+            "h": 1.0,
+            "t": "Preview 2.1 — Tool descriptions & boundaries",
+            "subs": [
+              [
+                "Tool descriptions are the model's ONLY signal for tool selection",
+                3,
+                30,
+                "tool-descriptions"
+              ],
+              [
+                "The classic failure: two similarly-described tools, one gets ignored",
+                2,
+                30,
+                null
+              ]
+            ],
+            "tid": "PV8"
+          }
+        ]
+      },
+      {
+        "date": "Sep 7",
+        "dow": "Mon",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 2,
+            "h": 1.0,
+            "t": "Preview 2.2 — Structured MCP error responses",
+            "subs": [
+              [
+                "isError plus errorCategory — how a tool should fail informatively",
+                2,
+                30,
+                "mcp-iserror"
+              ],
+              [
+                "Retryable vs not: why 'operation failed' wastes the agent's next move",
+                3,
+                30,
+                null
+              ]
+            ],
+            "tid": "PV9"
+          }
+        ]
+      },
+      {
+        "date": "Sep 8",
+        "dow": "Tue",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 2,
+            "h": 1.0,
+            "t": "Preview 2.3 — Tool distribution & tool_choice",
+            "subs": [
+              [
+                "Fewer, well-scoped tools beat a big generic toolbox for reliability",
+                2,
+                30,
+                null
+              ],
+              [
+                "tool_choice: auto / any / forced — three levels of control",
+                2,
+                30,
+                "tool-choice"
+              ]
+            ],
+            "tid": "PV10"
+          }
+        ]
+      },
+      {
+        "date": "Sep 9",
+        "dow": "Wed",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 2,
+            "h": 1.0,
+            "t": "Preview 2.4 — MCP servers in Claude Code",
+            "subs": [
+              [
+                ".mcp.json (shared, project) vs ~/.claude.json (personal) at a glance",
+                2,
+                30,
+                "mcp-config-scope"
+              ],
+              [
+                "MCP resources vs MCP tools: exposing content vs taking action",
+                2,
+                30,
+                "mcp-resources"
+              ]
+            ],
+            "tid": "PV11"
+          }
+        ]
+      },
+      {
+        "date": "Sep 10",
+        "dow": "Thu",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 2,
+            "h": 1.0,
+            "t": "Preview 2.5 — Built-in tools (Read/Write/Edit/Bash/Grep/Glob)",
+            "subs": [
+              [
+                "Grep to find, Glob to match paths, Edit for a precise single change",
+                2,
+                30,
+                "builtin-tools"
+              ],
+              [
+                "Building codebase understanding incrementally instead of reading everything",
+                2,
+                30,
+                null
+              ]
+            ],
+            "tid": "PV12"
+          }
+        ]
+      },
+      {
+        "date": "Sep 11",
+        "dow": "Fri",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 3,
+            "h": 1.0,
+            "t": "Preview 3.1 — CLAUDE.md hierarchy",
+            "subs": [
+              [
+                "User vs project vs directory CLAUDE.md — who sees what",
+                2,
+                30,
+                "claude-md-hierarchy"
+              ],
+              [
+                "@import to keep one CLAUDE.md from becoming an unreadable monolith",
+                2,
+                30,
+                "claude-md-import"
+              ]
+            ],
+            "tid": "PV13"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Week 3 · Architecture-lens preview — Domain 3, then a rapid pass on Domains 4 & 5",
+    "days": [
+      {
+        "date": "Sep 12",
+        "dow": "Sat",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 3,
+            "h": 1.0,
+            "t": "Preview 3.2 — Custom commands & skills",
+            "subs": [
+              [
+                "Project .claude/commands vs personal ~/.claude/commands",
+                2,
+                30,
+                "slash-commands"
+              ],
+              [
+                "context: fork — running a skill without polluting the main conversation",
+                3,
+                30,
+                "skill-context-fork"
+              ]
+            ],
+            "tid": "PV14"
+          }
+        ]
+      },
+      {
+        "date": "Sep 13",
+        "dow": "Sun",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 3,
+            "h": 1.0,
+            "t": "Preview 3.3 — Path-specific rules",
+            "subs": [
+              [
+                ".claude/rules/ with YAML 'paths' globs — conventions that follow file type",
+                2,
+                30,
+                "rules-directory"
+              ],
+              [
+                "Why this beats a directory CLAUDE.md when tests live next to their code",
+                2,
+                30,
+                null
+              ]
+            ],
+            "tid": "PV15"
+          }
+        ]
+      },
+      {
+        "date": "Sep 14",
+        "dow": "Mon",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 3,
+            "h": 1.0,
+            "t": "Preview 3.4 — Plan mode vs direct execution",
+            "subs": [
+              [
+                "The decision rule: architectural + multi-file -> plan mode; scoped -> direct",
+                2,
+                30,
+                "plan-mode"
+              ],
+              [
+                "The Explore subagent: verbose discovery without burning main context",
+                2,
+                30,
+                "explore-subagent"
+              ]
+            ],
+            "tid": "PV16"
+          }
+        ]
+      },
+      {
+        "date": "Sep 15",
+        "dow": "Tue",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 3,
+            "h": 1.0,
+            "t": "Preview 3.5 — Iterative refinement",
+            "subs": [
+              [
+                "Concrete I/O examples beat another paragraph of prose instructions",
+                2,
+                30,
+                "tdd-iterative-workflow"
+              ],
+              [
+                "Test-first iteration: let failing tests drive the next revision",
+                2,
+                30,
+                "common-workflows-tests"
+              ]
+            ],
+            "tid": "PV17"
+          }
+        ]
+      },
+      {
+        "date": "Sep 16",
+        "dow": "Wed",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 3,
+            "h": 1.0,
+            "t": "Preview 3.6 — Claude Code in CI/CD",
+            "subs": [
+              [
+                "-p for non-interactive runs; --output-format json --json-schema for machine output",
+                2,
+                30,
+                "headless-mode"
+              ],
+              [
+                "Why the generating session is a weak reviewer of its own diff",
+                2,
+                30,
+                "github-actions-cicd"
+              ]
+            ],
+            "tid": "PV18"
+          }
+        ]
+      },
+      {
+        "date": "Sep 17",
+        "dow": "Thu",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 4,
+            "h": 1.0,
+            "t": "Rapid pass — Domain 4: Prompt Engineering & Structured Output (all 6 skills)",
+            "subs": [
+              [
+                "4.1 Explicit criteria beat vague ones for precision",
+                2,
+                10,
+                "clear-and-direct"
+              ],
+              [
+                "4.2 Few-shot examples for consistency, especially on ambiguous cases",
+                2,
+                10,
+                "few-shot-multishot"
+              ],
+              [
+                "4.3 tool_use + JSON schema for guaranteed-structure output",
+                2,
+                10,
+                "json-schema-tools"
+              ],
+              [
+                "4.4 Retry-with-error-feedback, and when retries can't help",
+                2,
+                10,
+                null
+              ],
+              [
+                "4.5 Message Batches API: 50% cheaper, 24h window, no multi-turn tools",
+                2,
+                10,
+                "message-batches-api"
+              ],
+              [
+                "4.6 Independent review instances beat self-review",
+                2,
+                10,
+                null
+              ]
+            ],
+            "tid": "PV19"
+          }
+        ]
+      },
+      {
+        "date": "Sep 18",
+        "dow": "Fri",
+        "hours": 1.0,
+        "segs": [
+          {
+            "d": 5,
+            "h": 1.0,
+            "t": "Rapid pass — Domain 5: Context Management & Reliability (all 6 skills)",
+            "subs": [
+              [
+                "5.1 Case-facts blocks and the lost-in-the-middle effect",
+                2,
+                10,
+                "lost-in-middle-niah"
+              ],
+              [
+                "5.2 Escalation triggers: request, policy gap, stuck — not sentiment",
+                2,
+                10,
+                null
+              ],
+              [
+                "5.3 Structured error context lets a coordinator actually recover",
+                2,
+                10,
+                "mcp-iserror"
+              ],
+              [
+                "5.4 Scratchpads and /compact for long codebase exploration",
+                2,
+                10,
+                "agent-sdk-compaction"
+              ],
+              [
+                "5.5 Stratified sampling and field-level confidence calibration",
+                2,
+                10,
+                null
+              ],
+              [
+                "5.6 Claim-source mappings so synthesis doesn't lose provenance",
+                2,
+                10,
+                "rag-citations"
+              ]
+            ],
+            "tid": "PV20"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "CCDV-F exam day — no Architect study",
+    "days": [
+      {
+        "date": "Sep 19",
+        "dow": "Sat",
+        "hours": 0,
+        "restday": true,
+        "segs": []
+      }
+    ]
+  },
+  {
+    "label": "Week 4 · Domain 1: Agentic Architecture & Orchestration & Domain 2: Tool Design & MCP Integration",
+    "days": [
+      {
+        "date": "Sep 20",
+        "dow": "Sun",
+        "hours": 6.0,
+        "segs": [
+          {
+            "d": 1,
+            "h": 3.0,
+            "t": "Agentic loops for autonomous task execution",
+            "subs": [
+              [
+                "Loop lifecycle: send request -> inspect stop_reason -> execute tools -> return results",
+                3,
+                35,
+                "agentic-loop"
+              ],
+              [
+                "tool_use vs end_turn: when the loop continues vs terminates",
+                3,
+                30,
+                "stop-reason"
+              ],
+              [
+                "Appending tool results to conversation history so Claude reasons over new info",
+                3,
+                30,
+                "agentic-loop"
+              ],
+              [
+                "Model-driven decisions vs pre-configured decision trees/fixed tool sequences",
+                3,
+                25,
+                null
+              ],
+              [
+                "Anti-patterns: parsing NL for loop termination, arbitrary iteration caps, scanning assistant text",
+                4,
+                30,
+                null
+              ],
+              [
+                "Practice: trace a stop_reason state machine for a 3-tool agent loop",
+                3,
+                30,
+                null
+              ]
+            ],
+            "tid": "1.1"
+          },
+          {
+            "d": 1,
+            "h": 3.0,
+            "t": "Coordinator-subagent orchestration patterns",
+            "subs": [
+              [
+                "Hub-and-spoke architecture: coordinator owns all inter-subagent communication",
+                3,
+                30,
+                "hub-and-spoke"
+              ],
+              [
+                "Subagents hold isolated context — no automatic inheritance of coordinator history",
+                4,
+                30,
+                "subagent-isolation"
+              ],
+              [
+                "Coordinator responsibilities: decomposition, delegation, aggregation, subagent selection",
+                3,
+                25,
+                "hub-and-spoke"
+              ],
+              [
+                "Risk: overly narrow task decomposition silently drops coverage (creative-industries case)",
+                4,
+                30,
+                null
+              ],
+              [
+                "Dynamic subagent selection based on query complexity, not fixed pipelines",
+                3,
+                25,
+                null
+              ],
+              [
+                "Partitioning research scope across subagents to minimize duplicated work",
+                3,
+                25,
+                null
+              ],
+              [
+                "Iterative refinement loop: coordinator evaluates synthesis gaps, re-delegates, re-invokes",
+                4,
+                15,
+                "task-decomposition"
+              ]
+            ],
+            "tid": "1.2"
+          }
+        ]
+      },
+      {
+        "date": "Sep 21",
+        "dow": "Mon",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 1,
+            "h": 0.6667,
+            "t": "Coordinator-subagent orchestration patterns",
+            "subs": [
+              [
+                "Iterative refinement loop: coordinator evaluates synthesis gaps, re-delegates, re-invokes (cont'd)",
+                4,
+                20,
+                "task-decomposition"
+              ],
+              [
+                "Routing all subagent communication through the coordinator for observability",
+                3,
+                20,
+                null
+              ]
+            ],
+            "tid": "1.2"
+          },
+          {
+            "d": 1,
+            "h": 1.3333,
+            "t": "Subagent invocation, context passing, and spawning",
+            "subs": [
+              [
+                "The Task/Agent tool as the spawn mechanism; allowedTools must include it",
+                3,
+                25,
+                "task-tool"
+              ],
+              [
+                "Subagents need context explicitly in the prompt — no shared memory between calls",
+                4,
+                30,
+                "task-tool"
+              ],
+              [
+                "AgentDefinition: description, system prompt, and tool restrictions per subagent type",
+                3,
+                25,
+                "agent-definition"
+              ]
+            ],
+            "tid": "1.3"
+          }
+        ]
+      },
+      {
+        "date": "Sep 22",
+        "dow": "Tue",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 1,
+            "h": 2.0,
+            "t": "Subagent invocation, context passing, and spawning",
+            "subs": [
+              [
+                "AgentDefinition: description, system prompt, and tool restrictions per subagent type (cont'd)",
+                3,
+                5,
+                "agent-definition"
+              ],
+              [
+                "fork_session for exploring divergent approaches from a shared analysis baseline",
+                4,
+                30,
+                "fork-session"
+              ],
+              [
+                "Passing complete prior findings directly into a subagent's prompt",
+                3,
+                25,
+                null
+              ],
+              [
+                "Structured data formats that separate content from metadata when passing context",
+                4,
+                30,
+                null
+              ],
+              [
+                "Spawning parallel subagents via multiple Task calls in one coordinator turn",
+                3,
+                25,
+                null
+              ],
+              [
+                "Writing coordinator prompts around goals/quality criteria, not step-by-step scripts",
+                3,
+                5,
+                null
+              ]
+            ],
+            "tid": "1.3"
+          }
+        ]
+      },
+      {
+        "date": "Sep 23",
+        "dow": "Wed",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 1,
+            "h": 0.3333,
+            "t": "Subagent invocation, context passing, and spawning",
+            "subs": [
+              [
+                "Writing coordinator prompts around goals/quality criteria, not step-by-step scripts (cont'd)",
+                3,
+                20,
+                null
+              ]
+            ],
+            "tid": "1.3"
+          },
+          {
+            "d": 1,
+            "h": 1.6667,
+            "t": "Multi-step workflows: enforcement and handoff patterns",
+            "subs": [
+              [
+                "Programmatic enforcement (hooks, prerequisite gates) vs prompt-based guidance",
+                4,
+                35,
+                "workflow-enforcement"
+              ],
+              [
+                "When deterministic compliance is required (e.g. identity check before refund)",
+                4,
+                30,
+                null
+              ],
+              [
+                "Implementing programmatic prerequisites that block downstream tool calls",
+                4,
+                30,
+                "workflow-enforcement"
+              ],
+              [
+                "Decomposing multi-concern requests into distinct items handled in parallel",
+                3,
+                5,
+                null
+              ]
+            ],
+            "tid": "1.4"
+          }
+        ]
+      },
+      {
+        "date": "Sep 24",
+        "dow": "Thu",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 1,
+            "h": 0.8333,
+            "t": "Multi-step workflows: enforcement and handoff patterns",
+            "subs": [
+              [
+                "Decomposing multi-concern requests into distinct items handled in parallel (cont'd)",
+                3,
+                20,
+                null
+              ],
+              [
+                "Structured handoff summaries for escalation: ID, root cause, amount, recommended action",
+                3,
+                30,
+                null
+              ]
+            ],
+            "tid": "1.4"
+          },
+          {
+            "d": 1,
+            "h": 1.1667,
+            "t": "Agent SDK hooks: tool call interception & normalization",
+            "subs": [
+              [
+                "Hook types overview: PreToolUse, PostToolUse, Stop, SubagentStart and their timing",
+                3,
+                30,
+                "sdk-hooks"
+              ],
+              [
+                "PostToolUse hooks that normalize heterogeneous data formats before the model sees them",
+                4,
+                35,
+                "sdk-hooks"
+              ],
+              [
+                "Tool-call interception hooks that block policy-violating actions deterministically",
+                4,
+                5,
+                "sdk-hooks"
+              ]
+            ],
+            "tid": "1.5"
+          }
+        ]
+      },
+      {
+        "date": "Sep 25",
+        "dow": "Fri",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 1,
+            "h": 1.5,
+            "t": "Agent SDK hooks: tool call interception & normalization",
+            "subs": [
+              [
+                "Tool-call interception hooks that block policy-violating actions deterministically (cont'd)",
+                4,
+                30,
+                "sdk-hooks"
+              ],
+              [
+                "Hooks vs prompt instructions: when guaranteed compliance beats probabilistic compliance",
+                3,
+                25,
+                null
+              ],
+              [
+                "Practice: design a hook that blocks refunds above a threshold and redirects to escalation",
+                4,
+                35,
+                null
+              ]
+            ],
+            "tid": "1.5"
+          },
+          {
+            "d": 1,
+            "h": 0.5,
+            "t": "Task decomposition strategies for complex workflows",
+            "subs": [
+              [
+                "Fixed sequential pipelines (prompt chaining) vs dynamic adaptive decomposition",
+                3,
+                30,
+                "task-decomposition"
+              ]
+            ],
+            "tid": "1.6"
+          }
+        ]
+      },
+      {
+        "date": "Sep 26",
+        "dow": "Sat",
+        "hours": 6.0,
+        "segs": [
+          {
+            "d": 1,
+            "h": 2.0,
+            "t": "Task decomposition strategies for complex workflows",
+            "subs": [
+              [
+                "Prompt-chaining pattern: per-file passes then a separate cross-file integration pass",
+                3,
+                30,
+                "prompt-chaining"
+              ],
+              [
+                "Adaptive investigation plans that generate subtasks from what was just discovered",
+                4,
+                30,
+                null
+              ],
+              [
+                "Choosing the right pattern: predictable multi-aspect review vs open-ended investigation",
+                3,
+                25,
+                null
+              ],
+              [
+                "Decomposing an open-ended task: map structure, find high-impact areas, build an adapting plan",
+                4,
+                35,
+                null
+              ]
+            ],
+            "tid": "1.6"
+          },
+          {
+            "d": 1,
+            "h": 2.0833,
+            "t": "Session state, resumption, and forking",
+            "subs": [
+              [
+                "Named session resumption with --resume <session-name>",
+                2,
+                25,
+                "session-management"
+              ],
+              [
+                "fork_session for parallel exploration branches from a shared baseline",
+                3,
+                30,
+                "fork-session"
+              ],
+              [
+                "Telling a resumed session about file changes made outside it",
+                3,
+                25,
+                "session-management"
+              ],
+              [
+                "Why a fresh session with an injected summary beats resuming with stale tool results",
+                3,
+                25,
+                null
+              ],
+              [
+                "Choosing resumption (context still valid) vs fresh start (context is stale)",
+                3,
+                20,
+                null
+              ]
+            ],
+            "tid": "1.7"
+          },
+          {
+            "d": 2,
+            "h": 1.9167,
+            "t": "Effective tool interfaces: descriptions and boundaries",
+            "subs": [
+              [
+                "Tool descriptions as the primary LLM tool-selection mechanism",
+                3,
+                30,
+                "tool-descriptions"
+              ],
+              [
+                "Including input formats, example queries, edge cases, and boundaries in descriptions",
+                3,
+                30,
+                "tool-descriptions"
+              ],
+              [
+                "How ambiguous/overlapping descriptions cause misrouting (analyze_content vs analyze_document)",
+                4,
+                30,
+                null
+              ],
+              [
+                "System-prompt wording that unintentionally overrides good tool descriptions",
+                4,
+                25,
+                null
+              ]
+            ],
+            "tid": "2.1"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Week 5 · Domain 2: Tool Design & MCP Integration & Domain 3: Claude Code Configuration & Workflows",
+    "days": [
+      {
+        "date": "Sep 27",
+        "dow": "Sun",
+        "hours": 6.0,
+        "segs": [
+          {
+            "d": 2,
+            "h": 1.5833,
+            "t": "Effective tool interfaces: descriptions and boundaries",
+            "subs": [
+              [
+                "Writing differentiated descriptions for near-duplicate tools",
+                3,
+                30,
+                "tool-descriptions"
+              ],
+              [
+                "Splitting a generic tool into purpose-specific tools with defined I/O contracts",
+                4,
+                35,
+                null
+              ],
+              [
+                "Practice: rewrite two overlapping tool descriptions to eliminate selection ambiguity",
+                4,
+                30,
+                null
+              ]
+            ],
+            "tid": "2.1"
+          },
+          {
+            "d": 2,
+            "h": 3.3333,
+            "t": "Structured error responses for MCP tools",
+            "subs": [
+              [
+                "The MCP isError flag pattern for signalling tool failure back to the agent",
+                3,
+                25,
+                "mcp-iserror"
+              ],
+              [
+                "Transient vs validation vs business vs permission error categories",
+                3,
+                30,
+                "mcp-iserror"
+              ],
+              [
+                "Why uniform 'operation failed' responses block intelligent recovery",
+                3,
+                25,
+                null
+              ],
+              [
+                "Retryable vs non-retryable errors, and structured metadata that avoids wasted retries",
+                4,
+                30,
+                null
+              ],
+              [
+                "Returning errorCategory + isRetryable + human-readable description",
+                3,
+                30,
+                "mcp-iserror"
+              ],
+              [
+                "Local error recovery inside subagents; propagate only what can't be resolved locally",
+                4,
+                30,
+                null
+              ],
+              [
+                "Distinguishing access failures (needs retry) from valid empty results (success, no matches)",
+                4,
+                30,
+                null
+              ]
+            ],
+            "tid": "2.2"
+          },
+          {
+            "d": 2,
+            "h": 1.0833,
+            "t": "Distributing tools across agents & configuring tool_choice",
+            "subs": [
+              [
+                "Why too many tools (18 vs 4-5) degrades tool-selection reliability",
+                3,
+                25,
+                null
+              ],
+              [
+                "Agents misusing tools outside their specialization when given broad access",
+                3,
+                25,
+                null
+              ],
+              [
+                "Scoped tool access: only what a role needs, plus limited high-frequency cross-role tools",
+                3,
+                15,
+                null
+              ]
+            ],
+            "tid": "2.3"
+          }
+        ]
+      },
+      {
+        "date": "Sep 28",
+        "dow": "Mon",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 2,
+            "h": 2.0,
+            "t": "Distributing tools across agents & configuring tool_choice",
+            "subs": [
+              [
+                "Scoped tool access: only what a role needs, plus limited high-frequency cross-role tools (cont'd)",
+                3,
+                15,
+                null
+              ],
+              [
+                "tool_choice modes: auto, any, and forced selection ({'type':'tool','name':...})",
+                3,
+                30,
+                "tool-choice"
+              ],
+              [
+                "Restricting each subagent's tool set to its role to prevent cross-specialization misuse",
+                3,
+                25,
+                "tool-choice"
+              ],
+              [
+                "Forcing a specific tool first with tool_choice, then following up in later turns",
+                3,
+                30,
+                "force-tool-use"
+              ],
+              [
+                "Using tool_choice: any to guarantee a tool call instead of conversational text",
+                2,
+                20,
+                "force-tool-use"
+              ]
+            ],
+            "tid": "2.3"
+          }
+        ]
+      },
+      {
+        "date": "Sep 29",
+        "dow": "Tue",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 2,
+            "h": 2.0,
+            "t": "Integrating MCP servers into Claude Code and agent workflows",
+            "subs": [
+              [
+                "MCP overview: what the protocol standardizes and why it matters architecturally",
+                2,
+                25,
+                "mcp-overview"
+              ],
+              [
+                "MCP tools vs MCP resources — actions vs exposed content",
+                3,
+                30,
+                "mcp-tools"
+              ],
+              [
+                "Project scope (.mcp.json, shared via VCS) vs user scope (~/.claude.json, personal)",
+                3,
+                30,
+                "mcp-config-scope"
+              ],
+              [
+                "Environment variable expansion in .mcp.json for credentials without committing secrets",
+                3,
+                30,
+                "mcp-env-vars"
+              ],
+              [
+                "Tools from all configured MCP servers are discovered and available simultaneously",
+                2,
+                5,
+                "mcp-config-scope"
+              ]
+            ],
+            "tid": "2.4"
+          }
+        ]
+      },
+      {
+        "date": "Sep 30",
+        "dow": "Wed",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 2,
+            "h": 1.1667,
+            "t": "Integrating MCP servers into Claude Code and agent workflows",
+            "subs": [
+              [
+                "Tools from all configured MCP servers are discovered and available simultaneously (cont'd)",
+                2,
+                15,
+                "mcp-config-scope"
+              ],
+              [
+                "MCP resources as content catalogs that reduce exploratory tool calls",
+                3,
+                30,
+                "mcp-resources"
+              ],
+              [
+                "Choosing existing community MCP servers over custom builds for standard integrations",
+                2,
+                25,
+                "mcp-servers-directory"
+              ]
+            ],
+            "tid": "2.4"
+          },
+          {
+            "d": 2,
+            "h": 0.8333,
+            "t": "Built-in tools: Read, Write, Edit, Bash, Grep, Glob",
+            "subs": [
+              [
+                "Grep for content search; Glob for path/name pattern matching",
+                2,
+                30,
+                "builtin-tools"
+              ],
+              [
+                "Read/Write for full-file operations; Edit for targeted unique-text modifications",
+                2,
+                20,
+                "builtin-tools"
+              ]
+            ],
+            "tid": "2.5"
+          }
+        ]
+      },
+      {
+        "date": "Oct 1",
+        "dow": "Thu",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 2,
+            "h": 2.0,
+            "t": "Built-in tools: Read, Write, Edit, Bash, Grep, Glob",
+            "subs": [
+              [
+                "Read/Write for full-file operations; Edit for targeted unique-text modifications (cont'd)",
+                2,
+                10,
+                "builtin-tools"
+              ],
+              [
+                "Read+Write fallback when Edit's anchor text isn't unique",
+                2,
+                25,
+                "builtin-tools"
+              ],
+              [
+                "Incremental codebase understanding: Grep for entry points, then Read to follow imports",
+                3,
+                30,
+                null
+              ],
+              [
+                "Tracing function usage across wrapper modules: find exported names, then Grep each",
+                3,
+                30,
+                null
+              ],
+              [
+                "Practice: plan a Grep -> Read -> Edit sequence for a targeted refactor",
+                3,
+                25,
+                null
+              ]
+            ],
+            "tid": "2.5"
+          }
+        ]
+      },
+      {
+        "date": "Oct 2",
+        "dow": "Fri",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 3,
+            "h": 2.0,
+            "t": "CLAUDE.md hierarchy, scoping, and modular organization",
+            "subs": [
+              [
+                "Configuration hierarchy: user-level, project-level, directory-level CLAUDE.md",
+                3,
+                30,
+                "claude-md-hierarchy"
+              ],
+              [
+                "User-level settings apply only to that user — not shared via version control",
+                3,
+                25,
+                "claude-md-hierarchy"
+              ],
+              [
+                "@import syntax to keep CLAUDE.md modular across packages",
+                3,
+                30,
+                "claude-md-import"
+              ],
+              [
+                "Diagnosing hierarchy issues: a teammate missing instructions due to wrong scope",
+                4,
+                30,
+                null
+              ],
+              [
+                ".claude/rules/ as an alternative to one monolithic CLAUDE.md",
+                3,
+                5,
+                "rules-directory"
+              ]
+            ],
+            "tid": "3.1"
+          }
+        ]
+      },
+      {
+        "date": "Oct 3",
+        "dow": "Sat",
+        "hours": 6.0,
+        "segs": [
+          {
+            "d": 3,
+            "h": 0.6667,
+            "t": "CLAUDE.md hierarchy, scoping, and modular organization",
+            "subs": [
+              [
+                ".claude/rules/ as an alternative to one monolithic CLAUDE.md (cont'd)",
+                3,
+                20,
+                "rules-directory"
+              ],
+              [
+                "Using /memory to verify which memory files are actually loaded",
+                2,
+                20,
+                "memory-command"
+              ]
+            ],
+            "tid": "3.1"
+          },
+          {
+            "d": 3,
+            "h": 2.8333,
+            "t": "Custom slash commands and skills",
+            "subs": [
+              [
+                "Project-scoped .claude/commands (shared) vs user-scoped ~/.claude/commands (personal)",
+                3,
+                30,
+                "slash-commands"
+              ],
+              [
+                "SKILL.md frontmatter: context, allowed-tools, argument-hint",
+                3,
+                35,
+                "skill-frontmatter"
+              ],
+              [
+                "context: fork for isolating verbose/exploratory skill output from the main session",
+                4,
+                30,
+                "skill-context-fork"
+              ],
+              [
+                "Personal skill variants in ~/.claude/skills without affecting teammates",
+                2,
+                20,
+                "skills-scoping"
+              ],
+              [
+                "Configuring allowed-tools in frontmatter to restrict a skill's tool access",
+                3,
+                30,
+                "skill-frontmatter"
+              ],
+              [
+                "Choosing skills (on-demand) vs CLAUDE.md (always-loaded universal standards)",
+                3,
+                25,
+                null
+              ]
+            ],
+            "tid": "3.2"
+          },
+          {
+            "d": 3,
+            "h": 2.0833,
+            "t": "Path-specific rules for conditional convention loading",
+            "subs": [
+              [
+                ".claude/rules/ files with YAML frontmatter 'paths' globs for conditional activation",
+                3,
+                35,
+                "rules-directory"
+              ],
+              [
+                "Path-scoped rules load only for matching files, reducing irrelevant context/tokens",
+                3,
+                30,
+                "rules-directory"
+              ],
+              [
+                "Glob patterns for type-based conventions regardless of directory (e.g. **/*.test.tsx)",
+                3,
+                30,
+                "rules-directory"
+              ],
+              [
+                "Choosing path rules over directory CLAUDE.md when tests are spread across the tree",
+                3,
+                30,
+                null
+              ]
+            ],
+            "tid": "3.3"
+          },
+          {
+            "d": 3,
+            "h": 0.4167,
+            "t": "Plan mode vs direct execution",
+            "subs": [
+              [
+                "Plan mode: complex, large-scale, architectural, multi-file decisions",
+                3,
+                25,
+                "plan-mode"
+              ]
+            ],
+            "tid": "3.4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Week 6 · Domain 3: Claude Code Configuration & Workflows & Domain 4: Prompt Engineering & Structured Output",
+    "days": [
+      {
+        "date": "Oct 4",
+        "dow": "Sun",
+        "hours": 6.0,
+        "segs": [
+          {
+            "d": 3,
+            "h": 2.4167,
+            "t": "Plan mode vs direct execution",
+            "subs": [
+              [
+                "Plan mode: complex, large-scale, architectural, multi-file decisions (cont'd)",
+                3,
+                5,
+                "plan-mode"
+              ],
+              [
+                "Direct execution: simple, well-scoped changes with clear implementation",
+                2,
+                25,
+                "plan-mode"
+              ],
+              [
+                "Plan mode enables safe exploration and design before committing to changes",
+                3,
+                25,
+                "plan-mode"
+              ],
+              [
+                "The Explore subagent isolates verbose discovery to protect main context",
+                3,
+                30,
+                "explore-subagent"
+              ],
+              [
+                "Combining plan mode for investigation with direct execution for implementation",
+                3,
+                30,
+                "plan-mode"
+              ],
+              [
+                "Practice: classify 4 example tasks as plan-mode or direct-execution and justify",
+                4,
+                30,
+                null
+              ]
+            ],
+            "tid": "3.4"
+          },
+          {
+            "d": 3,
+            "h": 2.5833,
+            "t": "Iterative refinement for progressive improvement",
+            "subs": [
+              [
+                "Concrete input/output examples when prose descriptions produce inconsistent results",
+                3,
+                30,
+                "tdd-iterative-workflow"
+              ],
+              [
+                "Test-driven iteration: write test suites first, iterate on shared failures",
+                3,
+                35,
+                "common-workflows-tests"
+              ],
+              [
+                "The interview pattern: Claude asks questions to surface unanticipated considerations",
+                3,
+                30,
+                "tdd-iterative-workflow"
+              ],
+              [
+                "2-3 concrete I/O examples to clarify a transformation the model interprets inconsistently",
+                3,
+                30,
+                null
+              ],
+              [
+                "Single detailed message for interacting issues vs sequential fixes for independent ones",
+                3,
+                30,
+                null
+              ]
+            ],
+            "tid": "3.5"
+          },
+          {
+            "d": 3,
+            "h": 1.0,
+            "t": "Integrating Claude Code into CI/CD pipelines",
+            "subs": [
+              [
+                "The -p/--print flag for non-interactive mode in automated pipelines",
+                2,
+                25,
+                "headless-mode"
+              ],
+              [
+                "--output-format json with --json-schema for machine-parseable CI findings",
+                3,
+                30,
+                "structured-output-json"
+              ],
+              [
+                "CLAUDE.md as the mechanism for giving CI-invoked Claude Code project context",
+                2,
+                5,
+                "claude-md-hierarchy"
+              ]
+            ],
+            "tid": "3.6"
+          }
+        ]
+      },
+      {
+        "date": "Oct 5",
+        "dow": "Mon",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 3,
+            "h": 1.6667,
+            "t": "Integrating Claude Code into CI/CD pipelines",
+            "subs": [
+              [
+                "CLAUDE.md as the mechanism for giving CI-invoked Claude Code project context (cont'd)",
+                2,
+                20,
+                "claude-md-hierarchy"
+              ],
+              [
+                "Session isolation: why the generating session under-reviews its own changes",
+                3,
+                25,
+                null
+              ],
+              [
+                "Including prior review findings to avoid duplicate comments on re-runs",
+                3,
+                30,
+                "github-actions-cicd"
+              ],
+              [
+                "Providing existing test files in context so generation avoids duplicate scenarios",
+                2,
+                25,
+                null
+              ]
+            ],
+            "tid": "3.6"
+          },
+          {
+            "d": 4,
+            "h": 0.3333,
+            "t": "Explicit criteria to improve precision, reduce false positives",
+            "subs": [
+              [
+                "Explicit categorical criteria over vague instructions ('be conservative')",
+                3,
+                20,
+                "clear-and-direct"
+              ]
+            ],
+            "tid": "4.1"
+          }
+        ]
+      },
+      {
+        "date": "Oct 6",
+        "dow": "Tue",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 4,
+            "h": 2.0,
+            "t": "Explicit criteria to improve precision, reduce false positives",
+            "subs": [
+              [
+                "Explicit categorical criteria over vague instructions ('be conservative') (cont'd)",
+                3,
+                10,
+                "clear-and-direct"
+              ],
+              [
+                "Why general instructions fail to improve precision compared to specific criteria",
+                3,
+                25,
+                null
+              ],
+              [
+                "False-positive rates and their effect on developer trust in automated review",
+                3,
+                25,
+                null
+              ],
+              [
+                "Writing specific review criteria: which issues to report vs skip",
+                3,
+                30,
+                "prompt-eng-overview"
+              ],
+              [
+                "Defining explicit severity levels with concrete code examples for consistent classification",
+                3,
+                30,
+                null
+              ]
+            ],
+            "tid": "4.1"
+          }
+        ]
+      },
+      {
+        "date": "Oct 7",
+        "dow": "Wed",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 4,
+            "h": 2.0,
+            "t": "Few-shot prompting for consistency and quality",
+            "subs": [
+              [
+                "Few-shot examples as the most reliable lever for consistent, formatted output",
+                3,
+                30,
+                "few-shot-multishot"
+              ],
+              [
+                "Using examples to demonstrate ambiguous-case handling, not just the easy cases",
+                3,
+                30,
+                "few-shot-multishot"
+              ],
+              [
+                "Few-shot examples enabling generalization to novel patterns, not just memorized cases",
+                3,
+                25,
+                null
+              ],
+              [
+                "Creating 2-4 targeted examples showing why one action beat plausible alternatives",
+                3,
+                30,
+                "few-shot-multishot"
+              ],
+              [
+                "Reducing hallucination in extraction with examples of informal/varied source formats",
+                4,
+                5,
+                "reduce-hallucinations"
+              ]
+            ],
+            "tid": "4.2"
+          }
+        ]
+      },
+      {
+        "date": "Oct 8",
+        "dow": "Thu",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 4,
+            "h": 0.8333,
+            "t": "Few-shot prompting for consistency and quality",
+            "subs": [
+              [
+                "Reducing hallucination in extraction with examples of informal/varied source formats (cont'd)",
+                4,
+                25,
+                "reduce-hallucinations"
+              ],
+              [
+                "Examples that handle empty/null extraction correctly instead of fabricating values",
+                4,
+                25,
+                null
+              ]
+            ],
+            "tid": "4.2"
+          },
+          {
+            "d": 4,
+            "h": 1.1667,
+            "t": "Structured output via tool_use and JSON schemas",
+            "subs": [
+              [
+                "tool_use with JSON schemas as the most reliable route to schema-compliant output",
+                3,
+                30,
+                "json-schema-tools"
+              ],
+              [
+                "tool_choice: auto vs any vs forced tool selection, and when each applies",
+                3,
+                30,
+                "tool-choice"
+              ],
+              [
+                "Strict schemas eliminate syntax errors but not semantic errors (wrong field, bad sum)",
+                4,
+                10,
+                null
+              ]
+            ],
+            "tid": "4.3"
+          }
+        ]
+      },
+      {
+        "date": "Oct 9",
+        "dow": "Fri",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 4,
+            "h": 1.75,
+            "t": "Structured output via tool_use and JSON schemas",
+            "subs": [
+              [
+                "Strict schemas eliminate syntax errors but not semantic errors (wrong field, bad sum) (cont'd)",
+                4,
+                20,
+                null
+              ],
+              [
+                "Schema design: required vs optional fields, enum + 'other' + detail-string patterns",
+                3,
+                30,
+                "json-schema-tools"
+              ],
+              [
+                "Nullable/optional fields to stop the model fabricating values that aren't in the source",
+                4,
+                30,
+                null
+              ],
+              [
+                "Forcing a specific tool ({'type':'tool','name':...}) to sequence extraction before enrichment",
+                3,
+                25,
+                "force-tool-use"
+              ]
+            ],
+            "tid": "4.3"
+          },
+          {
+            "d": 4,
+            "h": 0.25,
+            "t": "Validation, retry, and feedback loops for extraction quality",
+            "subs": [
+              [
+                "Retry-with-error-feedback: appending specific validation errors on the follow-up request",
+                3,
+                15,
+                "output-consistency"
+              ]
+            ],
+            "tid": "4.4"
+          }
+        ]
+      },
+      {
+        "date": "Oct 10",
+        "dow": "Sat",
+        "hours": 6.0,
+        "segs": [
+          {
+            "d": 4,
+            "h": 2.0833,
+            "t": "Validation, retry, and feedback loops for extraction quality",
+            "subs": [
+              [
+                "Retry-with-error-feedback: appending specific validation errors on the follow-up request (cont'd)",
+                3,
+                15,
+                "output-consistency"
+              ],
+              [
+                "Limits of retry: ineffective when info is genuinely absent vs a format/structural error",
+                3,
+                30,
+                null
+              ],
+              [
+                "detected_pattern fields to enable systematic analysis of dismissed findings",
+                3,
+                25,
+                null
+              ],
+              [
+                "Semantic validation errors (bad sums, wrong field) vs schema syntax errors",
+                3,
+                25,
+                null
+              ],
+              [
+                "Self-correction flows: calculated_total vs stated_total, conflict_detected booleans",
+                4,
+                30,
+                null
+              ]
+            ],
+            "tid": "4.4"
+          },
+          {
+            "d": 4,
+            "h": 2.6667,
+            "t": "Efficient batch processing strategies",
+            "subs": [
+              [
+                "Message Batches API: 50% cost savings, up to 24h window, no latency SLA",
+                2,
+                25,
+                "message-batches-api"
+              ],
+              [
+                "Matching API choice to workload latency: sync for blocking, batch for overnight/weekly",
+                3,
+                30,
+                "message-batches-api"
+              ],
+              [
+                "The batch API doesn't support multi-turn tool calling within one request",
+                3,
+                25,
+                "message-batches-api"
+              ],
+              [
+                "custom_id for correlating batch request/response pairs",
+                2,
+                20,
+                "message-batches-api"
+              ],
+              [
+                "Calculating batch submission frequency against SLA constraints",
+                3,
+                30,
+                null
+              ],
+              [
+                "Handling batch failures: resubmit only failed docs by custom_id, with modifications",
+                3,
+                30,
+                null
+              ]
+            ],
+            "tid": "4.5"
+          },
+          {
+            "d": 4,
+            "h": 1.25,
+            "t": "Multi-instance and multi-pass review architectures",
+            "subs": [
+              [
+                "Self-review limitations: a model retains its own generation reasoning in-session",
+                3,
+                30,
+                null
+              ],
+              [
+                "Independent review instances catch subtler issues than self-review or extended thinking",
+                3,
+                30,
+                "chain-of-thought"
+              ],
+              [
+                "Multi-pass review: per-file local passes plus a separate cross-file integration pass",
+                4,
+                15,
+                "prompt-chaining"
+              ]
+            ],
+            "tid": "4.6"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Week 7 · Domain 4: Prompt Engineering & Structured Output & Domain 5: Context Management & Reliability + review",
+    "days": [
+      {
+        "date": "Oct 11",
+        "dow": "Sun",
+        "hours": 6.0,
+        "segs": [
+          {
+            "d": 4,
+            "h": 1.0833,
+            "t": "Multi-instance and multi-pass review architectures",
+            "subs": [
+              [
+                "Multi-pass review: per-file local passes plus a separate cross-file integration pass (cont'd)",
+                4,
+                20,
+                "prompt-chaining"
+              ],
+              [
+                "Using a second independent Claude instance to review generated code",
+                2,
+                20,
+                null
+              ],
+              [
+                "Verification passes with self-reported confidence to enable calibrated routing",
+                3,
+                25,
+                null
+              ]
+            ],
+            "tid": "4.6"
+          },
+          {
+            "d": 5,
+            "h": 3.25,
+            "t": "Managing conversation context across long interactions",
+            "subs": [
+              [
+                "Progressive summarization risk: numbers, dates, and commitments compress into vagueness",
+                4,
+                30,
+                "context-window-mgmt"
+              ],
+              [
+                "The lost-in-the-middle effect: strong recall at start/end, weaker in the middle",
+                4,
+                30,
+                "lost-in-middle-niah"
+              ],
+              [
+                "Tool results consuming tokens disproportionately to their relevance (40+ fields for 5 needed)",
+                3,
+                25,
+                "context-window-mgmt"
+              ],
+              [
+                "Extracting transactional facts into a persistent 'case facts' block in every prompt",
+                4,
+                30,
+                null
+              ],
+              [
+                "Trimming verbose tool outputs to only relevant fields before they accumulate",
+                3,
+                25,
+                null
+              ],
+              [
+                "Placing key-findings summaries first and using explicit section headers to fight position effects",
+                3,
+                30,
+                null
+              ],
+              [
+                "Requiring subagents to return structured data instead of verbose reasoning chains",
+                3,
+                25,
+                null
+              ]
+            ],
+            "tid": "5.1"
+          },
+          {
+            "d": 5,
+            "h": 1.6667,
+            "t": "Escalation and ambiguity resolution patterns",
+            "subs": [
+              [
+                "Escalation triggers: explicit human request, policy gaps, inability to progress",
+                3,
+                30,
+                null
+              ],
+              [
+                "Escalate-immediately-on-request vs offer-to-resolve-first for straightforward issues",
+                3,
+                25,
+                null
+              ],
+              [
+                "Why sentiment analysis and self-reported confidence are unreliable escalation proxies",
+                3,
+                30,
+                null
+              ],
+              [
+                "Multiple matches require clarification (more identifiers), not heuristic selection",
+                3,
+                15,
+                null
+              ]
+            ],
+            "tid": "5.2"
+          }
+        ]
+      },
+      {
+        "date": "Oct 12",
+        "dow": "Mon",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 5,
+            "h": 0.6667,
+            "t": "Escalation and ambiguity resolution patterns",
+            "subs": [
+              [
+                "Multiple matches require clarification (more identifiers), not heuristic selection (cont'd)",
+                3,
+                10,
+                null
+              ],
+              [
+                "Adding explicit escalation criteria with few-shot examples to the system prompt",
+                3,
+                30,
+                "few-shot-multishot"
+              ]
+            ],
+            "tid": "5.2"
+          },
+          {
+            "d": 5,
+            "h": 1.3333,
+            "t": "Error propagation across multi-agent systems",
+            "subs": [
+              [
+                "Structured error context (failure type, attempted query, partial results) enables recovery",
+                4,
+                30,
+                "mcp-iserror"
+              ],
+              [
+                "Access failures (needs retry) vs valid empty results (success, no matches)",
+                3,
+                25,
+                null
+              ],
+              [
+                "Why generic error statuses hide context the coordinator needs to decide well",
+                3,
+                25,
+                null
+              ]
+            ],
+            "tid": "5.3"
+          }
+        ]
+      },
+      {
+        "date": "Oct 13",
+        "dow": "Tue",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 5,
+            "h": 1.4167,
+            "t": "Error propagation across multi-agent systems",
+            "subs": [
+              [
+                "Anti-patterns: silently suppressing errors as success, or killing the whole workflow on one failure",
+                4,
+                30,
+                null
+              ],
+              [
+                "Local recovery for transient failures; propagate only what a subagent can't resolve",
+                3,
+                30,
+                null
+              ],
+              [
+                "Structuring synthesis output with coverage annotations for gaps from unavailable sources",
+                3,
+                25,
+                null
+              ]
+            ],
+            "tid": "5.3"
+          },
+          {
+            "d": 5,
+            "h": 0.5833,
+            "t": "Context management in large codebase exploration",
+            "subs": [
+              [
+                "Context degradation in long sessions: inconsistent answers, generic pattern references",
+                3,
+                30,
+                "context-window-mgmt"
+              ],
+              [
+                "Scratchpad files for persisting key findings across context boundaries",
+                3,
+                5,
+                null
+              ]
+            ],
+            "tid": "5.4"
+          }
+        ]
+      },
+      {
+        "date": "Oct 14",
+        "dow": "Wed",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 5,
+            "h": 1.75,
+            "t": "Context management in large codebase exploration",
+            "subs": [
+              [
+                "Scratchpad files for persisting key findings across context boundaries (cont'd)",
+                3,
+                25,
+                null
+              ],
+              [
+                "Delegating verbose exploration to subagents while the coordinator stays high-level",
+                3,
+                25,
+                "explore-subagent"
+              ],
+              [
+                "Structured state persistence (manifests) for crash recovery across agent runs",
+                3,
+                30,
+                null
+              ],
+              [
+                "Using /compact to reduce context usage during extended discovery sessions",
+                2,
+                25,
+                "agent-sdk-compaction"
+              ]
+            ],
+            "tid": "5.4"
+          },
+          {
+            "d": 5,
+            "h": 0.25,
+            "t": "Human review workflows and confidence calibration",
+            "subs": [
+              [
+                "Why aggregate accuracy metrics can mask poor performance on specific segments",
+                3,
+                15,
+                null
+              ]
+            ],
+            "tid": "5.5"
+          }
+        ]
+      },
+      {
+        "date": "Oct 15",
+        "dow": "Thu",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 5,
+            "h": 2.0,
+            "t": "Human review workflows and confidence calibration",
+            "subs": [
+              [
+                "Why aggregate accuracy metrics can mask poor performance on specific segments (cont'd)",
+                3,
+                15,
+                null
+              ],
+              [
+                "Stratified random sampling to measure error rates and catch novel failure patterns",
+                3,
+                30,
+                null
+              ],
+              [
+                "Field-level confidence scores calibrated against labeled validation sets",
+                3,
+                30,
+                null
+              ],
+              [
+                "Validating accuracy by document type/field segment before automating high-confidence cases",
+                3,
+                25,
+                "human-in-the-loop"
+              ],
+              [
+                "Routing low-confidence or contradictory extractions to human review by priority",
+                2,
+                20,
+                "human-in-the-loop"
+              ]
+            ],
+            "tid": "5.5"
+          }
+        ]
+      },
+      {
+        "date": "Oct 16",
+        "dow": "Fri",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 5,
+            "h": 2.0,
+            "t": "Provenance and uncertainty in multi-source synthesis",
+            "subs": [
+              [
+                "How summarization silently drops claim-to-source attribution",
+                3,
+                30,
+                "rag-citations"
+              ],
+              [
+                "Structured claim-source mappings the synthesis agent must preserve and merge",
+                3,
+                30,
+                "rag-citations"
+              ],
+              [
+                "Annotating conflicting statistics from credible sources instead of arbitrarily picking one",
+                3,
+                30,
+                null
+              ],
+              [
+                "Requiring publication/collection dates so temporal differences aren't read as contradictions",
+                3,
+                25,
+                null
+              ],
+              [
+                "Rendering different content types appropriately (tables for numbers, prose for narrative)",
+                2,
+                5,
+                null
+              ]
+            ],
+            "tid": "5.6"
+          }
+        ]
+      },
+      {
+        "date": "Oct 17",
+        "dow": "Sat",
+        "hours": 6.0,
+        "segs": [
+          {
+            "d": 5,
+            "h": 0.25,
+            "t": "Provenance and uncertainty in multi-source synthesis",
+            "subs": [
+              [
+                "Rendering different content types appropriately (tables for numbers, prose for narrative) (cont'd)",
+                2,
+                15,
+                null
+              ]
+            ],
+            "tid": "5.6"
+          },
+          {
+            "d": 0,
+            "h": 2.0,
+            "t": "Exercise 1 — Build a Multi-Tool Agent with Escalation Logic",
+            "subs": [
+              [
+                "Define 3-4 MCP tools with descriptions detailed enough to avoid selection confusion",
+                3,
+                25,
+                "tool-descriptions"
+              ],
+              [
+                "Implement the agentic loop: branch on stop_reason, handle tool_use and end_turn",
+                3,
+                25,
+                "agentic-loop"
+              ],
+              [
+                "Add structured errors: errorCategory, isRetryable, human-readable description per tool",
+                3,
+                25,
+                "mcp-iserror"
+              ],
+              [
+                "Add a hook that blocks an action above a threshold and redirects to escalation",
+                4,
+                25,
+                "sdk-hooks"
+              ],
+              [
+                "Test with a multi-concern message and verify decomposition + unified synthesis",
+                3,
+                20,
+                null
+              ]
+            ],
+            "tid": "EX1"
+          },
+          {
+            "d": 0,
+            "h": 1.8333,
+            "t": "Exercise 2 — Configure Claude Code for a Team Development Workflow",
+            "subs": [
+              [
+                "Create a project CLAUDE.md with standards that apply consistently across the team",
+                2,
+                20,
+                "claude-md-hierarchy"
+              ],
+              [
+                ".claude/rules/ with glob-scoped conventions for two different code areas",
+                3,
+                25,
+                "rules-directory"
+              ],
+              [
+                "A project-scoped skill with context: fork and allowed-tools restrictions",
+                3,
+                25,
+                "skill-frontmatter"
+              ],
+              [
+                "An .mcp.json server with env-var credentials, plus a personal ~/.claude.json server",
+                2,
+                20,
+                "mcp-config-scope"
+              ],
+              [
+                "Compare plan mode vs direct execution across a bug fix, a migration, and a new feature",
+                3,
+                20,
+                "plan-mode"
+              ]
+            ],
+            "tid": "EX2"
+          },
+          {
+            "d": 0,
+            "h": 1.9167,
+            "t": "Exercise 3 — Build a Structured Data Extraction Pipeline",
+            "subs": [
+              [
+                "A JSON schema with required/optional fields, an enum+'other', and nullable fields",
+                3,
+                25,
+                "json-schema-tools"
+              ],
+              [
+                "A validation-retry loop that resends the document plus the specific validation error",
+                3,
+                25,
+                null
+              ],
+              [
+                "Few-shot examples spanning varied document formats (citations vs bibliographies)",
+                3,
+                20,
+                "few-shot-multishot"
+              ],
+              [
+                "A batch strategy for 100 documents: custom_id, resubmission, SLA math",
+                3,
+                25,
+                "message-batches-api"
+              ],
+              [
+                "A confidence-score routing strategy: low-confidence extractions to human review",
+                2,
+                20,
+                "human-in-the-loop"
+              ]
+            ],
+            "tid": "EX3"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Week 8 · Review & practice",
+    "days": [
+      {
+        "date": "Oct 18",
+        "dow": "Sun",
+        "hours": 6.0,
+        "segs": [
+          {
+            "d": 0,
+            "h": 1.9167,
+            "t": "Exercise 4 — Design and Debug a Multi-Agent Research Pipeline",
+            "subs": [
+              [
+                "A coordinator delegating to 2+ subagents, each receiving findings directly in-prompt",
+                3,
+                25,
+                "hub-and-spoke"
+              ],
+              [
+                "Parallel subagent execution via multiple Task calls in a single response",
+                3,
+                20,
+                "task-tool"
+              ],
+              [
+                "Structured findings (claim, evidence, source, date) that survive synthesis intact",
+                3,
+                25,
+                "rag-citations"
+              ],
+              [
+                "Simulated timeout: verify the coordinator gets structured error context and proceeds",
+                3,
+                25,
+                "mcp-iserror"
+              ],
+              [
+                "Conflicting-source test: verify both values survive with attribution, not one arbitrary pick",
+                3,
+                20,
+                null
+              ]
+            ],
+            "tid": "EX4"
+          },
+          {
+            "d": 0,
+            "h": 1.5,
+            "t": "Scenario practice — Customer Support Resolution Agent",
+            "subs": [
+              [
+                "Work the get_customer-skipped case: why a programmatic prerequisite beats a prompt fix",
+                3,
+                30,
+                "workflow-enforcement"
+              ],
+              [
+                "Work the tool-confusion case: expand descriptions before adding few-shot or routing layers",
+                3,
+                30,
+                "tool-descriptions"
+              ],
+              [
+                "Work the low-resolution-rate case: explicit escalation criteria before confidence scores or ML",
+                3,
+                30,
+                null
+              ]
+            ],
+            "tid": "SC1"
+          },
+          {
+            "d": 0,
+            "h": 1.5,
+            "t": "Scenario practice — Code Generation with Claude Code",
+            "subs": [
+              [
+                "Work the shared slash-command case: .claude/commands/ in the repo, not ~/.claude/commands/",
+                2,
+                30,
+                "slash-commands"
+              ],
+              [
+                "Work the monolith-to-microservices case: why plan mode fits multi-file architectural change",
+                3,
+                30,
+                "plan-mode"
+              ],
+              [
+                "Work the scattered-test-conventions case: .claude/rules/ globs vs per-directory CLAUDE.md",
+                3,
+                30,
+                "rules-directory"
+              ]
+            ],
+            "tid": "SC2"
+          },
+          {
+            "d": 0,
+            "h": 1.0833,
+            "t": "Scenario practice — Multi-Agent Research System",
+            "subs": [
+              [
+                "Work the narrow-decomposition case: diagnose from coordinator logs, not downstream agents",
+                3,
+                30,
+                "hub-and-spoke"
+              ],
+              [
+                "Work the subagent-timeout case: structured error context vs silent suppression or hard-fail",
+                3,
+                30,
+                "mcp-iserror"
+              ],
+              [
+                "Work the verification-overhead case: a scoped verify_fact tool vs full access or batching",
+                3,
+                5,
+                "tool-choice"
+              ]
+            ],
+            "tid": "SC3"
+          }
+        ]
+      },
+      {
+        "date": "Oct 19",
+        "dow": "Mon",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 0,
+            "h": 0.4167,
+            "t": "Scenario practice — Multi-Agent Research System",
+            "subs": [
+              [
+                "Work the verification-overhead case: a scoped verify_fact tool vs full access or batching (cont'd)",
+                3,
+                25,
+                "tool-choice"
+              ]
+            ],
+            "tid": "SC3"
+          },
+          {
+            "d": 0,
+            "h": 1.5,
+            "t": "Scenario practice — Claude Code for Continuous Integration",
+            "subs": [
+              [
+                "Work the pipeline-hangs case: -p as the documented non-interactive fix",
+                2,
+                30,
+                "headless-mode"
+              ],
+              [
+                "Work the batch-vs-real-time case: match API to blocking vs overnight latency needs",
+                3,
+                30,
+                "message-batches-api"
+              ],
+              [
+                "Work the 14-file-review case: split into per-file + cross-file integration passes",
+                3,
+                30,
+                "prompt-chaining"
+              ]
+            ],
+            "tid": "SC4"
+          },
+          {
+            "d": 0,
+            "h": 0.0833,
+            "t": "Scenario practice — Developer Productivity with Claude",
+            "subs": [
+              [
+                "Rehearse Grep-first, Read-to-follow-imports codebase exploration on an unfamiliar repo",
+                2,
+                5,
+                null
+              ]
+            ],
+            "tid": "SC5"
+          }
+        ]
+      },
+      {
+        "date": "Oct 20",
+        "dow": "Tue",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 0,
+            "h": 0.9167,
+            "t": "Scenario practice — Developer Productivity with Claude",
+            "subs": [
+              [
+                "Rehearse Grep-first, Read-to-follow-imports codebase exploration on an unfamiliar repo (cont'd)",
+                2,
+                25,
+                null
+              ],
+              [
+                "Rehearse tracing a function across wrapper modules: exported names, then Grep each",
+                3,
+                30,
+                null
+              ]
+            ],
+            "tid": "SC5"
+          },
+          {
+            "d": 0,
+            "h": 1.0,
+            "t": "Scenario practice — Structured Data Extraction",
+            "subs": [
+              [
+                "Rehearse designing nullable/optional schema fields so absence isn't fabricated",
+                3,
+                30,
+                null
+              ],
+              [
+                "Rehearse the detected_pattern + conflict_detected self-correction pattern end to end",
+                3,
+                30,
+                null
+              ]
+            ],
+            "tid": "SC6"
+          },
+          {
+            "d": 0,
+            "h": 0.0833,
+            "t": "Bridge review — Domain 1: from 'how the loop works' to 'how you'd design it'",
+            "subs": [
+              [
+                "Revisit your Developer notes on the agentic loop and tool_use; now ask 'what would break at scale?'",
+                3,
+                5,
+                "agentic-loop"
+              ]
+            ],
+            "tid": "BR1"
+          }
+        ]
+      },
+      {
+        "date": "Oct 21",
+        "dow": "Wed",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 0,
+            "h": 1.4167,
+            "t": "Bridge review — Domain 1: from 'how the loop works' to 'how you'd design it'",
+            "subs": [
+              [
+                "Revisit your Developer notes on the agentic loop and tool_use; now ask 'what would break at scale?' (cont'd)",
+                3,
+                25,
+                "agentic-loop"
+              ],
+              [
+                "Reframe subagent basics from Developer study as an architectural hub-and-spoke decision",
+                3,
+                30,
+                "hub-and-spoke"
+              ],
+              [
+                "Turn 'what hooks are' (Developer) into 'when I'd choose a hook over a prompt' (Architect)",
+                3,
+                30,
+                "sdk-hooks"
+              ]
+            ],
+            "tid": "BR1"
+          },
+          {
+            "d": 0,
+            "h": 0.5833,
+            "t": "Bridge review — Domain 2: from 'what a tool is' to 'how you'd design one'",
+            "subs": [
+              [
+                "Revisit Developer tool_use material; now critique two tool descriptions for selection ambiguity",
+                3,
+                30,
+                "tool-descriptions"
+              ],
+              [
+                "Reframe Developer MCP basics as a project-vs-user scoping decision for a real team",
+                3,
+                5,
+                "mcp-config-scope"
+              ]
+            ],
+            "tid": "BR2"
+          }
+        ]
+      },
+      {
+        "date": "Oct 22",
+        "dow": "Thu",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 0,
+            "h": 0.4167,
+            "t": "Bridge review — Domain 2: from 'what a tool is' to 'how you'd design one'",
+            "subs": [
+              [
+                "Reframe Developer MCP basics as a project-vs-user scoping decision for a real team (cont'd)",
+                3,
+                25,
+                "mcp-config-scope"
+              ]
+            ],
+            "tid": "BR2"
+          },
+          {
+            "d": 0,
+            "h": 1.0,
+            "t": "Bridge review — Domain 3: from 'what CLAUDE.md is' to 'how you'd structure one'",
+            "subs": [
+              [
+                "Revisit Developer Claude Code material; now design a CLAUDE.md hierarchy for a 3-package repo",
+                3,
+                30,
+                "claude-md-hierarchy"
+              ],
+              [
+                "Reframe plan-mode basics as a go/no-go call on a real multi-file change",
+                3,
+                30,
+                "plan-mode"
+              ]
+            ],
+            "tid": "BR3"
+          },
+          {
+            "d": 0,
+            "h": 0.5833,
+            "t": "Bridge review — Domain 4: from 'what few-shot is' to 'why this example set works'",
+            "subs": [
+              [
+                "Revisit Developer prompt-engineering notes; now write explicit severity criteria for a review tool",
+                3,
+                30,
+                "clear-and-direct"
+              ],
+              [
+                "Reframe Developer JSON-schema basics as a required-vs-optional field design decision",
+                3,
+                5,
+                "json-schema-tools"
+              ]
+            ],
+            "tid": "BR4"
+          }
+        ]
+      },
+      {
+        "date": "Oct 23",
+        "dow": "Fri",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 0,
+            "h": 0.4167,
+            "t": "Bridge review — Domain 4: from 'what few-shot is' to 'why this example set works'",
+            "subs": [
+              [
+                "Reframe Developer JSON-schema basics as a required-vs-optional field design decision (cont'd)",
+                3,
+                25,
+                "json-schema-tools"
+              ]
+            ],
+            "tid": "BR4"
+          },
+          {
+            "d": 0,
+            "h": 1.0,
+            "t": "Bridge review — Domain 5: from 'what context limits are' to 'how you'd manage them'",
+            "subs": [
+              [
+                "Revisit Developer context-window notes; now design a case-facts block for a real support agent",
+                3,
+                30,
+                "context-window-mgmt"
+              ],
+              [
+                "Reframe Developer error-handling basics as a structured error-propagation contract",
+                3,
+                30,
+                "mcp-iserror"
+              ]
+            ],
+            "tid": "BR5"
+          },
+          {
+            "d": 0,
+            "h": 0.5833,
+            "t": "Flashcard sprint — Domain 1 (all 7 task statements, complexity-weighted)",
+            "subs": [
+              [
+                "Rapid recall: stop_reason values, hook types, Task tool requirements, fork_session vs --resume",
+                3,
+                35,
+                null
+              ]
+            ],
+            "tid": "FC1"
+          }
+        ]
+      },
+      {
+        "date": "Oct 24",
+        "dow": "Sat",
+        "hours": 6.0,
+        "segs": [
+          {
+            "d": 0,
+            "h": 1.4167,
+            "t": "Flashcard sprint — Domain 1 (all 7 task statements, complexity-weighted)",
+            "subs": [
+              [
+                "Rapid recall: stop_reason values, hook types, Task tool requirements, fork_session vs --resume (cont'd)",
+                3,
+                25,
+                null
+              ],
+              [
+                "Rapid recall: hub-and-spoke roles, decomposition patterns, workflow enforcement mechanisms",
+                3,
+                60,
+                null
+              ]
+            ],
+            "tid": "FC1"
+          },
+          {
+            "d": 0,
+            "h": 2.0,
+            "t": "Flashcard sprint — Domain 2 (all 5 task statements)",
+            "subs": [
+              [
+                "Rapid recall: tool description pitfalls, isError categories, tool_choice modes, MCP scoping",
+                3,
+                60,
+                null
+              ],
+              [
+                "Rapid recall: built-in tool selection criteria (Grep vs Glob vs Edit vs Read/Write)",
+                2,
+                60,
+                null
+              ]
+            ],
+            "tid": "FC2"
+          },
+          {
+            "d": 0,
+            "h": 2.0,
+            "t": "Flashcard sprint — Domain 3 (all 6 task statements)",
+            "subs": [
+              [
+                "Rapid recall: CLAUDE.md hierarchy, @import, .claude/rules/ vs directory files, skill frontmatter",
+                3,
+                60,
+                null
+              ],
+              [
+                "Rapid recall: plan mode triggers, iterative refinement techniques, CI/CD flags",
+                3,
+                60,
+                null
+              ]
+            ],
+            "tid": "FC3"
+          },
+          {
+            "d": 0,
+            "h": 0.5833,
+            "t": "Flashcard sprint — Domain 4 (all 6 task statements)",
+            "subs": [
+              [
+                "Rapid recall: explicit-criteria vs vague instructions, few-shot patterns, tool_choice for output",
+                3,
+                35,
+                null
+              ]
+            ],
+            "tid": "FC4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Week 9 · Review & practice",
+    "days": [
+      {
+        "date": "Oct 25",
+        "dow": "Sun",
+        "hours": 6.0,
+        "segs": [
+          {
+            "d": 0,
+            "h": 1.4167,
+            "t": "Flashcard sprint — Domain 4 (all 6 task statements)",
+            "subs": [
+              [
+                "Rapid recall: explicit-criteria vs vague instructions, few-shot patterns, tool_choice for output (cont'd)",
+                3,
+                25,
+                null
+              ],
+              [
+                "Rapid recall: retry-feedback limits, batch API constraints, multi-pass review design",
+                3,
+                60,
+                null
+              ]
+            ],
+            "tid": "FC4"
+          },
+          {
+            "d": 0,
+            "h": 2.0,
+            "t": "Flashcard sprint — Domain 5 (all 6 task statements)",
+            "subs": [
+              [
+                "Rapid recall: case-facts blocks, lost-in-the-middle, escalation triggers, error propagation",
+                3,
+                60,
+                null
+              ],
+              [
+                "Rapid recall: scratchpads/manifests, confidence calibration, claim-source provenance",
+                3,
+                60,
+                null
+              ]
+            ],
+            "tid": "FC5"
+          },
+          {
+            "d": 0,
+            "h": 2.5,
+            "t": "Timed mock exam 1 — 60 items, 120 minutes, then review every miss",
+            "subs": [
+              [
+                "Sit a full 60-item mock under real time pressure (120 min)",
+                4,
+                120,
+                null
+              ],
+              [
+                "Review every missed item against its task statement; log the pattern, not just the answer",
+                4,
+                30,
+                null
+              ]
+            ],
+            "tid": "MK1"
+          },
+          {
+            "d": 0,
+            "h": 0.0833,
+            "t": "Timed mock exam 2 — 60 items, 120 minutes, then review every miss",
+            "subs": [
+              [
+                "Sit a second full 60-item mock; target the domains that were weak in mock 1",
+                4,
+                5,
+                null
+              ]
+            ],
+            "tid": "MK2"
+          }
+        ]
+      },
+      {
+        "date": "Oct 26",
+        "dow": "Mon",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 0,
+            "h": 2.0,
+            "t": "Timed mock exam 2 — 60 items, 120 minutes, then review every miss",
+            "subs": [
+              [
+                "Sit a second full 60-item mock; target the domains that were weak in mock 1 (cont'd)",
+                4,
+                115,
+                null
+              ],
+              [
+                "Review every missed item; if a domain is still weak, re-run that domain's flashcard sprint",
+                4,
+                5,
+                null
+              ]
+            ],
+            "tid": "MK2"
+          }
+        ]
+      },
+      {
+        "date": "Oct 27",
+        "dow": "Tue",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 0,
+            "h": 0.4167,
+            "t": "Timed mock exam 2 — 60 items, 120 minutes, then review every miss",
+            "subs": [
+              [
+                "Review every missed item; if a domain is still weak, re-run that domain's flashcard sprint (cont'd)",
+                4,
+                25,
+                null
+              ]
+            ],
+            "tid": "MK2"
+          },
+          {
+            "d": 0,
+            "h": 1.5833,
+            "t": "Weak-spot triage — deep re-study of whatever scored lowest across both mocks",
+            "subs": [
+              [
+                "Re-read the exam guide's task statements for your two lowest-scoring domains",
+                3,
+                55,
+                null
+              ],
+              [
+                "Re-work every missed mock item from those domains, writing out the 'why' for the correct answer",
+                3,
+                40,
+                null
+              ]
+            ],
+            "tid": "TRIAGE"
+          }
+        ]
+      },
+      {
+        "date": "Oct 28",
+        "dow": "Wed",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 0,
+            "h": 1.0,
+            "t": "Weak-spot triage — deep re-study of whatever scored lowest across both mocks",
+            "subs": [
+              [
+                "Re-work every missed mock item from those domains, writing out the 'why' for the correct answer (cont'd)",
+                3,
+                15,
+                null
+              ],
+              [
+                "Re-run the flashcard sprint for those domains a second time",
+                3,
+                45,
+                null
+              ]
+            ],
+            "tid": "TRIAGE"
+          },
+          {
+            "d": 0,
+            "h": 0.5,
+            "t": "Exam-day logistics and rules of conduct",
+            "subs": [
+              [
+                "Registration/scheduling flow, ID requirements, retake policy (14/30/90-day waits)",
+                1,
+                15,
+                null
+              ],
+              [
+                "Rules of conduct: proctoring, prohibited items, and the confidentiality agreement",
+                1,
+                15,
+                null
+              ]
+            ],
+            "tid": "LOG"
+          },
+          {
+            "d": 0,
+            "h": 0.5,
+            "t": "Final cross-domain sprint — everything important for architecture, revised once more",
+            "subs": [
+              [
+                "Domain 1 & 2 rapid re-pass: agentic loops, orchestration, tool design, MCP scoping",
+                3,
+                30,
+                null
+              ]
+            ],
+            "tid": "SPRINT"
+          }
+        ]
+      },
+      {
+        "date": "Oct 29",
+        "dow": "Thu",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 0,
+            "h": 2.0,
+            "t": "Final cross-domain sprint — everything important for architecture, revised once more",
+            "subs": [
+              [
+                "Domain 1 & 2 rapid re-pass: agentic loops, orchestration, tool design, MCP scoping (cont'd)",
+                3,
+                60,
+                null
+              ],
+              [
+                "Domain 3 rapid re-pass: CLAUDE.md, rules, skills, plan mode, CI/CD integration",
+                3,
+                60,
+                null
+              ]
+            ],
+            "tid": "SPRINT"
+          }
+        ]
+      },
+      {
+        "date": "Oct 30",
+        "dow": "Fri",
+        "hours": 2.0,
+        "segs": [
+          {
+            "d": 0,
+            "h": 2.0,
+            "t": "Final cross-domain sprint — everything important for architecture, revised once more",
+            "subs": [
+              [
+                "Domain 4 & 5 rapid re-pass: structured output, batching, context management, escalation",
+                3,
+                90,
+                null
+              ],
+              [
+                "Light closing review: re-skim your architecture notes doc from Day 1 end to end",
+                2,
+                30,
+                null
+              ]
+            ],
+            "tid": "SPRINT"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Exam day",
+    "days": [
+      {
+        "date": "Oct 31",
+        "dow": "Sat",
+        "hours": 0.5,
+        "segs": [
+          {
+            "d": 0,
+            "h": 0.5,
+            "t": "Exam day — light final review",
+            "subs": [
+              [
+                "Skim the Day-1 architecture notes + LOG/SPRINT recap one last time",
+                1,
+                20,
+                null
+              ],
+              [
+                "Arrive early, ID ready, workspace clear — then trust the prep",
+                1,
+                10,
+                null
+              ]
+            ],
+            "tid": "EXAMDAY"
+          }
+        ],
+        "exam": true
+      }
+    ]
+  }
+];
+
+// ---------- helpers ----------
+function fmtH(h){ return (h % 1 === 0 ? h : h.toFixed(1)) + "h"; }
+function dots(c){
+  let s = "";
+  for (let i=1;i<=5;i++) s += `<span class="${i<=c?'on':''}">${i<=c?'&#9679;':'&#9675;'}</span>`;
+  return `<span class="dots">${s}</span>`;
+}
+function avgComplexity(subs){
+  if (!subs.length) return null;
+  const sum = subs.reduce((a,s)=>a+s[1],0);
+  return Math.round((sum/subs.length)*10)/10;
+}
+function segMinutes(seg){ return seg.subs.reduce((a,s)=>a+s[2],0); }
+
+// flatten for the gantt: ordered list of dates, and sessions grouped by domain
+const DATES = [];
+WEEKS.forEach(w => w.days.forEach(d => DATES.push(d)));
+
+// Build one Gantt bar per genuinely distinct study session: when the day-packer split a
+// single task statement across a day boundary (it ran out of hours mid-topic), the two
+// halves share the same tid and land on consecutive dates — merge those back into one
+// duration-accurate bar instead of showing the same title twice with fractional hours.
+const LANES = [1,2,3,4,5,0];
+const sessionsByLane = {};
+LANES.forEach(l => sessionsByLane[l] = []);
+WEEKS.forEach(w => w.days.forEach(day => {
+  const dateIdx = DATES.indexOf(day);
+  day.segs.forEach(seg => {
+    const lane = sessionsByLane[seg.d];
+    const last = lane[lane.length - 1];
+    if (last && last.tid === seg.tid && dateIdx === last.endIdx + 1) {
+      last.endIdx = dateIdx;
+      last.endDate = day.date;
+      last.h += seg.h;
+      last.subs = last.subs.concat(seg.subs);
+    } else {
+      lane.push({
+        tid: seg.tid, t: seg.t, d: seg.d,
+        startIdx: dateIdx, endIdx: dateIdx,
+        startDate: day.date, endDate: day.date,
+        h: seg.h, subs: seg.subs.slice(),
+      });
+    }
+  });
+}));
+
+// ---------- legend ----------
+const legend = document.getElementById("legend");
+LANES.forEach(id => {
+  const dm = DOMAINS[id];
+  const el = document.createElement("div");
+  el.className = "item";
+  el.innerHTML = `<span class="sw" style="background:${dm.color}"></span><b>${dm.name}</b>${dm.weight ? `<span class="pct">${dm.weight}</span>` : ""}`;
+  legend.appendChild(el);
+});
+
+// ---------- tooltip ----------
+const tooltip = document.getElementById("tooltip");
+function showTip(e, html){ tooltip.innerHTML = html; tooltip.style.opacity = "1"; positionTip(e); }
+function positionTip(e){
+  const pad = 14;
+  let x = e.clientX + pad, y = e.clientY + pad;
+  const rect = tooltip.getBoundingClientRect();
+  if (x + rect.width > window.innerWidth - 10) x = e.clientX - rect.width - pad;
+  if (y + rect.height > window.innerHeight - 10) y = e.clientY - rect.height - pad;
+  tooltip.style.left = x + "px"; tooltip.style.top = y + "px";
+}
+function hideTip(){ tooltip.style.opacity = "0"; }
+
+// ---------- gantt ----------
+const gantt = document.getElementById("gantt");
+const N = DATES.length;
+const LABEL_PX = 236; // must match the 236px first column in .grow's grid-template-columns
+const colLeft = (idx) => `calc(${LABEL_PX}px + (100% - ${LABEL_PX}px) * ${idx} / ${N})`;
+const colWidth = (span) => `calc((100% - ${LABEL_PX}px) * ${span} / ${N})`;
+
+// full-height column shading (weekend / CCDV-F rest day / CCAR-F exam day), plus a divider
+// line at each phase boundary — drawn once, behind every lane and session row.
+const guides = document.createElement("div");
+guides.className = "gantt-guides";
+let guidesHtml = "";
+DATES.forEach((d, idx) => {
+  const cls = d.restday ? "rest-col" : (d.exam ? "exam-col" : (d.hours >= 6 ? "weekend" : ""));
+  if (cls) guidesHtml += `<div class="guide ${cls}" style="left:${colLeft(idx)}; width:${colWidth(1)};"></div>`;
+});
+[0, 21, 22, 63].forEach(idx => { // Phase 1 start, CCDV-F exam, Phase 2 start, CCAR-F exam
+  guidesHtml += `<div class="guide phase-line" style="left:${colLeft(idx)};"></div>`;
+});
+guides.innerHTML = guidesHtml;
+gantt.appendChild(guides);
+
+// month-group header row, so 64 daily columns stay orientable at a glance
+const months = document.createElement("div");
+months.className = "grow months";
+let monthsHtml = `<div class="gcell"></div>`;
+let mi = 0;
+while (mi < N) {
+  const label = DATES[mi].date.split(" ")[0];
+  let span = 1;
+  while (mi + span < N && DATES[mi + span].date.split(" ")[0] === label) span++;
+  monthsHtml += `<div class="mcell" style="grid-column: ${mi + 2} / ${mi + 2 + span};">${label}</div>`;
+  mi += span;
+}
+months.innerHTML = monthsHtml;
+gantt.appendChild(months);
+
+// header row (day-of-week + day-of-month)
+const head = document.createElement("div");
+head.className = "grow head";
+let headHtml = `<div class="gcell"></div>`;
+DATES.forEach(d => {
+  headHtml += `<div class="gcell">${d.dow}<b>${d.date.split(" ")[1]}</b></div>`;
+});
+head.innerHTML = headHtml;
+gantt.appendChild(head);
+
+LANES.forEach(laneId => {
+  const dm = DOMAINS[laneId];
+  const sessions = sessionsByLane[laneId];
+  if (!sessions.length) return;
+
+  const laneRow = document.createElement("div");
+  laneRow.className = "grow lane";
+  laneRow.style.background = dm.tint;
+  laneRow.innerHTML = `<div class="lane-name"><span class="sw" style="background:${dm.color}"></span>${dm.name}${dm.weight ? `<span class="pct">${dm.weight} of exam</span>` : ""}</div>`;
+  gantt.appendChild(laneRow);
+
+  sessions.forEach(sess => {
+    const row = document.createElement("div");
+    row.className = "grow session";
+    const span = sess.endIdx - sess.startIdx + 1;
+    const avg = avgComplexity(sess.subs);
+    const dateLabel = sess.startDate === sess.endDate ? sess.startDate : `${sess.startDate}–${sess.endDate.split(" ")[1]}`;
+    const spaceAfter = N - sess.endIdx - 1;
+    const spaceBefore = sess.startIdx;
+    const labelAfter = spaceAfter >= spaceBefore;
+    const labelHtml = `<b>${sess.t}</b><span class="ghrs">${fmtH(sess.h)} &middot; avg complexity ${avg}/5</span>`;
+    const barLeft = colLeft(sess.startIdx);
+    const barWidth = colWidth(span);
+    row.innerHTML = `
+      <div class="glabel">${dateLabel}</div>
+      <div class="gbar" style="position:absolute; left:${barLeft}; width:${barWidth}; background:${dm.color};" data-lane="${laneId}"></div>
+      ${labelAfter
+        ? `<div class="gbar-label after" style="position:absolute; left:calc(${barLeft} + ${barWidth} + 8px); right:0;">${labelHtml}</div>`
+        : `<div class="gbar-label before" style="position:absolute; left:${LABEL_PX}px; width:calc(${barLeft} - ${LABEL_PX}px - 8px);">${labelHtml}</div>`}
+    `;
+    row.style.position = "relative";
+    const bar = row.querySelector(".gbar");
+    bar.addEventListener("mouseover", (e) => {
+      const list = sess.subs.map(s => `<li>${s[0].split(" — ")[0]} <span style="opacity:.7">(${s[2]}m, C${s[1]})</span></li>`).join("");
+      showTip(e, `<span class="tt-domain">${dm.name} &middot; ${dateLabel} &middot; ${fmtH(sess.h)}</span><b>${sess.t}</b><ul>${list}</ul>`);
+    });
+    bar.addEventListener("mousemove", positionTip);
+    bar.addEventListener("mouseout", hideTip);
+    gantt.appendChild(row);
+  });
+});
+
+// ---------- accordion day cards ----------
+const daycards = document.getElementById("daycards");
+WEEKS.forEach(week => {
+  const wh = document.createElement("div");
+  wh.style.cssText = "font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3);font-weight:600;margin:22px 0 4px;";
+  wh.textContent = week.label;
+  daycards.appendChild(wh);
+
+  week.days.forEach(day => {
+    const det = document.createElement("details");
+    det.className = "daycard" + (day.exam ? " exam" : "") + (day.restday ? " restday" : "");
+    const allSubs = day.segs.flatMap(s => s.subs);
+    const dayAvg = avgComplexity(allSubs);
+
+    const summary = document.createElement("summary");
+    summary.className = "day-summary";
+
+    if (day.restday) {
+      summary.innerHTML = `
+        <span class="chev">&#9656;</span>
+        <span class="sdate"><span class="dow">${day.dow}</span><span class="date">${day.date}</span></span>
+        <span class="schips"><span class="chip">CCDV-F exam day</span></span>
+        <span class="smeta"><span><b>0h</b></span></span>`;
+      det.appendChild(summary);
+      const body = document.createElement("div");
+      body.className = "day-body";
+      body.innerHTML = `<p class="note">Full focus on the Claude Certified Developer &ndash; Foundations exam today. No Architect study scheduled &mdash; resume the Architect plan tomorrow.</p>`;
+      det.appendChild(body);
+      daycards.appendChild(det);
+      return;
+    }
+
+    const chips = day.segs.map(s => {
+      const dm = DOMAINS[s.d];
+      return `<span class="chip"><span class="sw" style="background:${dm.color}"></span>${s.t}</span>`;
+    }).join("");
+
+    summary.innerHTML = `
+      <span class="chev">&#9656;</span>
+      <span class="sdate"><span class="dow">${day.dow}</span><span class="date">${day.date}</span></span>
+      <span class="schips">${chips}</span>
+      <span class="smeta"><span><b>${fmtH(day.hours)}</b></span>${dayAvg!==null?`<span>avg C&nbsp;<b>${dayAvg}</b>/5</span>`:""}</span>`;
+    det.appendChild(summary);
+
+    const body = document.createElement("div");
+    body.className = "day-body";
+    day.segs.forEach(seg => {
+      const dm = DOMAINS[seg.d];
+      const segAvg = avgComplexity(seg.subs);
+      const block = document.createElement("div");
+      block.className = "topic-block";
+      block.style.background = dm.tint;
+      const subRows = seg.subs.map(s => {
+        const [name, c, min, linkKey] = s;
+        const link = linkKey && LINKS[linkKey] ? `<a href="${LINKS[linkKey][1]}" target="_blank" rel="noopener">${LINKS[linkKey][0]} ↗</a>` : "";
+        return `<div class="sub-row"><div class="sn">${name}${link}</div>${dots(c)}<div class="smin">${min} min</div></div>`;
+      }).join("");
+      block.innerHTML = `
+        <div class="topic-head">
+          <span class="sw" style="background:${dm.color}"></span>
+          <h4>${seg.t}</h4>
+          <span class="tmeta">${dm.name} &middot; ${fmtH(seg.h)} &middot; avg complexity ${segAvg}/5</span>
+        </div>
+        <div class="subs">${subRows}</div>`;
+      body.appendChild(block);
+    });
+    det.appendChild(body);
+    daycards.appendChild(det);
+  });
+});
+
+// Live countdown to exam day (Oct 31, 2026), computed in the viewer's local time.
+try {
+  const exam = new Date("2026-10-31T00:00:00");
+  const now = new Date();
+  const diff = Math.ceil((exam.setHours(0,0,0,0) - now.setHours(0,0,0,0)) / 86400000);
+  document.getElementById("stat-days").textContent = diff > 0 ? diff : (diff === 0 ? "Today" : "—");
+} catch(e) {
+  document.getElementById("stat-days").textContent = "63";
+}
+</script>
