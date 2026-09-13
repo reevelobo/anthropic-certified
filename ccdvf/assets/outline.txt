@@ -1,0 +1,218 @@
+---
+markmap:
+  initialExpandLevel: 2
+---
+
+# CCDV-F Exam Blueprint
+
+## Domain 1 · Agents & Workflows (14.7%)
+- Agent Architecture (4.5%)
+  - Workflow vs. agent: decision criteria
+  - Manager / supervisor hierarchies (structure)
+  - Role of subagents in improving task execution
+- Agent Construction with Claude (5.3%)
+  - Claude Agent SDK
+  - Custom agent loops and harnesses
+  - Managed agent deployment models
+    - Self-hosted
+    - Anthropic-hosted
+  - Hooks for deterministic actions
+- Agent Patterns and Frameworks (4.9%)
+  - Tool-use loops
+  - Sub-agents (pattern)
+  - Memory
+  - Context-window management (pattern)
+  - Agentic abstraction frameworks
+    - Strands
+    - LangGraph
+    - PydanticAI
+  - Multi-step task design
+
+## Domain 2 · Applications & Integration (33.1%)
+- Understanding Requirements (3.4%)
+  - Functional requirements from business requirements
+  - Infrastructure requirements from solution architecture
+- Systems Life Cycle (2.8%)
+  - SDLC management concepts
+  - SDLC frameworks (develop, implement, operate, maintain)
+- Claude API Mechanics (6.8%)
+  - Messages
+  - Tools (API mechanics)
+  - Streaming
+  - Vision
+  - Thinking (extended/adaptive)
+  - Caching (API mechanics)
+  - Invoking Claude through third-party vendors
+  - Messages API data access patterns
+  - Batch API use
+  - Realtime vs. batch API tradeoffs
+- Software Engineering Foundations (7.4%)
+  - REST APIs
+  - JSON
+  - Asynchronous programming
+  - Version control
+  - SDLC integration
+  - Code review
+  - Refactoring: small-scale
+  - Refactoring: large-scale
+- Claude Application Design (8.6%)
+  - How Claude interprets instructions across interfaces
+    - Claude Code
+    - Desktop
+    - claude.ai
+    - API
+    - SDKs
+  - Content boundaries
+  - Schema design
+  - Session hygiene
+  - Plugin management
+- Configuration Management (4.1%)
+  - CLAUDE.md files
+  - settings.json
+  - Model version pinning
+  - Prompt versioning
+  - Plugin dependencies
+
+## Domain 3 · Claude Code (3.1%)
+- Claude Code Operation (3.1%)
+  - Core components
+    - Rules
+    - Skills
+    - Commands
+    - Agents
+    - Agent Memory
+  - Features
+    - Session management
+    - Built-in slash commands
+    - Custom slash commands
+    - Headless mode
+    - Streaming mode
+    - Auto-mode
+  - CLAUDE.md hierarchy
+  - Repository initialization
+  - settings.json configuration
+
+## Domain 4 · Eval, Testing, and Debugging (2.6%)
+- Debugging and Error Handling (2.6%)
+  - Error type identification
+  - Recovery strategy selection
+  - Trace analysis to identify failure modes
+  - Problem origin isolation
+    - Integration layer
+    - Model output
+
+## Domain 5 · Model Selection and Optimization (16.8%)
+- LLM Fundamentals (5.2%)
+  - Tokens
+  - Context windows
+  - Sampling
+  - Non-determinism
+  - Next-token generation
+  - Model options
+    - Fast mode
+    - Extended thinking
+    - Adaptive thinking
+    - Effort levels
+  - Fundamental prompting techniques
+    - Zero-shot
+    - Single-shot
+    - Multi-shot
+- Technical Fundamentals (6.1%)
+  - Basic engineering practices
+  - SDKs that wrap REST APIs
+  - Websockets
+- Model Selection and Tradeoffs (2.7%)
+  - Opus vs. Sonnet vs. Haiku use cases
+  - Adaptive thinking support by model
+  - Quality / latency / cost tradeoffs
+  - Breaking behavior changes across model releases
+- Cost and Token Management (2.8%)
+  - Token usage tracking
+  - Cost modeling
+  - Caching techniques
+    - Prompt caching
+    - Cache check-pointing
+
+## Domain 6 · Prompt and Context Engineering (11.0%)
+- Context Engineering (3.8%)
+  - Context window management
+  - Preventing context drift
+  - Preventing context bloat
+    - Tool output pruning
+    - Compaction
+  - Context isolation via subagents
+  - Context isolation via multi-step agentic workflows
+- Prompt Engineering (4.6%)
+  - Instruction clarity
+  - Few-shot examples
+  - System vs. user placement
+  - Output constraints
+  - Prompt/instruction placement across components
+  - Iterative refinement
+  - Prompt adjustment
+  - Input sanitization
+- Output Handling (2.6%)
+  - Structured output patterns
+  - Response validation
+  - Defensive parsing
+  - Skepticism toward confident output
+
+## Domain 7 · Security and Safety (8.1%)
+- AI Application Security (3.2%)
+  - Data privacy best practices
+  - Security best practices
+  - Prompt injection awareness and mitigation
+  - Jailbreak defense
+  - Untrusted input handling
+  - Data leakage prevention
+  - PII handling
+  - Authentication
+  - Authorization
+  - Confidentiality
+  - Privacy
+  - Integrity
+- Guardrails and Safe Deployment (2.3%)
+  - Content policy
+  - Guardrail layering
+  - Secure-by-design: privacy
+  - Secure-by-design: identity and access management
+  - Secure-by-design: least privilege
+- Claude Hooks (1.0%)
+  - Hooks for guardrails
+  - Hooks for safety controls
+  - Preventing destructive actions
+- Identity, Secrets, and Key Management (1.6%)
+  - Managing secrets
+  - Managing credentials
+  - Managing API keys (dev vs. production)
+  - Identity validation and authentication
+  - Access approval and level verification
+  - Authorized access monitoring
+
+## Domain 8 · Tools and MCPs (10.6%)
+- Tool Implementation (4.4%)
+  - Tool use and function calling
+  - Configuration for external system interaction
+  - Tool description writing
+  - Error handling (tools)
+  - Tool usage patterns
+    - Agentic harness dispatch
+    - Client-side vs. server-side tools
+    - Approval patterns
+  - Tool set construction best practices
+- MCP Server Development (2.1%)
+  - Server authoring
+  - Deployment
+  - Integration with Claude applications
+  - MCP resources
+  - MCP tools
+  - MCP prompts
+  - Communication patterns
+    - stdio
+    - Sockets
+    - Client vs. server
+- Agentic Customization (4.1%)
+  - Built-in Tools vs. custom Tools
+  - Tools vs. Skills
+  - Tools/Skills vs. MCPs
+  - Selecting the right approach per use case

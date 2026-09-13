@@ -1,0 +1,18 @@
+[
+  {
+    "prompt_inputs": {
+      "height": "180",
+      "weight": "68",
+      "goal": "Marathon training peak week - maximize carbohydrate intake and hydration for endurance performance",
+      "restrictions": "None"
+    },
+    "solution_criteria": [
+      "Meal plan covers all meals for one full day (breakfast, lunch, dinner, and snacks)",
+      "Emphasizes high carbohydrate intake appropriate for peak marathon training week",
+      "Includes hydration strategy with specific fluid recommendations throughout the day",
+      "Provides realistic, practical meal options that can be consumed by a single athlete"
+    ],
+    "task_description": "Write a compact, concise 1 day meal plan for a single athlete",
+    "scenario": "Testing with a professional marathon runner requiring high carbohydrate intake and hydration strategy during peak training week"
+  }
+]
