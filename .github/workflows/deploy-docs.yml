@@ -12,6 +12,8 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      PAGES_SITE_URL: https://reevelobo.github.io/anthropic-certified/
 
     steps:
       - name: Checkout repository
@@ -28,8 +30,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Ensure theme override path exists
+        run: mkdir -p docs/overrides/partials
+
       - name: Build and deploy to gh-pages branch
         run: |
           git config --global user.name  "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          python -m mkdocs gh-deploy --force --clean --verbose
+          python -m mkdocs gh-deploy --force --clean --verbose --site-url "$PAGES_SITE_URL"
