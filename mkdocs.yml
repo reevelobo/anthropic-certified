@@ -4,7 +4,7 @@ site_description: >-
   Developer Foundations, modules, badges, prompting, agents, tools, MCP,
   evals, security, and related learning paths.
 site_author: Reeve Lobo
-site_url: https://github.ibm.com/pages/Reeve-Lobo/claude-certified-developer-foundation/
+site_url: https://reevelobo.github.io/anthropic-certified/
 repo_name: Reeve-Lobo/claude-certified-developer-foundation
 repo_url: https://github.ibm.com/Reeve-Lobo/claude-certified-developer-foundation
 edit_uri: ""
