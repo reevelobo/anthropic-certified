@@ -6,7 +6,7 @@ site_description: >-
 site_author: Reeve Lobo
 site_url: https://reevelobo.github.io/anthropic-certified/
 repo_name: Reeve-Lobo/claude-certified-developer-foundation
-repo_url: https://github.ibm.com/Reeve-Lobo/claude-certified-developer-foundation
+repo_url: https://github.com/reevelobo/anthropic-certified
 edit_uri: ""
 
 docs_dir: docs
