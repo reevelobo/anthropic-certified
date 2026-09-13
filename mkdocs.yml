@@ -4,9 +4,9 @@ site_description: >-
   Developer Foundations, modules, badges, prompting, agents, tools, MCP,
   evals, security, and related learning paths.
 site_author: Reeve Lobo
-site_url: https://reevelobo.github.io/anthropic-certified/
-repo_name: reevelobo/anthropic-certified
-repo_url: https://github.com/reevelobo/anthropic-certified
+site_url: https://github.ibm.com/pages/Reeve-Lobo/claude-certified-developer-foundation/
+repo_name: Reeve-Lobo/claude-certified-developer-foundation
+repo_url: https://github.ibm.com/Reeve-Lobo/claude-certified-developer-foundation
 edit_uri: ""
 
 docs_dir: docs
@@ -77,6 +77,15 @@ plugins:
         - "002_prompting_completed.ipynb"
         - "11.prompting.ipynb"
         - "12.tools.ipynb"
+        - "13.tools_multi-turn.ipynb"
+        - "14.tool_streaming.ipynb"
+        - "15.text_editor_tool.ipynb"
+        - "16.web_search.ipynb"
+        - "17.chunking.ipynb"
+        - "18.embeddings.ipynb"
+        - "19.vectordb.ipynb"
+        - "20.bm25.ipynb"
+        - "21.hybrid.ipynb"
       execute: false
   - glightbox:
       touchNavigation: true
@@ -315,24 +324,50 @@ nav:
           - "SS04 · Tool Schemas":
             - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss04_tool_schemas/index.md
             - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/12.tools.ipynb
-          - "SS05 · Handling Message Blocks": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss05_handling_message_blocks/index.md
-          - "SS06 · Sending Tool Results": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss06_sending_tool_results/index.md
-          - "SS07 · Multi-Turn Conversations with Tools": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss07_multi_turn_conversations_with_tools/index.md
-          - "SS08 · Implementing Multiple Turns": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss08_implementing_multiple_turns/index.md
-          - "SS09 · Using Multiple Tools": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss09_using_multiple_tools/index.md
-          - "SS10 · Fine Grained Tool Calling": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss10_fine_grained_tool_calling/index.md
-          - "SS11 · The Text Edit Tool": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss11_the_text_edit_tool/index.md
-          - "SS12 · The Web Search Tool": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss12_the_web_search_tool/index.md
+          - "SS05 · Handling Message Blocks":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss05_handling_message_blocks/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/12.tools.ipynb
+          - "SS06 · Sending Tool Results":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss06_sending_tool_results/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/12.tools.ipynb
+          - "SS07 · Multi-Turn Conversations with Tools":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss07_multi_turn_conversations_with_tools/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/13.tools_multi-turn.ipynb
+          - "SS08 · Implementing Multiple Turns":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss08_implementing_multiple_turns/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/13.tools_multi-turn.ipynb
+          - "SS09 · Using Multiple Tools":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss09_using_multiple_tools/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/13.tools_multi-turn.ipynb
+          - "SS10 · Fine Grained Tool Calling":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss10_fine_grained_tool_calling/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/14.tool_streaming.ipynb
+          - "SS11 · The Text Edit Tool":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss11_the_text_edit_tool/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/15.text_editor_tool.ipynb
+          - "SS12 · The Web Search Tool":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss12_the_web_search_tool/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/16.web_search.ipynb
           - "SS13 · Quiz on Tool Use with Claude": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s06_tool_use_with_claude/ss13_quiz_on_tool_use_with_claude/index.md
         - "S07 · RAG and Agentic Search":
           - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/index.md
           - "SS01 · Introducing Retrieval Augmented Generation": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss01_introducing_retrieval_augmented_generation/index.md
-          - "SS02 · Text Chunking Strategies": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss02_text_chunking_strategies/index.md
-          - "SS03 · Text Embeddings": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss03_text_embeddings/index.md
+          - "SS02 · Text Chunking Strategies":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss02_text_chunking_strategies/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/17.chunking.ipynb
+          - "SS03 · Text Embeddings":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss03_text_embeddings/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/18.embeddings.ipynb
           - "SS04 · The Full RAG Flow": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss04_the_full_rag_flow/index.md
-          - "SS05 · Implementing the RAG Flow": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss05_implementing_the_rag_flow/index.md
-          - "SS06 · BM25 Lexical Search": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss06_bm25_lexical_search/index.md
-          - "SS07 · A Multi-Index RAG Pipeline": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss07_a_multi_index_rag_pipeline/index.md
+          - "SS05 · Implementing the RAG Flow":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss05_implementing_the_rag_flow/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/19.vectordb.ipynb
+          - "SS06 · BM25 Lexical Search":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss06_bm25_lexical_search/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/20.bm25.ipynb
+          - "SS07 · A Multi-Index RAG Pipeline":
+            - Notes: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s07_rag_and_agentic_search/ss07_a_multi_index_rag_pipeline/index.md
+            - Notebook: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/notebooks/21.hybrid.ipynb
         - "S08 · Features of Claude":
           - Overview: certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s08_features_of_claude/index.md
           - "SS01 · Extended Thinking": certification/claude_certified_architect-foundation/modules/m02_building_with_the_claude_api/s08_features_of_claude/ss01_extended_thinking/index.md
@@ -496,8 +531,12 @@ nav:
           - "SS08 · Implementing Multiple Turns": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss08_implementing_multiple_turns/index.md
           - "SS09 · Using Multiple Tools": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss09_using_multiple_tools/index.md
           - "SS10 · Fine Grained Tool Calling": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss10_fine_grained_tool_calling/index.md
-          - "SS11 · The Text Edit Tool": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss11_the_text_edit_tool/index.md
-          - "SS12 · The Web Search Tool": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss12_the_web_search_tool/index.md
+          - "SS11 · The Text Edit Tool":
+            - Notes: modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss11_the_text_edit_tool/index.md
+            - Notebook: modules/m08_building_with_the_claude_api/notebooks/15.text_editor_tool.ipynb
+          - "SS12 · The Web Search Tool":
+            - Notes: modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss12_the_web_search_tool/index.md
+            - Notebook: modules/m08_building_with_the_claude_api/notebooks/16.web_search.ipynb
           - "SS13 · Quiz on Tool Use with Claude": modules/m08_building_with_the_claude_api/s06_tool_use_with_claude/ss13_quiz_on_tool_use_with_claude/index.md
         - "S07 · RAG and Agentic Search":
           - Overview: modules/m08_building_with_the_claude_api/s07_rag_and_agentic_search/index.md

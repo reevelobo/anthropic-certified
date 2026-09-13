@@ -2,6 +2,8 @@
 
 # Handling Multi-Block Messages with Tool Use
 
+[:material-notebook-outline: Open Jupyter Notebook](../../notebooks/12.tools.ipynb){ .md-button .md-button--primary }
+
 When working with Claude's tool functionality, you'll encounter a new type of response structure that's different from the simple text responses you've seen before. Instead of just getting back a single text block, Claude can now return multi-block messages that contain both text and tool usage information.
 
 ## Making Tool-Enabled API Calls

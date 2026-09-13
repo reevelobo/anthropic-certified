@@ -6,3 +6,8 @@ mkdocs-material==9.7.1
 mkdocs-minify-plugin>=0.8.0
 mkdocs-glightbox>=0.4.0
 mkdocs-jupyter>=0.25.1
+
+# Notebook runtime dependencies
+anthropic==1.4.0
+python-dotenv>=1.0.1
+voyageai
