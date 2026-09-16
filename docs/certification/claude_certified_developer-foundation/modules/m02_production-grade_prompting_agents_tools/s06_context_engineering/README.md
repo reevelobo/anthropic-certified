@@ -1,751 +1,189 @@
-# The Stream That Left a Half-Written Tool Call in the History
+# Context Engineering
 
+# Model selection and keeping multi-turn sessions in budget
+ 
+You make one early choice: which model runs the workload. The Claude family covers a range of cost, latency, and capability tradeoffs, so the model you pick sets the price and speed floor that every later decision moves within.
+ 
+Once the model is set, the next constraint is the context window: the full span of text the model can take in at once, including your prompt, the conversation so far, and every tool result. Every tool result Claude returns gets appended to the context window and stays there for the rest of the session. In a single-turn prompt, that's invisible. In a multi-step agent session running ten or twenty tool calls, the window fills up fast, and once it fills, the agent either compacts (losing detail) or stalls before the task is done.
+ 
+So, the question for any agent workflow is whether you've decided in advance what goes into the context window, what comes back out as a summary, and what never enters at all. That set of choices is context engineering.
+ 
+## Model selection: Start with Sonnet, move deliberately
+ 
+The Claude model family currently spans four tiers: Fable, Opus, Sonnet, and Haiku, each optimized for different cost, latency, and capability tradeoffs. Sonnet is the balanced default for most production workloads. Haiku is built for speed and cost efficiency on tasks that fit its capability envelope. Opus handles demanding work above the Sonnet envelope, and Fable is Anthropic's most capable model, built for the most demanding tasks including complex reasoning, advanced coding, research synthesis, and sophisticated agentic workflows where maximum intelligence is the priority. Confirm the current lineup and model identifiers against platform.claude.com/docs at build time.
+ 
+The default starting point is Sonnet. Move up to Opus only when an eval set tells you Sonnet isn't meeting your quality bar. Move down to Haiku only when an eval set tells you the quality regression is acceptable at your task, not just to save costs. Your decision to move models should always be a measured decision.
+ 
+## The context window is not a free resource
+ 
+Think of the context window as the amount of space Claude can hold in working memory. Every message you send, every tool result you return, every document you inject, and every response Claude generates occupies space in that window. If a request is already larger than the context window, the Messages API rejects it with a validation error before generation; if a request fits but generation reaches the ceiling partway, current models return the output generated so far with a model_context_window_exceeded stop reason. Neither path silently truncates your oldest content. If you want a session to keep running past the window limit, your application must manage that itself by trimming or summarizing history before the next request goes out.
+ 
+In development, the window rarely fills because test inputs are small and sessions are short. In production, tool outputs are often three to five times longer than test fixtures, sessions run for more turns, and the window fills at turn eight rather than turn fifty, which means they fill earlier than development. The cost of not planning for this is a production outage.
+ 
+## Four strategies for staying in budget
+ 
+The previous section made the case for moving state out of the live context window. The reason behind that is the budget. Every token in the window costs money on input and adds latency to the response, and a long session compounds both. The four strategies below are concrete ways to manage that budget, each suited to a different shape of conversation.
+ 
+| Strategy | What it does | When to apply | What continuity you lose |
+| --- | --- | --- | --- |
+| Pruning | Lets you jump back to an earlier message and continue from there, removing the conversation that came after. | After Claude has gone down an unproductive path or accumulated debugging back-and-forth that won't help the next task. | The work done after the rewind point is gone. If Claude learned something useful in that stretch, it has to relearn it. |
+| Compaction (/compact in Claude Code; server-side compaction in the API, a beta strategy the platform performs for you, with manual summarization as the client-side alternative) | Summarizes the conversation history into a condensed version that preserves the key information Claude has learned. The summary costs fewer tokens than the original turns. | When the session is approaching the context ceiling but you want to keep working on the same feature with the knowledge Claude has built up. | Details can be lost in the summarization. Anything not captured in the summary will not be available to Claude going forward. |
+| Clearing (/clear in Claude Code; new session in API) | Starts a new conversation with empty context. Nothing from the previous session carries forward. | When the next task is completely different from the current one, and previous context would only introduce bias or confusion. | All session context is gone. Anything Claude needs to remember across sessions has to be put somewhere persistent, like a CLAUDE.md file. |
+| Subagent Handoffs | Spawns a subagent in its own isolated context window with only the task description and system prompt it needs. The subagent does the work and returns a summary. | When a subtask is self-contained enough to delegate, especially exploration work where the journey clutters the main context but the answer is short. | Visibility into how the subagent reached its conclusion. The intermediate steps are discarded with the subagent's context. |
+ 
+## Two more levers: prompt caching and token counting
+ 
+The four strategies above manage what enters the context window. Two API features reduce what you pay for what's already there.
+ 
+Prompt caching stores the processing work done on a stable prefix of your request so follow-up requests can reuse it instead of reprocessing the same tokens. The first request writes the prefix to cache; subsequent requests that send identical content up to that point pay a fraction of the original cost. The strongest candidates are parts of the request that rarely change across turns: a long system prompt, a large tool definition set, or a reference document you query repeatedly. You enable caching by marking a cache breakpoint with a cache_control field of type ephemeral on the last block you want cached. You can place up to four breakpoints. For multi-turn sessions with a stable system prompt and tool schemas, caching those prefixes once and reusing them across turns is the highest-leverage cost reduction available.
+ 
+Token counting lets you measure context pressure before a request goes out rather than after it fails. The count_tokens endpoint takes the same request body as a messages call and returns the token count without running inference. Use it during development to verify your context budget assumptions hold against real tool outputs, not just test fixtures, and in production to gate requests that would exceed the window before they error.
+ 
+## The three places a RAG path can break
+ 
+The path has three places where it can go wrong: the chunking, the embedding match, and the assembly into the prompt.
+ 
+- Chunking decides what a unit of retrievable context is. Split too small and a single chunk lacks the surrounding context to be useful. Split too large and one chunk dilutes the match with unrelated text. Sentence-based or section-based chunking with a little overlap is a reasonable default. The overlap matters because facts that cross a boundary would otherwise be split apart and become difficult to retrieve.
+- The embedding match decides which chunks are returned. It uses a similarity search, so it retrieves content that is semantically close. This is not always what contains the exact term you need. A query for a specific identifier can miss the relevant chunk if a more semantically similar result outranks it. This is why a lexical match is sometimes run alongside the semantic one.
+- The assembly step is where retrieved chunks must reach the model in the structure the prompt expects, otherwise the model answers from memory instead of from the retrieved text.
+The fetch-once path gives you a system you can reason about: you can inspect which chunks were retrieved for a query and test that retrieval directly. The cost is the infrastructure: the index that must be built, stored, kept in sync as the corpus changes, and secured wherever it lives. The search-across-rounds path removes that infrastructure and the staleness that comes with it, since the model reads the current files at query time, at the cost of spending more tokens and time per query and giving you a less inspectable process. For a stable reference corpus queried with simple lookups, the index is worth owning. For a changing corpus or multi-step questions, the iterative search is usually the simpler system despite costing more per query.
+ 
+The reported performance gain for single-agent agentic search over a retrieval index is a version-pinned figure. Confirm it against the reference layer at build time rather than relying on the number in this module.
+ 
+Now, let's understand a bit about two of the most common strategies: compaction and subagent handoffs.
+ 
+## Applying compaction: What gets preserved depends on how you write the summarizer
+ 
+When you use /compact in Claude Code, the tool decides what to include in the summary. In the API, the documented primary strategy is server-side compaction (beta): the platform summarizes the conversation for you when it is configured on the request. When you instead implement manual compaction in an API session, you write the summarizer prompt yourself. That prompt determines what the agent will know in subsequent turns.
+ 
+Summarizer prompt says "summarize the conversation so far"
+ 
+Summarizer prompt says "summarize the conversation, preserving all file paths modified, all decisions made, and any errors encountered and their resolutions"
+ 
+This is not an edge case; task-critical state loss from an under-specified summarizer is one of the most common sources of multi-session agent failures.
+ 
+## Subagent handoffs: Managing long-horizon tasks
+ 
+When a task is too large for a single context window, increasing the window is not a solution. The solution is to decompose the task and pass only the relevant context to each subagent. A subagent receives a scoped task and the minimum context it needs, the results of prior steps that are directly relevant, the tools it needs to complete its task, and clear exit conditions. The parent agent collects the results. This pattern keeps per-turn cost low and makes long-horizon tasks tractable.
+ 
+Like compaction and pruning, subagent handoffs add implementation overhead, so apply them only where context cost is a real constraint: a simple single-turn prompt or short workflow doesn't need this.
+ 
+### Handles well
+ 
+Multi-step agent sessions that exceed the token budget and need decomposition. Best designed at the architecture stage rather than patched in as a production fix.
+ 
+### Use a different approach
+ 
+Pipelines that never approach the window limit. Measure actual token usage against your model's context limit before adding management overhead.
+ 
+## Forward pointer
+ 
+The strategies covered so far assume you know your context budget is under pressure and you are choosing a tool to manage it. The critical point here is not to know the pressure exists until the session breaks. A workload can pass every test in development and then fail in production for one reason: the tool output got bigger, the sessions got longer, and the context window that held twenty turns cleanly now fills at turn eight. The next section walks through exactly how that happens, using a worked postmortem of an agent that ran fine on test fixtures and then hit its ceiling once real documents started flowing through it.
+ # Model selection and keeping multi-turn sessions in budget
+ 
+You make one early choice: which model runs the workload. The Claude family covers a range of cost, latency, and capability tradeoffs, so the model you pick sets the price and speed floor that every later decision moves within.
+ 
+Once the model is set, the next constraint is the context window: the full span of text the model can take in at once, including your prompt, the conversation so far, and every tool result. Every tool result Claude returns gets appended to the context window and stays there for the rest of the session. In a single-turn prompt, that's invisible. In a multi-step agent session running ten or twenty tool calls, the window fills up fast, and once it fills, the agent either compacts (losing detail) or stalls before the task is done.
+ 
+So, the question for any agent workflow is whether you've decided in advance what goes into the context window, what comes back out as a summary, and what never enters at all. That set of choices is context engineering.
+ 
+## Model selection: Start with Sonnet, move deliberately
+ 
+The Claude model family currently spans four tiers: Fable, Opus, Sonnet, and Haiku, each optimized for different cost, latency, and capability tradeoffs. Sonnet is the balanced default for most production workloads. Haiku is built for speed and cost efficiency on tasks that fit its capability envelope. Opus handles demanding work above the Sonnet envelope, and Fable is Anthropic's most capable model, built for the most demanding tasks including complex reasoning, advanced coding, research synthesis, and sophisticated agentic workflows where maximum intelligence is the priority. Confirm the current lineup and model identifiers against platform.claude.com/docs at build time.
+ 
+The default starting point is Sonnet. Move up to Opus only when an eval set tells you Sonnet isn't meeting your quality bar. Move down to Haiku only when an eval set tells you the quality regression is acceptable at your task, not just to save costs. Your decision to move models should always be a measured decision.
+ 
+## The context window is not a free resource
+ 
+Think of the context window as the amount of space Claude can hold in working memory. Every message you send, every tool result you return, every document you inject, and every response Claude generates occupies space in that window. If a request is already larger than the context window, the Messages API rejects it with a validation error before generation; if a request fits but generation reaches the ceiling partway, current models return the output generated so far with a model_context_window_exceeded stop reason. Neither path silently truncates your oldest content. If you want a session to keep running past the window limit, your application must manage that itself by trimming or summarizing history before the next request goes out.
+ 
+In development, the window rarely fills because test inputs are small and sessions are short. In production, tool outputs are often three to five times longer than test fixtures, sessions run for more turns, and the window fills at turn eight rather than turn fifty, which means they fill earlier than development. The cost of not planning for this is a production outage.
+ 
+## Four strategies for staying in budget
+ 
+The previous section made the case for moving state out of the live context window. The reason behind that is the budget. Every token in the window costs money on input and adds latency to the response, and a long session compounds both. The four strategies below are concrete ways to manage that budget, each suited to a different shape of conversation.
+ 
+| Strategy | What it does | When to apply | What continuity you lose |
+| --- | --- | --- | --- |
+| Pruning | Lets you jump back to an earlier message and continue from there, removing the conversation that came after. | After Claude has gone down an unproductive path or accumulated debugging back-and-forth that won't help the next task. | The work done after the rewind point is gone. If Claude learned something useful in that stretch, it has to relearn it. |
+| Compaction (/compact in Claude Code; server-side compaction in the API, a beta strategy the platform performs for you, with manual summarization as the client-side alternative) | Summarizes the conversation history into a condensed version that preserves the key information Claude has learned. The summary costs fewer tokens than the original turns. | When the session is approaching the context ceiling but you want to keep working on the same feature with the knowledge Claude has built up. | Details can be lost in the summarization. Anything not captured in the summary will not be available to Claude going forward. |
+| Clearing (/clear in Claude Code; new session in API) | Starts a new conversation with empty context. Nothing from the previous session carries forward. | When the next task is completely different from the current one, and previous context would only introduce bias or confusion. | All session context is gone. Anything Claude needs to remember across sessions has to be put somewhere persistent, like a CLAUDE.md file. |
+| Subagent Handoffs | Spawns a subagent in its own isolated context window with only the task description and system prompt it needs. The subagent does the work and returns a summary. | When a subtask is self-contained enough to delegate, especially exploration work where the journey clutters the main context but the answer is short. | Visibility into how the subagent reached its conclusion. The intermediate steps are discarded with the subagent's context. |
+ 
+## Two more levers: prompt caching and token counting
+ 
+The four strategies above manage what enters the context window. Two API features reduce what you pay for what's already there.
+ 
+Prompt caching stores the processing work done on a stable prefix of your request so follow-up requests can reuse it instead of reprocessing the same tokens. The first request writes the prefix to cache; subsequent requests that send identical content up to that point pay a fraction of the original cost. The strongest candidates are parts of the request that rarely change across turns: a long system prompt, a large tool definition set, or a reference document you query repeatedly. You enable caching by marking a cache breakpoint with a cache_control field of type ephemeral on the last block you want cached. You can place up to four breakpoints. For multi-turn sessions with a stable system prompt and tool schemas, caching those prefixes once and reusing them across turns is the highest-leverage cost reduction available.
+ 
+Token counting lets you measure context pressure before a request goes out rather than after it fails. The count_tokens endpoint takes the same request body as a messages call and returns the token count without running inference. Use it during development to verify your context budget assumptions hold against real tool outputs, not just test fixtures, and in production to gate requests that would exceed the window before they error.
+ 
+## The three places a RAG path can break
+ 
+The path has three places where it can go wrong: the chunking, the embedding match, and the assembly into the prompt.
+ 
+- Chunking decides what a unit of retrievable context is. Split too small and a single chunk lacks the surrounding context to be useful. Split too large and one chunk dilutes the match with unrelated text. Sentence-based or section-based chunking with a little overlap is a reasonable default. The overlap matters because facts that cross a boundary would otherwise be split apart and become difficult to retrieve.
+- The embedding match decides which chunks are returned. It uses a similarity search, so it retrieves content that is semantically close. This is not always what contains the exact term you need. A query for a specific identifier can miss the relevant chunk if a more semantically similar result outranks it. This is why a lexical match is sometimes run alongside the semantic one.
+- The assembly step is where retrieved chunks must reach the model in the structure the prompt expects, otherwise the model answers from memory instead of from the retrieved text.
+The fetch-once path gives you a system you can reason about: you can inspect which chunks were retrieved for a query and test that retrieval directly. The cost is the infrastructure: the index that must be built, stored, kept in sync as the corpus changes, and secured wherever it lives. The search-across-rounds path removes that infrastructure and the staleness that comes with it, since the model reads the current files at query time, at the cost of spending more tokens and time per query and giving you a less inspectable process. For a stable reference corpus queried with simple lookups, the index is worth owning. For a changing corpus or multi-step questions, the iterative search is usually the simpler system despite costing more per query.
+ 
+The reported performance gain for single-agent agentic search over a retrieval index is a version-pinned figure. Confirm it against the reference layer at build time rather than relying on the number in this module.
+ 
+Now, let's understand a bit about two of the most common strategies: compaction and subagent handoffs.
+ 
+## Applying compaction: What gets preserved depends on how you write the summarizer
+ 
+When you use /compact in Claude Code, the tool decides what to include in the summary. In the API, the documented primary strategy is server-side compaction (beta): the platform summarizes the conversation for you when it is configured on the request. When you instead implement manual compaction in an API session, you write the summarizer prompt yourself. That prompt determines what the agent will know in subsequent turns.
+ 
+Summarizer prompt says "summarize the conversation so far"
+ 
+Summarizer prompt says "summarize the conversation, preserving all file paths modified, all decisions made, and any errors encountered and their resolutions"
+ 
+This is not an edge case; task-critical state loss from an under-specified summarizer is one of the most common sources of multi-session agent failures.
+ 
+## Subagent handoffs: Managing long-horizon tasks
+ 
+When a task is too large for a single context window, increasing the window is not a solution. The solution is to decompose the task and pass only the relevant context to each subagent. A subagent receives a scoped task and the minimum context it needs, the results of prior steps that are directly relevant, the tools it needs to complete its task, and clear exit conditions. The parent agent collects the results. This pattern keeps per-turn cost low and makes long-horizon tasks tractable.
+ 
+Like compaction and pruning, subagent handoffs add implementation overhead, so apply them only where context cost is a real constraint: a simple single-turn prompt or short workflow doesn't need this.
+ 
+### Handles well
+ 
+Multi-step agent sessions that exceed the token budget and need decomposition. Best designed at the architecture stage rather than patched in as a production fix.
+ 
+### Use a different approach
+ 
+Pipelines that never approach the window limit. Measure actual token usage against your model's context limit before adding management overhead.
+ 
+## Forward pointer
+ 
+The strategies covered so far assume you know your context budget is under pressure and you are choosing a tool to manage it. The critical point here is not to know the pressure exists until the session breaks. A workload can pass every test in development and then fail in production for one reason: the tool output got bigger, the sessions got longer, and the context window that held twenty turns cleanly now fills at turn eight. The next section walks through exactly how that happens, using a worked postmortem of an agent that ran fine on test fixtures and then hit its ceiling once real documents started flowing through it.
+ 
+ # The session that ran fine in development, then hit a ceiling in production
+ 
 ## Setup
-
-*A streamed response can appear correct on screen and still corrupt the next request.*
-
-The text may render successfully, the user may see an answer, and the handler may append the turn to conversation history.
-
-However, if the stream is interrupted before the message fully completes, the stored assistant turn may contain incomplete content. This becomes especially dangerous when the interrupted content includes a partially constructed `tool_use` block.
-
-The resulting failure usually surfaces on a later request, making the root cause difficult to trace.
-
----
-
-# Postmortem: Partial `tool_use` Block Committed to History After a Dropped Stream
-
-An agent application used streaming so that operators could watch responses appear in real time.
-
-The streaming handler worked as follows:
-
-1. Receive stream events.
-2. Append `content_block_delta` fragments to local state.
-3. When the read loop ends, append the assembled assistant turn to conversation history.
-
-During development and local testing, streams always completed successfully.
-
-Every stream ended with:
-
-```text
-message_stop
-```
-
-As a result:
-
-- Every assistant turn was complete.
-- Every tool call was valid.
-- No failures appeared.
-
----
-
-## What Changed in Production?
-
-A temporary network interruption caused a stream to terminate unexpectedly.
-
-The interruption happened after:
-
-```text
-content_block_start
-```
-
-for a `tool_use` block
-
-and after several:
-
-```text
-content_block_delta
-```
-
-events
-
-but before:
-
-```text
-content_block_stop
-```
-
-and before:
-
-```text
-message_stop
-```
-
----
-
-## The Incomplete Tool Call
-
-The tool-use block had begun receiving JSON input.
-
-The stream might have looked like:
-
-```text
-content_block_start
-```
-
-```json
-{
-  "customer_id":
-```
-
-```json
-{
-  "customer_id": 12345,
-```
-
-*stream disconnects*
-
-The JSON was incomplete.
-
-The tool block never closed.
-
-The message never completed.
-
----
-
-## The Handler's Mistake
-
-The handler treated:
-
-```text
-stream ended
-```
-
-as equivalent to:
-
-```text
-message completed
-```
-
-Those are not the same thing.
-
-When the connection dropped:
-
-- The read loop exited.
-- The handler appended the partially assembled assistant turn to history.
-- The corrupted `tool_use` block was now part of the conversation state.
-
----
-
-# Why the Failure Appeared Later
-
-The operator saw partial output and retried the request.
-
-The retry included the stored conversation history.
-
-That history now contained:
-
-```text
-Assistant Turn
-└── Incomplete tool_use block
-```
-
-When the retry request was sent, the API attempted to validate the message structure.
-
-Validation failed because the historical tool block contained malformed input.
-
-The API returned an error pointing at the retry request.
-
----
-
-## Why Diagnosis Took So Long
-
-The team inspected:
-
-- Tool schemas
-- Tool arguments
-- Retry logic
-- Validation code
-
-because the failure appeared during the retry.
-
-The real cause was not the retry.
-
-The real cause occurred one request earlier when the streaming handler persisted an incomplete assistant turn.
-
-This created a classic situation:
-
-```text
-Cause
-      ↓
-Interrupted stream
-      ↓
-Corrupted history
-      ↓
-Retry request
-      ↓
-Validation error
-```
-
-The error surfaces on the retry even though the corruption happened earlier.
-
----
-
-# Root Cause
-
-The handler assumed:
-
-```text
-Read Loop Exit
-=
-Valid Assistant Turn
-```
-
-This assumption is incorrect.
-
-A stream can stop because:
-
-- The message completed
-- The network failed
-- The client disconnected
-- A timeout occurred
-
-Only one of those situations guarantees valid output.
-
----
-
-# The Correct Rule
-
-## Only `message_stop` Means Complete
-
-```text
-message_stop
-```
-
-is the only reliable indicator that a streamed message is finished.
-
-Anything accumulated before that point must be treated as provisional.
-
-### Safe Pattern
-
-```text
-Receive stream
-        ↓
-Assemble content
-        ↓
-Receive message_stop
-        ↓
-Persist assistant turn
-```
-
-### Unsafe Pattern
-
-```text
-Receive stream
-        ↓
-Read loop exits
-        ↓
-Persist assistant turn
-```
-
----
-
-# Recovery Strategy
-
-When a stream is interrupted:
-
-### Step 1
-
-Discard the partial assistant turn.
-
-### Step 2
-
-Do not write the incomplete turn to history.
-
-### Step 3
-
-Retry using the last known complete conversation state.
-
-### Step 4
-
-Allow Claude to regenerate the response.
-
----
-
-# Architectural Rule
-
-Conversation history should contain only:
-
-✅ Completed content blocks
-
-✅ Closed tool calls
-
-✅ Fully assembled assistant turns
-
-✅ Messages that reached `message_stop`
-
-Never store:
-
-❌ Partial text blocks
-
-❌ Incomplete tool inputs
-
-❌ Half-built `tool_use` blocks
-
-❌ Interrupted assistant turns
-
----
-
-# Warning Signs in Production
-
-If you encounter:
-
-- Validation errors on retry requests
-- Malformed `tool_use` inputs in history
-- Random failures after network interruptions
-- Tool-use pairing errors that seem unrelated to current code
-
-investigate the prior streamed turn before changing:
-
-- Schemas
-- Tool definitions
-- Retry mechanisms
-
-The corruption may already exist in conversation history.
-
----
-
-# What to Watch Out For
-
-A stream ending is **not** the same thing as a message completing.
-
-| Event | Meaning |
-|---------|---------|
-| Read loop ended | Connection stopped for some reason |
-| `message_stop` received | Message successfully completed |
-
-Only the second guarantees valid state.
-
-When a handler commits turns whenever a stream ends rather than when `message_stop` arrives, interrupted streams can silently inject corrupted blocks into history.
-
-The resulting failure often appears on the next request, making the true source difficult to identify.
-
----
-
-# Best Practices
-
-1. Track `message_stop` explicitly.
-2. Treat all streamed content as provisional until completion.
-3. Never save incomplete assistant turns.
-4. Discard interrupted streams.
-5. Retry from the last completed turn.
-6. Investigate prior streamed turns when validation failures appear unexpectedly.
-7. Remember that the location of the error is not always the location of the bug.
-
----
-
-# Key Takeaway
-
-The critical distinction is:
-
-> **"The stream ended" does not mean "the message completed."**
-
-Only `message_stop` means the response is structurally complete.
-
-If an interrupted stream writes a half-built `tool_use` block into history, the resulting validation error typically appears on the next request, not the one that caused the corruption.
-
-The safest strategy is simple:
-
-```text
-No message_stop
-        ↓
-No history write
-```
-
-Discard the partial turn, retry from the last complete state, and keep corrupted blocks out of conversation history.
-
-# The Session That Ran Fine in Development, Then Hit a Ceiling in Production
-
-## Setup
-
-*Tool outputs consume context in exactly the same way that prompts, documents, and user messages do.*
-
-The context window is a fixed budget that contains everything Claude needs to see on a given turn:
-
-- System prompts
-- User messages
-- Assistant messages
-- Tool calls
-- Tool results
-- Retrieved documents
-- Other injected context
-
-When tool outputs are small, each turn consumes only a modest amount of that budget.
-
-When tool outputs become larger, each turn consumes significantly more of the same budget.
-
-The context window itself has not changed.
-
-What changes is how quickly each turn spends it.
-
-As a result, an agent that comfortably survives twenty turns during development can begin failing at turn eight in production without any change to the model, prompt, or code.
-
----
-
-# Postmortem: Context Budget Never Measured Against Production Tool Outputs
-
-A team built an agent to process sales receipts.
-
-The team imposed a:
-
-```text
-40,000-token context budget
-```
-
-as a cost-control measure.
-
-This was **not** a model limitation.
-
-The selected Claude model supported substantially more context:
-
-- 200k tokens as a standard context window
-- Up to 1M tokens on current flagship models
-
-The team simply chose to operate within a 40k-token budget.
-
----
-
-## Development Environment
-
-Development used a controlled fixture set:
-
-- 20 receipts
-- Approximately 800 tokens returned per tool call
-
-### Result
-
-```text
-20 turns × 800 tokens
-≈ 16,000 tool-output tokens
-```
-
-After accounting for:
-
-- System prompt
-- User messages
-- Assistant responses
-
-the entire workflow consumed approximately:
-
-```text
-18,000 tokens
-```
-
-Well below the team's:
-
-```text
-40,000-token budget
-```
-
-Everything appeared healthy.
-
----
-
-## Production Environment
-
-Production receipts were significantly more complex.
-
-Many included:
-
-- Supporting documentation
-- Transaction records
-- Email correspondence
-- Additional attachments
-
-Average tool output increased from:
-
-```text
-~800 tokens
-```
-
-to approximately:
-
-```text
-~3,200 tokens
-```
-
-per call.
-
----
-
-## What Happened?
-
-After only eight turns:
-
-```text
-8 × 3,200
-=
-25,600 tokens
-```
-
-of tool output had accumulated.
-
-When combined with:
-
-- System prompts
-- User messages
-- Assistant messages
-- Prior tool calls
-
-the running total approached the team's:
-
-```text
-40,000-token budget
-```
-
-The budget was exhausted around:
-
-```text
-Turn 8
-```
-
-before the analysis completed.
-
----
-
-# Symptoms Observed
-
-The failure did not initially look like a context problem.
-
-Operators reported:
-
-- Incorrect tool selection
-- Missing information
-- Incomplete analyses
-- Inconsistent reasoning
-
-The behavior resembled a broken tool schema.
-
----
-
-# Actual Root Cause
-
-The problem was not tool routing.
-
-The problem was context pressure.
-
-Over time:
-
-```text
-Tool Result
-      ↓
-Added to Context
-      ↓
-Never Removed
-      ↓
-Context Grows
-      ↓
-Important Instructions Lose Influence
-```
-
-Large accumulated tool outputs crowded the working context.
-
-The agent was making decisions using a context window dominated by historical tool data.
-
-Critical information became progressively less effective, including:
-
-- Original instructions
-- Planning context
-- Task objectives
-
-The agent's behavior degraded because the context window was overloaded.
-
----
-
-# Development vs. Production
-
-| Metric | Development | Production |
-|----------|-------------|-------------|
-| **Context window available** | 200k standard, 1M on current Opus and Sonnet | 200k standard, 1M on current Opus and Sonnet |
-| **Team budget cap** | 40k tokens | 40k tokens |
-| **Average tool output** | ~800 tokens per call | ~3,200 tokens per call |
-| **Turns before budget fills** | Sessions completed without reaching the cap | Cap reached at turn 8 |
-| **Observed symptom** | None. Sessions completed cleanly | Wrong tool selections and incomplete outputs starting around turn 8 |
-| **Root cause identified by** | Not applicable | Token usage audit, two days after deployment |
-| **Fix** | Not applicable | Prune tool outputs after use and apply compaction proactively before the cap is reached |
-
----
-
-# Why Development Didn't Catch the Problem
-
-This failure mode is extremely common.
-
-Development fixtures are almost always smaller than production data.
-
-Typical development assumptions include:
-
-```text
-Small documents
-Small tool outputs
-Short sessions
-Predictable inputs
-```
-
-Production often contains:
-
-```text
-Larger documents
-Long conversations
-Unexpected edge cases
-Bigger tool outputs
-```
-
-The result is that token growth curves observed in testing do not represent real-world usage.
-
----
-
-# The Diagnostic Trap
-
-Many teams initially interpret the symptom as:
-
-```text
-Wrong tool selected
-```
-
-when the actual problem is:
-
-```text
-Context budget exhausted
-```
-
-These failures often look similar.
-
-### Tool Routing Failure
-
-```text
-Bad schema
-      ↓
-Wrong tool selected
-```
-
-### Context Overflow Failure
-
-```text
-Too much accumulated context
-      ↓
-Model loses effective guidance
-      ↓
-Wrong tool selected
-```
-
-The visible behavior is nearly identical.
-
-The underlying causes are completely different.
-
----
-
-# The Fix
-
-The team implemented two changes.
-
-## 1. Prune Tool Outputs
-
-After a tool result had served its purpose:
-
-```text
-Tool Output
-      ↓
-Used
-      ↓
-Removed
-```
-
-instead of remaining in context for the entire session.
-
-This prevented old data from continuously accumulating.
-
----
-
-## 2. Compact Before Reaching the Budget Limit
-
-Instead of waiting until the budget ceiling was reached:
-
-```text
-Approaching Limit
-      ↓
-Compact Context
-      ↓
-Continue Session
-```
-
-A summary preserved:
-
-- Key findings
-- Decisions made
-- Relevant state
-
-while reducing token consumption.
-
----
-
-# What to Watch Out For
-
-A production context problem often appears as:
-
-- Tool-selection degradation
-- Lower-quality reasoning
-- Missing details
-- Incomplete responses
-
-before anyone notices token growth.
-
-If quality suddenly drops after a predictable number of turns:
-
-```text
-Turn 7
-Turn 8
-Turn 9
-```
-
-check token usage before debugging:
-
-- Tool schemas
-- Prompt wording
-- Agent architecture
-
-The context budget may already be exhausted.
-
----
-
-# Prevention Checklist
-
-Before shipping a multi-turn agent:
-
-✅ Measure token costs using the largest production-like inputs available.
-
-✅ Estimate cumulative tool-output growth across many turns.
-
-✅ Monitor context usage during testing.
-
-✅ Set compaction thresholds before reaching the limit.
-
-✅ Prune tool outputs that no longer provide value.
-
-✅ Validate assumptions with real data, not just fixtures.
-
-✅ Use token-counting endpoints to verify budget estimates.
-
----
-
-# Key Takeaway
-
-The context window did not shrink.
-
-The tool outputs grew.
-
-That single change was enough to move a workflow from:
-
-```text
-20 successful turns
-```
-
-to:
-
-```text
-Failure at turn 8
-```
-
-The lesson is simple:
-
-> Always measure context growth against realistic production outputs before deployment.
-
-When agent quality degrades after a predictable number of turns, investigate context pressure before assuming the problem lies in prompts, schemas, or tool routing.
+ 
+Tool outputs consume context the same way prompts and file reads do. The context window is a fixed budget that holds everything Claude needs to see on a given turn: the system prompt, the conversation history, and every tool call and tool result accumulated so far. When tool outputs are short, each turn adds a small amount to that running total and the budget lasts a long time. When tool outputs grow larger, each turn adds more to the same running total, and the budget runs down faster. The window itself has not changed; what changed is how much of it each turn now spends. A session that handles twenty turns cleanly in development can start failing at turn eight in production for exactly this reason.
+ 
+## Postmortem: Context budget never measured against production tool outputs
+ 
+An agent was built to process sales receipts under a 40k context window token budget, a cap the team set as a cost control on the agent's context rather than the model's ceiling. The model itself offered far more room. Current Claude API models carry at least a 200k-token context window, and the newest flagship models, Fable included, serve 1M tokens by default, so the 40k figure was a deliberate budget the team imposed, not a limit the model forced on them. Development used a test fixture set of twenty receipts, each returning a tool result of roughly 800 tokens. The full twenty-turn session consumed about 18,000 tokens, well within the team's 40k token budget limit.
+ 
+In production, receipts contained supporting documentation, including transaction records, and correspondence. Average tool output grew to approximately 3,200 tokens per call. Eight turns of tool output alone added up to roughly 25,600 tokens, and once the system prompt, user messages, and assistant messages were added on top, the running total reached the team's 40k budget cap. The agent hit that cap at turn eight, before it could complete its analysis. The failure looked like degraded tool selection because the agent started choosing the wrong tools and returning incomplete analyses. However, the underlying cause was different. The system prompt and early instructions had been crowded out by accumulated tool outputs that were never pruned after use, and the agent was making decisions on a context window that no longer contained the guidance it had started with.
+ 
+|  | Development | Production |
+| --- | --- | --- |
+| Context window available | 200k standard, 1M on current Opus and Sonnet | 200k standard, 1M on current Opus and Sonnet |
+| Team budget cap | 40k tokens | 40k tokens |
+| Avg. tool output | ~800 tokens per call | ~3,200 tokens per call |
+| Turns before window fills | Sessions completed without reaching the cap | Cap reached at turn 8 |
+| Observed symptom | None. Sessions complete cleanly | Wrong tool selections and incomplete outputs starting turn 8 |
+| Root cause identified by | Not applicable | Token usage audit, two days after deployment |
+| Fix | Not applicable | Prune tool outputs after use, and apply compaction proactively before the cap is reached |
+ 
+## What to Watch Out for
+ 
+The development test fixtures were shorter than production data. This is true for almost every agent built against a fixture set. The fix is to measure the actual token cost of a tool result against the largest input you can find in your target data before the agent ships.
+ 
+The symptom of context overflow is often misread as a tool selection failure, because the output looks similar. If you see tool selection degrade after a fixed number of turns, check whether the context window is filling before you start debugging the schema.
+ 
